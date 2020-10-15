@@ -1,0 +1,21 @@
+{
+  "posts": [
+    {
+      "firstname": "akshay",
+      "email": "akshay@gmauil.com",
+      "password": "ajhbasda",
+      "id": 5
+    },
+    {
+      "firstname": "roy",
+      "email": "dfd",
+      "password": "asefsd",
+      "id": 6
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "username": "jeson",
+    "password": "roy"
+  }
+}

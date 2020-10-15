@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "name": "akshay",
+      "mobile": "98734",
+      "email": "skdj@gmauil.com",
+      "password": "skdj",
+      "id": 3
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "username": "akshay",
+    "password": "malthanew"
+  }
+}

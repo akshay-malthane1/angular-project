@@ -1,0 +1,36 @@
+<!-- 
+<div class="login">
+  <div class="login-header">
+	<h2>Login</h2>
+  </div>
+  <div class="login-form">
+    <h3>Username:</h3>
+	<input type="text" required placeholder="Username" #username>
+	<br>
+    <h3>Password:</h3>
+    <input type="password" required placeholder="Password" #password>
+	<br>
+    <input type="button" value="Login" class="login-button" (click)="performLogin(username, password)"/>
+    <br>
+    <a class="sign-up">Sign Up!</a>
+	<br>
+    <h6 class="no-access">Forgot Password?</h6>
+  </div> 
+</div>  -->
+
+
+<div class ="form">
+<form class="login-form" action="" method="post">
+  <h2> Login </h2>
+  <div class="icons">
+    <a href="#"><i class="fab fa-facebook" ></i></a>
+    <a href="#"><i class="fab fa-google" ></i></a>
+    <a href="#"><i class="fab fa-twitter" ></i></a>
+  </div>
+  <input type="text" name="" value="" placeholder="Username" #username required>
+  <input type="password" name="" value="" placeholder="Password" #password required>
+  <button type="submit" name="button" (click)="performLogin(username, password)"> Login </button>
+  <p class="options"> Not Registered? <a href="#" > Create an Account</a></p>
+</form>
+</div>
+
