@@ -1,16 +1,12 @@
 {
-  "posts": [
-    {
-      "name": "akshay",
-      "mobile": "98734",
-      "email": "skdj@gmauil.com",
-      "password": "skdj",
-      "id": 3
+    "posts": [{
+        "name": "akshay",
+        "email": "skdj@gmauil.com",
+        "password": "skdj"
+    }],
+    "comments": [],
+    "profile": {
+        "username": "akshay",
+        "password": "malthane"
     }
-  ],
-  "comments": [],
-  "profile": {
-    "username": "akshay",
-    "password": "malthanew"
-  }
 }

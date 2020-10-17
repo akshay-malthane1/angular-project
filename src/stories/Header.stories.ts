@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/angular/types-6-0';
 
-import Button from './button.component';
 import Header from './header.component';
 
 export default {
@@ -11,7 +10,7 @@ export default {
   component: Header,
   decorators: [
     moduleMetadata({
-      declarations: [Button],
+      declarations: [],
       imports: [CommonModule],
     }),
   ],

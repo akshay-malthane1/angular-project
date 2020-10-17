@@ -1,0 +1,14 @@
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+  </label>
+    <label class="logo">Music-X</label>
+    <ul>
+        <li> <a [hidden]="loggedin()" class="active btn" [routerLink]="['/login']"> Login </a></li>
+        <li> <a [hidden]="!loggedin()" class="btn" (click)="onLogout()"> Logout </a></li>
+        <li> <a class="btn" [routerLink]="['/themes']"> Themes </a></li>
+        <li> <a class="btn" [routerLink]="['/details']"> details </a></li>
+        <li> <a class="btn" [routerLink]="['/songs']"> songs </a></li>
+    </ul>
+</nav>

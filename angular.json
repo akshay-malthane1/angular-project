@@ -76,7 +76,6 @@
             "browserTarget": "myapp:build"
           }
         },
-       
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -103,6 +102,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "myapp"
+    }
+  },
+  "defaultProject": "myapp",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

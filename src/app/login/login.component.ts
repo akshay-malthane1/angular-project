@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +9,17 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginForm ;
 
   constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+
+      username: new FormControl('', [ Validators.required]),
+  
+      password: new FormControl(''),
+    });
 
   }
   performLogin(userName, password) {
@@ -21,4 +29,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['details']);
     });
   }
+  
+  onCreate(){
+    this.router.navigate(['signup']);
+}
 }

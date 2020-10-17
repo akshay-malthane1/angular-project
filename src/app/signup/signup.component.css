@@ -1,0 +1,74 @@
+.myform {
+    background: #000;
+    z-index: 1;
+    font-family: "Candara", sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 370px;
+    padding: 0 28px 18px 38px;
+    text-align: center;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.myform h2 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+label {
+    margin: 1px 102px 1px 3px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.psd {
+    margin: 1px 122px 1px -11px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.myform label input {
+    position: relative;
+    top: 5px;
+    left: 34px;
+    outline: 0;
+    background: none;
+    font-size: 15px;
+    color: #fff;
+    text-align: center;
+    width: 197px;
+    margin-bottom: 30px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 2.5px solid #2543d8;
+    border-radius: 25px;
+    transition: 0.5s;
+    transition-property: width;
+}
+
+.myform button {
+    outline: 0;
+    background: none;
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 15px;
+    width: 122px;
+    padding: 13px;
+    border: 2.5px solid #128b6d;
+    border-radius: 25px;
+    cursor: pointer;
+    transform: 0.5s;
+    transition-property: transform;
+}
