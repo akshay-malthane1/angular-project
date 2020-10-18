@@ -16,7 +16,7 @@ class Post {
 export class ErrorService {
   constructor(private http: HttpClient) { }
 
-  
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -29,5 +29,5 @@ export class ErrorService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
-  
+
 }

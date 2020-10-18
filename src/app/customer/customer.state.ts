@@ -1,9 +1,9 @@
 import Customer from './customer.model';
 
 export default class CustomerState {
-    customer: Array<Customer>
+    customer: Array<Customer>;
 }
 
 export const initializeState = (): CustomerState => {
-    return { customer: Array<Customer>()}
-}
+    return { customer: Array<Customer>()};
+};

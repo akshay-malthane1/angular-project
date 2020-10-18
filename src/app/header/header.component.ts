@@ -13,9 +13,9 @@ export class HeaderComponent implements OnInit {
     // localStorage.removeItem("isLoggedIn");
   }
   loggedin() {
-    const loggedIn = localStorage.getItem("isLoggedIn") ? localStorage.getItem("isLoggedIn") : false;
+    const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;
     // console.log("Am I logged in " + loggedIn);
-    if (loggedIn === "true") {
+    if (loggedIn === 'true') {
       return true;
     }
     return false;
@@ -23,5 +23,5 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.router.navigate(['login']);
-    return localStorage.removeItem("isLoggedIn")
+    return localStorage.removeItem('isLoggedIn');
 } }

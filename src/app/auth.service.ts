@@ -12,6 +12,6 @@ export class AuthService {
       username: uname,
       password: pwd
     };
-    return this.httpClient.post("http://localhost:3000/profile", postObject);
+    return this.httpClient.post('http://localhost:3000/profile', postObject);
   }
 }

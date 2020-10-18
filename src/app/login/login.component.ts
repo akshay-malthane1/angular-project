@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup({
 
       username: new FormControl('', [ Validators.required]),
-  
+
       password: new FormControl(''),
     });
 
@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
   performLogin(userName, password) {
     this.service.getLogin(userName.value, password.value).subscribe(res => {
       console.log(res);
-      localStorage.setItem("isLoggedIn", 'true');
+      localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['details']);
     });
   }
-  
+
   onCreate(){
     this.router.navigate(['signup']);
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-  
+
 
 @Component({
   selector: 'app-songs',
@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./songs.component.css']
 })
 export class SongsComponent implements OnInit {
- 
+
 constructor(){}
 
 ngOnInit() {}

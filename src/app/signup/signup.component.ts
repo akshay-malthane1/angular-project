@@ -13,9 +13,9 @@ export class SignupComponent implements OnInit {
     username: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  })
+  });
   onSubmit(){
-    console.log(this.profile.value)
+    console.log(this.profile.value);
   }
 
   // constructor(private service: AuthService, private router: Router) { }
