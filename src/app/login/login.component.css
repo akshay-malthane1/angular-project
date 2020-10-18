@@ -83,22 +83,6 @@ form button {
     transition-property: transform;
 }
 
-
-/* form .create {
-    outline: 0;
-    background: none;
-    color: #fff;
-    font-size: 14px;
-    text-transform: uppercase;
-    width: 150px;
-    padding: 15px;
-    border: 2.5px solid #40128b;
-    border-radius: 25px;
-    cursor: pointer;
-    transform: 0.5s;
-    transition-property: transform;
-} */
-
 .form button:hover,
 form button:active,
 form button:focus {

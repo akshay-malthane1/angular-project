@@ -32,13 +32,6 @@ nav ul li a .btn {
     text-transform: uppercase;
 }
 
-
-/* a.active,
-a:hover {
-    background: blueviolet;
-    transition: .5s;
-} */
-
 .checkbtn {
     font-size: 30px;
     color: white;

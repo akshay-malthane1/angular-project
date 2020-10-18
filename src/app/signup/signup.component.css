@@ -56,19 +56,3 @@ label {
     transition: 0.5s;
     transition-property: width;
 }
-
-.myform button {
-    outline: 0;
-    background: none;
-    color: #fff;
-    font-size: 14px;
-    text-transform: uppercase;
-    margin-top: 15px;
-    width: 122px;
-    padding: 13px;
-    border: 2.5px solid #128b6d;
-    border-radius: 25px;
-    cursor: pointer;
-    transform: 0.5s;
-    transition-property: transform;
-}

@@ -68,7 +68,7 @@
         },
         {
             "name": "CrudService",
-            "id": "injectable-CrudService-31c04c5032497297de367efdcd04bdc2",
+            "id": "injectable-CrudService-52ba98dcf4434c913424b51ef6f9dd50",
             "file": "src/app/crud.service.ts",
             "properties": [],
             "methods": [
@@ -105,7 +105,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 20,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -122,7 +122,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 15
+                    "line": 16
                 },
                 {
                     "name": "updateUser",
@@ -135,7 +135,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 21,
+                    "line": 23,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -148,7 +148,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n \n  constructor(private _http: HttpClient) { } \n\n  createUser(user){\n    return this._http.post(\"http://localhost:3000/posts\", user );\n  };\n  getAllUser(){\n    return this._http.get(\"http://localhost:3000/posts\")\n  };\n  deleteUser(user){\n    return this._http.delete(\"http://localhost:3000/posts/\" +user.id)\n  }\n  updateUser(user){\n    return this._http.put(\"http://localhost:3000/posts/\" +user.id, user)\n  }\n}",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private _http: HttpClient) { }\n\n  createUser(user) {\n    return this._http.post(\"http://localhost:3000/posts\", user);\n  };\n\n  getAllUser() {\n    return this._http.get(\"http://localhost:3000/posts\")\n  };\n  \n  deleteUser(user) {\n    return this._http.delete(\"http://localhost:3000/posts/\" + user.id)\n  }\n  updateUser(user) {\n    return this._http.put(\"http://localhost:3000/posts/\" + user.id, user)\n  }\n}",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -162,6 +162,59 @@
                 "jsdoctags": [
                     {
                         "name": "_http",
+                        "type": "HttpClient",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "ErrorService",
+            "id": "injectable-ErrorService-a6df608bc9916dcdd3dd7128f99b0966",
+            "file": "src/app/error.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "handleError",
+                    "args": [
+                        {
+                            "name": "error",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 20,
+                    "jsdoctags": [
+                        {
+                            "name": "error",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, throwError } from 'rxjs';\nimport { retry, catchError } from 'rxjs/operators';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n  \n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n  // constructor(private injector: Injector) { }\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   console.log(`Request URL: ${router.url}`);\n\n  //   if (error instanceof HttpErrorResponse) {\n  //     console.error('Backend returned status code:', error.status);\n  //     console.error('Response body:', error.message);\n  //   } else {\n  //     console.error('an error occured:', error.message);\n  //   }\n  //   router.navigate(['songs']);\n  // }\n\n\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   if (Error instanceof HttpErrorResponse) {\n  //     console.log(error.status);\n  //   }\n  //   else {\n  //     console.error(\"an error occurred\");\n  //   }\n  //   router.navigate(['songs']);\n  // }\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient"
+                    }
+                ],
+                "line": 16,
+                "jsdoctags": [
+                    {
+                        "name": "http",
                         "type": "HttpClient",
                         "tagName": {
                             "text": "param"
@@ -203,13 +256,158 @@
             "outputsClass": [],
             "hostBindings": [],
             "hostListeners": []
+        },
+        {
+            "name": "Customer",
+            "id": "class-Customer-ba046f7c82e5c4c48d33e283eed9d877",
+            "file": "src/app/customer/customer.model.ts",
+            "type": "class",
+            "sourceCode": "export default class Customer{\r\n    firstname: string;\r\n    password: string;\r\n    email: string;\r\n}",
+            "properties": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "firstname",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "CustomerState",
+            "id": "class-CustomerState-2794079483ad118ac7a6390ac3b44bea",
+            "file": "src/app/customer/customer.state.ts",
+            "type": "class",
+            "sourceCode": "import Customer from './customer.model';\r\n\r\nexport default class CustomerState {\r\n    customer: Array<Customer>\r\n}\r\n\r\nexport const initializeState = (): CustomerState => {\r\n    return { customer: Array<Customer>()}\r\n}",
+            "properties": [
+                {
+                    "name": "customer",
+                    "type": "Array<Customer>",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "Post",
+            "id": "class-Post-a6df608bc9916dcdd3dd7128f99b0966",
+            "file": "src/app/error.service.ts",
+            "type": "class",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, throwError } from 'rxjs';\nimport { retry, catchError } from 'rxjs/operators';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n  \n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n  // constructor(private injector: Injector) { }\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   console.log(`Request URL: ${router.url}`);\n\n  //   if (error instanceof HttpErrorResponse) {\n  //     console.error('Backend returned status code:', error.status);\n  //     console.error('Response body:', error.message);\n  //   } else {\n  //     console.error('an error occured:', error.message);\n  //   }\n  //   router.navigate(['songs']);\n  // }\n\n\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   if (Error instanceof HttpErrorResponse) {\n  //     console.log(error.status);\n  //   }\n  //   else {\n  //     console.error(\"an error occurred\");\n  //   }\n  //   router.navigate(['songs']);\n  // }\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "type": "string"
+                    }
+                ],
+                "line": 6,
+                "jsdoctags": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "type": "string",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "body",
+                        "type": "string",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "body",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "id",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
         }
     ],
     "directives": [],
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-f4c908fd7b287d03fbe8d05308293b65",
+            "id": "component-AppComponent-0d0a9e4c756a56dc53368e1f25d72d8b",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -227,40 +425,15 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "title",
-                    "defaultValue": "'myapp'",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 10
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [
-                {
-                    "name": "loggedin",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "boolean",
-                    "typeParameters": [],
-                    "line": 15
-                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
-                },
-                {
-                    "name": "onLogout",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 24
+                    "line": 9
                 }
             ],
             "hostBindings": [],
@@ -268,43 +441,23 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent implements OnInit {\n  title = 'myapp';\n  constructor(private router: Router){}\n  ngOnInit() {\n    // localStorage.removeItem(\"isLoggedIn\");\n  }\n  loggedin() {\n    const loggedIn = localStorage.getItem(\"isLoggedIn\") ? localStorage.getItem(\"isLoggedIn\") : false;\n    console.log(\"Am I logged in \" + loggedIn);\n    if (loggedIn === \"true\") {\n      return true;\n    }\n    return false;\n  }\n\n  onLogout() {\n    this.router.navigate(['login']);\n    return localStorage.removeItem(\"isLoggedIn\")\n    \n  }\n\n\n}\n\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent implements OnInit {\n  ngOnInit() {}\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "  body {\r\n      padding: 0;\r\n      margin: 0;\r\n      text-decoration: none;\r\n      list-style: none;\r\n      box-sizing: border-box;\r\n  }\r\n  \r\n  nav {\r\n      background: rgba(6, 1, 27, 0.932);\r\n      height: 80px;\r\n      width: 100%;\r\n  }\r\n  \r\n  label.logo {\r\n      color: deeppink;\r\n      font-size: 40px;\r\n      line-height: 80px;\r\n      padding: 0 100px;\r\n      font-weight: 600;\r\n      text-transform: uppercase;\r\n  }\r\n  \r\n  nav ul {\r\n      float: right;\r\n      margin-right: 20px;\r\n  }\r\n  \r\n  nav ul li {\r\n      display: inline-block;\r\n      line-height: 80px;\r\n      margin: 0 5px;\r\n  }\r\n  /* nav ul li a {\r\n      color: white;\r\n      font-size: 17px;\r\n      padding: 7px 13px;\r\n      border-radius: 3px;\r\n      text-transform: uppercase;\r\n  }\r\n  \r\n  a.active,\r\n  a:hover {\r\n      background: blueviolet;\r\n      transition: .5s;\r\n  }\r\n   */\r\n  \r\n  .checkbtn {\r\n      font-size: 30px;\r\n      color: white;\r\n      float: right;\r\n      line-height: 80px;\r\n      margin-right: 40px;\r\n      cursor: pointer;\r\n      display: none;\r\n  }\r\n  \r\n  #check {\r\n      display: none;\r\n  }\r\n  \r\n  @media(min-width: 200px) and (max-width:952px) {\r\n      label.logo {\r\n          font-size: 30px;\r\n          padding-left: 50px;\r\n      }\r\n      nav ul li a {\r\n          font-size: 16px;\r\n      }\r\n  }\r\n  \r\n  @media (min-width: 200px) and (max-width:800px) {\r\n      .checkbtn {\r\n          display: block;\r\n      }\r\n      ul {\r\n          position: fixed;\r\n          width: 100%;\r\n          height: 100vh;\r\n          background: #2c3e50;\r\n          top: 80px;\r\n          left: -100%;\r\n          text-align: center;\r\n          transition: all .5s;\r\n      }\r\n      nav ul li {\r\n          display: block;\r\n      }\r\n      nav ul li a {\r\n          font-size: 20px;\r\n      }\r\n      a:hover,\r\n      a.active {\r\n          background: none;\r\n          color: black;\r\n      }\r\n  }",
+                    "data": "",
                     "styleUrl": "./app.component.css"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [
-                    {
-                        "name": "router",
-                        "type": "Router"
-                    }
-                ],
-                "line": 10,
-                "jsdoctags": [
-                    {
-                        "name": "router",
-                        "type": "Router",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<nav>\n    <input type=\"checkbox\" id=\"check\">\n    <label for=\"check\" class=\"checkbtn\">\n    <i class=\"fas fa-bars\"></i>\n  </label>\n    <label class=\"logo\">Music-X</label>\n    <ul>\n        <li> <a [hidden]=\"loggedin()\" class=\"active btn\" [routerLink]=\"['/login']\"> Login </a></li>\n        <li> <a [hidden]=\"!loggedin()\" class=\"btn\" (click)=\"onLogout()\"> Logout </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/themes']\"> Themes </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/details']\"> details </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/songs']\"> songs </a></li>\n    </ul>\n</nav>\n\n\n\n<router-outlet> </router-outlet>"
+            "templateData": "<app-header> </app-header>\n\n<router-outlet> </router-outlet>"
         },
         {
             "name": "DetailsComponent",
-            "id": "component-DetailsComponent-24978b36d56e95e62820f7f5b13bc24c",
+            "id": "component-DetailsComponent-a6e48e8d44d1a3978f1c20968e871d34",
             "file": "src/app/details/details.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -324,34 +477,48 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "customer",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "CustomerSubscription",
+                    "type": "Subscription",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
                     "name": "isEdit",
                     "defaultValue": "false",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 19
                 },
                 {
                     "name": "ray",
-                    "type": "any",
+                    "type": "Observable<CustomerState>",
                     "optional": false,
                     "description": "",
-                    "line": 11
+                    "line": 16
                 },
                 {
                     "name": "user",
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 12
+                    "line": 18
                 },
                 {
                     "name": "userObj",
-                    "defaultValue": "{\n    firstname:'',\n    email:'',\n    password:'',\n  }",
+                    "defaultValue": "{\n    firstname: '',\n    email: '',\n    password: '',\n  }",
                     "type": "object",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 22
                 }
             ],
             "methodsClass": [
@@ -366,7 +533,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 36,
                     "jsdoctags": [
                         {
                             "name": "formObj",
@@ -388,7 +555,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 58,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -410,7 +577,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 40,
+                    "line": 53,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -427,7 +594,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34
+                    "line": 47
                 },
                 {
                     "name": "ngOnInit",
@@ -435,7 +602,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22
+                    "line": 31
                 },
                 {
                     "name": "updateUser",
@@ -443,7 +610,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50
+                    "line": 63
                 }
             ],
             "hostBindings": [],
@@ -451,11 +618,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { CrudService } from '../crud.service';\n\n\n@Component({\n  selector: 'app-details',\n  templateUrl: './details.component.html',\n  styleUrls: ['./details.component.css']\n})\nexport class DetailsComponent {\n  ray: any;\n  user:any;\n  isEdit=false;\n\n  userObj={\n    firstname:'',\n    email:'',\n    password:'',\n  }\n\n  constructor(private myService: CrudService) {}\n  ngOnInit(){\n    this.getLatestUser()\n    console.log(this.getLatestUser)\n  }\n\n  addUser(formObj){\n    console.log(formObj)\n    this.myService.createUser(formObj).subscribe((response)=> {\n      console.log(\"user added\")\n      this.getLatestUser();\n    })\n  }\n  getLatestUser(){\n    this.myService.getAllUser().subscribe((response)=>{\n      this.ray = response\n      console.log(this.ray)\n    })\n  }\n  editUser(user){\n    this.isEdit= true;\n    this.userObj = user;\n  }\n\n  deleteUser(user){\n    this.myService.deleteUser(user).subscribe(()=>{\n      this.getLatestUser();\n    })\n  }\n  updateUser(){\n    this.isEdit=!this.isEdit;\n    this.myService.updateUser(this.userObj).subscribe(()=>{\n      this.getLatestUser();\n    })\n  }\n}",
+            "sourceCode": "import { map } from 'rxjs/operators';\nimport { Component, OnInit } from '@angular/core';\nimport { select, Store } from '@ngrx/store';\nimport { Observable, Subscribable, Subscription } from 'rxjs';\nimport { CrudService } from '../crud.service';\nimport Customer from '../customer/customer.model';\nimport * as CustomerActions from '../customer/customer.action';\nimport CustomerState from '../customer/customer.state';\n\n@Component({\n  selector: 'app-details',\n  templateUrl: './details.component.html',\n  styleUrls: ['./details.component.css']\n})\nexport class DetailsComponent {\n  ray: Observable<CustomerState>;\n  customer: any[];\n  user: any;\n  isEdit = false;\n  CustomerSubscription: Subscription;\n\n  userObj = {\n    firstname: '',\n    email: '',\n    password: '',\n  }\n\n  constructor(private myService: CrudService, private store: Store<{ customers: CustomerState }>) {\n    this.ray = store.pipe(select('customers'));\n  }\n  ngOnInit() {\n    this.getLatestUser()\n    this.CustomerSubscription = this.ray.pipe(map((x: any) => { this.customer = x.customer; console.log(x) })).subscribe();\n  }\n\n  addUser(formObj) {\n    const customer = new Customer();\n    customer.firstname = formObj.firstname;\n    customer.email = formObj.email;\n    customer.password = formObj.password;\n    this.store.dispatch(CustomerActions.CreateCustomerAction(customer));\n    this.myService.createUser(customer).subscribe((response)=> {\n      console.log(\"user added\")\n      this.getLatestUser();\n    })\n  }\n  getLatestUser() {\n    this.myService.getAllUser().subscribe((response) => {\n      // this.ray = response\n      console.log(this.ray)\n    })    \n  }\n  editUser(user) {\n    this.isEdit = true;\n    this.userObj = user;\n  }\n\n  deleteUser(user) {\n    this.myService.deleteUser(user).subscribe(() => {\n      this.getLatestUser();\n    })\n  }\n  updateUser() {\n    this.isEdit = !this.isEdit;\n    this.myService.updateUser(this.userObj).subscribe(() => {\n      this.getLatestUser();\n    })\n  }\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "body {\r\n    background-image: url();\r\n    background-position: center;\r\n    background-size: cover;\r\n    font-family: sans-serif;\r\n    margin-top: 10px;\r\n}\r\n\r\n.regform {\r\n    width: 600px;\r\n    background-color: blueviolet;\r\n    margin: auto;\r\n    color: #FFFFFF;\r\n    padding: 10px 0px 10px 0px;\r\n    text-align: center;\r\n    border-radius: 20px 20px 0px 0px;\r\n}\r\n\r\n.regform h2 {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n}\r\n\r\n.main {\r\n    background-color: rgba(6, 1, 27, 0.932);\r\n    width: 600px;\r\n    height: 310px;\r\n    margin: auto;\r\n    border-radius: 0px 0px 20px 20px;\r\n}\r\n\r\nform {\r\n    padding: 10px;\r\n}\r\n\r\n.name {\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.firstname {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -37px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.email {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -20px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myemail {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -55px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.password {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -35px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.mypassowrd {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -70px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\nbutton {\r\n    position: relative;\r\n    top: -50px;\r\n    margin: 17px 0px 0px 207px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 14px 53px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #5390f5;\r\n}\r\n\r\n@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);\r\nbody {\r\n    background-color: url();\r\n    font-family: \"Roboto\", helvetica, arial, sans-serif;\r\n    font-size: 16px;\r\n    font-weight: 400;\r\n    text-rendering: optimizeLegibility;\r\n}\r\n\r\ndiv.table-title {\r\n    display: block;\r\n    margin: auto;\r\n    max-width: 600px;\r\n    padding: 5px;\r\n    width: 100%;\r\n}\r\n\r\n.table-title h3 {\r\n    color: #fafafa;\r\n    font-size: 30px;\r\n    font-weight: 400;\r\n    font-style: normal;\r\n    font-family: \"Roboto\", helvetica, arial, sans-serif;\r\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);\r\n    text-transform: uppercase;\r\n}\r\n\r\n\r\n/*** Table Styles **/\r\n\r\n.table-fill {\r\n    background: white;\r\n    border-radius: 3px;\r\n    border-collapse: collapse;\r\n    height: 320px;\r\n    margin: auto;\r\n    max-width: 600px;\r\n    padding: 5px;\r\n    width: 100%;\r\n    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);\r\n    animation: float 5s infinite;\r\n}\r\n\r\nth {\r\n    color: #D5DDE5;\r\n    ;\r\n    background: #1b1e24;\r\n    border-bottom: 4px solid #9ea7af;\r\n    border-right: 1px solid #343a45;\r\n    font-size: 23px;\r\n    font-weight: 100;\r\n    padding: 15px;\r\n    text-align: center;\r\n    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);\r\n    vertical-align: middle;\r\n}\r\n\r\nth:first-child {\r\n    border-top-left-radius: 3px;\r\n}\r\n\r\nth:last-child {\r\n    border-top-right-radius: 3px;\r\n    border-right: none;\r\n}\r\n\r\ntr {\r\n    border-top: 1px solid #C1C3D1;\r\n    border-bottom: 1px solid #C1C3D1;\r\n    color: #666B85;\r\n    font-size: 16px;\r\n    font-weight: normal;\r\n    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);\r\n}\r\n\r\ntr:hover td {\r\n    background: #4E5066;\r\n    color: #FFFFFF;\r\n    border-top: 1px solid #22262e;\r\n}\r\n\r\ntr:first-child {\r\n    border-top: none;\r\n}\r\n\r\ntr:last-child {\r\n    border-bottom: none;\r\n}\r\n\r\ntr:nth-child(odd) td {\r\n    background: #EBEBEB;\r\n}\r\n\r\ntr:nth-child(odd):hover td {\r\n    background: #4E5066;\r\n}\r\n\r\ntr:last-child td:first-child {\r\n    border-bottom-left-radius: 3px;\r\n}\r\n\r\ntr:last-child td:last-child {\r\n    border-bottom-right-radius: 3px;\r\n}\r\n\r\ntd {\r\n    background: #FFFFFF;\r\n    padding: 20px;\r\n    text-align: left;\r\n    vertical-align: middle;\r\n    font-weight: 300;\r\n    font-size: 18px;\r\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);\r\n    border-right: 1px solid #C1C3D1;\r\n}\r\n\r\ntd:last-child {\r\n    border-right: 0px;\r\n}\r\n\r\nth.text-left {\r\n    text-align: left;\r\n}\r\n\r\nth.text-center {\r\n    text-align: center;\r\n}\r\n\r\nth.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd.text-left {\r\n    text-align: left;\r\n}\r\n\r\ntd.text-center {\r\n    text-align: center;\r\n}\r\n\r\ntd.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd .btnedit {\r\n    background-color: rgb(20, 220, 87);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\ntd .btndelete {\r\n    background-color: rgb(220, 20, 20);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}",
+                    "data": "body {\r\n    background-image: url();\r\n    background-position: center;\r\n    background-size: cover;\r\n    font-family: sans-serif;\r\n    margin-top: 10px;\r\n}\r\n\r\n.details {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.regform h2 {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n}\r\n\r\n.main {\r\n    background-color: rgba(6, 1, 27, 0.932);\r\n    width: 600px;\r\n    height: 350px;\r\n    margin: auto;\r\n    border-radius: 20px 20px 20px 20px;\r\n}\r\n\r\nform {\r\n    padding: 10px;\r\n}\r\n\r\n.name {\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.firstname {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -37px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.email {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -20px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myemail {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -55px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.password {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -35px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.mypassowrd {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -70px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\nbutton {\r\n    position: relative;\r\n    top: -50px;\r\n    margin: 17px 0px 0px 207px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 14px 53px;\r\n    outline: none;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #84e984;\r\n}\r\n\r\n.table-fill {\r\n    background: white;\r\n    border-radius: 3px;\r\n    border-collapse: collapse;\r\n    height: 320px;\r\n    margin: auto;\r\n    max-width: 600px;\r\n    padding: 5px;\r\n    width: 100%;\r\n    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);\r\n    animation: float 5s infinite;\r\n}\r\n\r\nth {\r\n    color: #D5DDE5;\r\n    background: #1b1e24;\r\n    border-bottom: 4px solid #9ea7af;\r\n    border-right: 1px solid #343a45;\r\n    font-size: 23px;\r\n    font-weight: 100;\r\n    padding: 15px;\r\n    text-align: center;\r\n    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);\r\n    vertical-align: middle;\r\n}\r\n\r\nth:first-child {\r\n    border-top-left-radius: 3px;\r\n}\r\n\r\nth:last-child {\r\n    border-top-right-radius: 3px;\r\n    border-right: none;\r\n}\r\n\r\ntr {\r\n    border-top: 1px solid #C1C3D1;\r\n    border-bottom: 1px solid #C1C3D1;\r\n    color: #666B85;\r\n    font-size: 16px;\r\n    font-weight: normal;\r\n    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);\r\n}\r\n\r\ntr:hover td {\r\n    background: #4E5066;\r\n    color: #FFFFFF;\r\n    border-top: 1px solid #22262e;\r\n}\r\n\r\ntr:first-child {\r\n    border-top: none;\r\n}\r\n\r\ntr:last-child {\r\n    border-bottom: none;\r\n}\r\n\r\ntr:nth-child(odd) td {\r\n    background: #EBEBEB;\r\n}\r\n\r\ntr:nth-child(odd):hover td {\r\n    background: #4E5066;\r\n}\r\n\r\ntr:last-child td:first-child {\r\n    border-bottom-left-radius: 3px;\r\n}\r\n\r\ntr:last-child td:last-child {\r\n    border-bottom-right-radius: 3px;\r\n}\r\n\r\ntd {\r\n    background: #FFFFFF;\r\n    padding: 20px;\r\n    text-align: left;\r\n    vertical-align: middle;\r\n    font-weight: 300;\r\n    font-size: 18px;\r\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);\r\n    border-right: 1px solid #C1C3D1;\r\n}\r\n\r\ntd:last-child {\r\n    border-right: 0px;\r\n}\r\n\r\nth.text-left {\r\n    text-align: left;\r\n}\r\n\r\nth.text-center {\r\n    text-align: center;\r\n}\r\n\r\nth.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd.text-left {\r\n    text-align: left;\r\n}\r\n\r\ntd.text-center {\r\n    text-align: center;\r\n}\r\n\r\ntd.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd .btnedit {\r\n    background-color: rgb(20, 220, 87);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\ntd .btndelete {\r\n    background-color: rgb(220, 20, 20);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}",
                     "styleUrl": "./details.component.css"
                 }
             ],
@@ -467,9 +634,13 @@
                     {
                         "name": "myService",
                         "type": "CrudService"
+                    },
+                    {
+                        "name": "store",
+                        "type": "Store<literal type>"
                     }
                 ],
-                "line": 19,
+                "line": 26,
                 "jsdoctags": [
                     {
                         "name": "myService",
@@ -477,10 +648,17 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "store",
+                        "type": "Store<literal type>",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
-            "templateData": "<div class=\"regform\">\n    <h2> Details Form </h2>\n</div>\n<div class=\"main\">\n    <form #myForm=\"ngForm\">\n        <h2 class=\"name\"> Name </h2>\n        <input class=\"firstname\" placeholder=\"name\" type=\"text\" name=\"firstname\" [(ngModel)]=\"userObj.firstname\"><br>\n        <h2 class=\"email\"> Email </h2>\n        <input class=\"myemail\" placeholder=\"email\" type=\"email\" name=\"email\" [(ngModel)]=\"userObj.email\"><br>\n        <h2 class=\"password\"> Password </h2>\n        <input class=\"mypassowrd\" placeholder=\"password\" type=\"password\" name=\"password\" [(ngModel)]=\"userObj.password\"><br>\n        <button class=\"btn\" type=\"submit\" (click)=\"addUser(myForm.value)\" *ngIf=\"!isEdit\"> Submit</button>\n        <button type=\"submit\" *ngIf=\"isEdit\" (click)=\"updateUser()\">Update</button>\n    </form>\n</div>\n<br>\n\n\n\n<table class=\"table-fill\">\n    <thead>\n        <tr>\n            <th class=\"text-left\">Name</th>\n            <th class=\"text-left\">Email</th>\n            <th class=\"text-left\">Password</th>\n            <th class=\"text-left\">Edit</th>\n            <th class=\"text-left\">Delete</th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let user of ray\">\n            <td> {{user.firstname}}</td>\n            <td> {{user.email}}</td>\n            <td> {{user.password}}</td>\n            <td> <button class=\"btnedit\" type=\"submit\" (click)=\"editUser(user)\"> Edit </button></td>\n            <td> <button class=\"btndelete\" type=\"submit\" (click)=\"deleteUser(user)\"> Delete </button></td>\n        </tr>\n    </tbody>\n</table>"
+            "templateData": "<div class=\"regform\">\n\n</div>\n<div class=\"main\">\n    <form #myForm=\"ngForm\">\n        <h1 class=\"details\"> Details Form </h1>\n        <h2 class=\"name\"> Name </h2>\n        <input class=\"firstname\" placeholder=\"name\" type=\"text\" name=\"firstname\" [(ngModel)]=\"userObj.firstname\"><br>\n        <h2 class=\"email\"> Email </h2>\n        <input class=\"myemail\" placeholder=\"email\" type=\"email\" name=\"email\" [(ngModel)]=\"userObj.email\"><br>\n        <h2 class=\"password\"> Password </h2>\n        <input class=\"mypassowrd\" placeholder=\"password\" type=\"password\" name=\"password\" [(ngModel)]=\"userObj.password\"><br>\n        <button class=\"btn\" type=\"submit\" (click)=\"addUser(myForm.value)\" *ngIf=\"!isEdit\"> Submit</button>\n        <button type=\"submit\" *ngIf=\"isEdit\" (click)=\"updateUser()\">Update</button>\n    </form>\n</div>\n<br>\n\n<table class=\"table-fill\">\n    <thead>\n        <tr>\n            <th class=\"text-left\">Name</th>\n            <th class=\"text-left\">Email</th>\n            <th class=\"text-left\">Password</th>\n            <th class=\"text-left\">Edit</th>\n            <th class=\"text-left\">Delete</th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let user of customer\">\n            <td> {{user.firstname}}</td>\n            <td> {{user.email}}</td>\n            <td> {{user.password}}</td>\n            <td> <button class=\"btnedit\" type=\"submit\" (click)=\"editUser(user)\"> Edit </button></td>\n            <td> <button class=\"btndelete\" type=\"submit\" (click)=\"deleteUser(user)\"> Delete </button></td>\n        </tr>\n    </tbody>\n</table>"
         },
         {
             "name": "HeaderComponent",
@@ -545,8 +723,97 @@
             "stylesData": ""
         },
         {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-a3eb8f1535f58d95cc6858eff0564bdc-1",
+            "file": "src/app/header/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-header",
+            "styleUrls": [
+                "./header.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./header.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "loggedin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 15
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                },
+                {
+                    "name": "onLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 24
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.css']\n})\nexport class HeaderComponent implements OnInit {\n\n  constructor(private router: Router){}\n  ngOnInit() {\n    // localStorage.removeItem(\"isLoggedIn\");\n  }\n  loggedin() {\n    const loggedIn = localStorage.getItem(\"isLoggedIn\") ? localStorage.getItem(\"isLoggedIn\") : false;\n    // console.log(\"Am I logged in \" + loggedIn);\n    if (loggedIn === \"true\") {\n      return true;\n    }\n    return false;\n  }\n\n  onLogout() {\n    this.router.navigate(['login']);\n    return localStorage.removeItem(\"isLoggedIn\")\n} }\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "nav {\r\n    background: rgba(6, 1, 27, 0.932);\r\n    height: 80px;\r\n    width: 100%;\r\n}\r\n\r\nlabel.logo {\r\n    color: deeppink;\r\n    font-size: 35px;\r\n    line-height: 80px;\r\n    padding: 0 100px;\r\n    font-weight: 600;\r\n    text-transform: uppercase;\r\n}\r\n\r\nnav ul {\r\n    float: right;\r\n    margin-right: 20px;\r\n}\r\n\r\nnav ul li {\r\n    display: inline-block;\r\n    line-height: 80px;\r\n    margin: 0 5px;\r\n}\r\n\r\nnav ul li a .btn {\r\n    color: white;\r\n    font-size: 17px;\r\n    padding: 7px 13px;\r\n    border-radius: 3px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.checkbtn {\r\n    font-size: 30px;\r\n    color: white;\r\n    float: right;\r\n    line-height: 80px;\r\n    margin-right: 40px;\r\n    cursor: pointer;\r\n    display: none;\r\n}\r\n\r\n#check {\r\n    display: none;\r\n}\r\n\r\n@media(min-width: 200px) and (max-width:952px) {\r\n    label.logo {\r\n        font-size: 30px;\r\n        padding-left: 50px;\r\n    }\r\n    nav ul li a {\r\n        font-size: 16px;\r\n    }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width:800px) {\r\n    .checkbtn {\r\n        display: block;\r\n    }\r\n    ul {\r\n        position: fixed;\r\n        width: 100%;\r\n        height: 100vh;\r\n        background: #2c3e50;\r\n        top: 80px;\r\n        left: -100%;\r\n        text-align: center;\r\n        transition: all .5s;\r\n    }\r\n    nav ul li {\r\n        display: block;\r\n    }\r\n    nav ul li a {\r\n        font-size: 20px;\r\n    }\r\n    a:hover,\r\n    a.active {\r\n        background: none;\r\n        color: black;\r\n    }\r\n}",
+                    "styleUrl": "./header.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "router",
+                        "type": "Router"
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "HeaderComponent-1",
+            "templateData": "<nav>\n    <input type=\"checkbox\" id=\"check\">\n    <label for=\"check\" class=\"checkbtn\">\n    <i class=\"fas fa-bars\"></i>\n  </label>\n    <label class=\"logo\">Music-X</label>\n    <ul>\n        <li> <a [hidden]=\"loggedin()\" class=\"active btn\" [routerLink]=\"['/login']\"> Login </a></li>\n        <li> <a [hidden]=\"!loggedin()\" class=\"btn\" (click)=\"onLogout()\"> Logout </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/themes']\"> Themes </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/details']\"> details </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/songs']\"> songs </a></li>\n    </ul>\n</nav>"
+        },
+        {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-eac695ac2fa4e5d1b5a550b7e7f529d1",
+            "id": "component-LoginComponent-6555f5cf98600c7a9603c8d8345cbc68",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -581,6 +848,14 @@
                     "returnType": "void",
                     "typeParameters": [],
                     "line": 16
+                },
+                {
+                    "name": "onCreate",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33
                 },
                 {
                     "name": "performLogin",
@@ -621,11 +896,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormGroup, FormControl, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.css']\n})\nexport class LoginComponent implements OnInit {\n  loginForm ;\n\n  constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void {\n    this.loginForm = new FormGroup({\n\n      username: new FormControl('', [ Validators.required]),\n  \n      password: new FormControl(''),\n    });\n\n  }\n  performLogin(userName, password) {\n    this.service.getLogin(userName.value, password.value).subscribe(res => {\n      console.log(res);\n      localStorage.setItem(\"isLoggedIn\", 'true');\n      this.router.navigate(['details']);\n    });\n  }\n}",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormGroup, FormControl, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.css']\n})\nexport class LoginComponent implements OnInit {\n  loginForm ;\n\n  constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void {\n    this.loginForm = new FormGroup({\n\n      username: new FormControl('', [ Validators.required]),\n  \n      password: new FormControl(''),\n    });\n\n  }\n  performLogin(userName, password) {\n    this.service.getLogin(userName.value, password.value).subscribe(res => {\n      console.log(res);\n      localStorage.setItem(\"isLoggedIn\", 'true');\n      this.router.navigate(['details']);\n    });\n  }\n  \n  onCreate(){\n    this.router.navigate(['signup']);\n}\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".container {\r\n    margin: 0;\r\n    padding: 0;\r\n    height: 87vh;\r\n    clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);\r\n    background: linear-gradient(45deg, darkblue, transparent);\r\n    background-size: cover;\r\n}\r\n\r\n.form {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 350px;\r\n    padding: 0 45px 30px 45px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.form h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.form .icons i {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    margin: 0 20px 20px 20px;\r\n    transition: 0.8s;\r\n    transition-property: color, transform;\r\n}\r\n\r\n.form .icons i:hover {\r\n    color: #5369CC;\r\n    transform: scale(1.3);\r\n}\r\n\r\n.form input {\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 265px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n.form input:hover {\r\n    width: 300px;\r\n}\r\n\r\n.form input:focus {\r\n    width: 300px;\r\n}\r\n\r\nform button {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 150px;\r\n    padding: 15px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n}\r\n\r\n.form button:hover,\r\nform button:active,\r\nform button:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.form .options {\r\n    color: #bbb;\r\n    font-size: 14px;\r\n    margin: 20px 0 0;\r\n}\r\n\r\n.form .options a {\r\n    text-decoration: none;\r\n    color: #06C5CF;\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 500px) {\r\n    .form {\r\n        width: 100%;\r\n    }\r\n    .form .options,\r\n    .form .options a {\r\n        width: 100%\r\n    }\r\n    form button {\r\n        margin-bottom: 10px;\r\n    }\r\n}",
+                    "data": ".container {\r\n    margin: 0;\r\n    padding: 0;\r\n    height: 87vh;\r\n    /* clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%); */\r\n    background: linear-gradient(45deg, darkblue, transparent);\r\n    background-size: cover;\r\n}\r\n\r\n.form {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 350px;\r\n    padding: 0 45px 30px 45px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.form h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.form .icons i {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    margin: 0 20px 20px 20px;\r\n    transition: 0.8s;\r\n    transition-property: color, transform;\r\n}\r\n\r\n.form .icons i:hover {\r\n    color: #5369CC;\r\n    transform: scale(1.3);\r\n}\r\n\r\n.form input {\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 265px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n.form input:hover {\r\n    width: 300px;\r\n}\r\n\r\n.form input:focus {\r\n    width: 300px;\r\n}\r\n\r\nform button {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 150px;\r\n    padding: 15px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n}\r\n\r\n.form button:hover,\r\nform button:active,\r\nform button:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.form .options {\r\n    color: #bbb;\r\n    font-size: 14px;\r\n    margin: 20px 0 0;\r\n}\r\n\r\n.form .options a {\r\n    text-decoration: none;\r\n    color: #06C5CF;\r\n    cursor: pointer;\r\n}\r\n\r\n@media screen and (max-width: 300px) {\r\n    .form {\r\n        width: 100%;\r\n    }\r\n    .form .options,\r\n    .form .options a {\r\n        width: 100%\r\n    }\r\n    form button {\r\n        margin-bottom: 10px;\r\n    }\r\n}",
                     "styleUrl": "./login.component.css"
                 }
             ],
@@ -664,7 +939,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"container\">\n\n    <div class=\"form\">\n        <form class=\"login-form\" action=\"\" method=\"post\" [formGroup]=\"loginForm\">\n            <h2> Login </h2>\n            <div class=\"icons\">\n                <a href=\"#\"><i class=\"fab fa-facebook\" ></i></a>\n                <a href=\"#\"><i class=\"fab fa-google\" ></i></a>\n                <a href=\"#\"><i class=\"fab fa-twitter\" ></i></a>\n            </div>\n            <input id=\"username\" type=\"text\" placeholder=\"Username\" formControlName=\"username\" #username required>\n\n            <input type=\"password\" name=\"\" value=\"\" placeholder=\"Password\" formControlName=\"password\" #password required>\n\n            <button type=\"submit\" name=\"button\" (click)=\"performLogin(username, password)\"> Login </button>\n            <p class=\"options\"> Not Registered? <a href=\"#\"> Create an Account</a></p>\n        </form>\n    </div>\n</div>"
+            "templateData": "<div class=\"container\">\n    <div class=\"form\">\n        <form class=\"login-form\" action=\"\" method=\"post\" [formGroup]=\"loginForm\">\n            <h2> Login </h2>\n            <div class=\"icons\">\n                <a href=\"#\"><i class=\"fab fa-facebook\" ></i></a>\n                <a href=\"#\"><i class=\"fab fa-google\" ></i></a>\n                <a href=\"#\"><i class=\"fab fa-twitter\" ></i></a>\n            </div>\n            <input id=\"username\" type=\"text\" placeholder=\"Username\" formControlName=\"username\" #username required>\n\n            <input id=\"password\" type=\"password\" value=\"\" placeholder=\"Password\" formControlName=\"password\" #password required>\n\n            <button type=\"submit\" name=\"button\" (click)=\"performLogin(username, password)\"> Login </button>\n            <p class=\"options\"> Not Registered? <a (click)=\"onCreate()\"> Create an Account</a></p>\n        </form>\n    </div>\n</div>"
         },
         {
             "name": "PageComponent",
@@ -729,6 +1004,73 @@
             "stylesData": ""
         },
         {
+            "name": "SignupComponent",
+            "id": "component-SignupComponent-c4bd33f1dd9c412b7ef30a9a9c43b2e9",
+            "file": "src/app/signup/signup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-signup",
+            "styleUrls": [
+                "./signup.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./signup.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "profile",
+                    "defaultValue": "new FormGroup({\n    username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  })",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23
+                },
+                {
+                    "name": "onSubmit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.css']\n})\nexport class SignupComponent implements OnInit {\n  profile = new FormGroup({\n    username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  })\n  onSubmit(){\n    console.log(this.profile.value)\n  }\n\n  // constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void { }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".myform {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 400px;\r\n    height: 370px;\r\n    padding: 0 28px 18px 38px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.myform h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n    margin-top: 10px;\r\n}\r\n\r\nlabel {\r\n    margin: 1px 102px 1px 3px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.psd {\r\n    margin: 1px 122px 1px -11px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myform label input {\r\n    position: relative;\r\n    top: 5px;\r\n    left: 34px;\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 197px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n\r\n/* .myform button {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    margin-top: 15px;\r\n    width: 122px;\r\n    padding: 13px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n} */",
+                    "styleUrl": "./signup.component.css"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"container\">\n    <div class=\"myform\">\n        <form [formGroup]=\"profile\">\n            <h2> SignUp </h2>\n            <label> Name \n            <input type=\"text\" placeholder=\"Username\" formControlName=\"username\">\n        </label>\n\n            <label> Email \n            <input type=\"email\" placeholder=\"Email\" formControlName=\"email\">\n        </label>\n\n            <label class=\"psd\"> Password \n            <input type=\"password\" placeholder=\"password\" formControlName=\"password\">\n        </label>\n        </form>\n        <button class=\"btn\" type=\"submit\" [disabled]=\"!profile.valid\" (click)=\"onSubmit()\"> Signup </button>\n    </div>\n</div>"
+        },
+        {
             "name": "SongsComponent",
             "id": "component-SongsComponent-39881948f13a0ed74aa7b5bceb5919e8",
             "file": "src/app/songs/songs.component.ts",
@@ -768,7 +1110,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "h1 {\r\n    text-align: center;\r\n}",
+                    "data": "",
                     "styleUrl": "./songs.component.css"
                 }
             ],
@@ -782,7 +1124,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<h1> No subscription, No songs </h1>"
+            "templateData": "<h1>Nothing </h1>"
         },
         {
             "name": "ThemesComponent",
@@ -820,7 +1162,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<body>\r\n    <h1>Grid Layout</h1>\r\n    <main>\r\n        <div class=\"div1\"> Header </div>\r\n        <div class=\"div2\"> Box1 </div>\r\n        <div class=\"div3\"> Box2 </div>\r\n        <div class=\"div4\"> Box3 </div>\r\n        <div class=\"div5\"> Sidebar </div>\r\n        <div class=\"div6\"> Main content </div>\r\n        <div class=\"div7\"> Footer </div>\r\n    </main>\r\n</body>"
+            "templateData": "<main>\r\n    <div class=\"div1\"> Header </div>\r\n    <div class=\"div2\"> Box1 </div>\r\n    <div class=\"div3\"> Box2 </div>\r\n    <div class=\"div4\"> Box3 </div>\r\n    <div class=\"div5\"> Sidebar </div>\r\n    <div class=\"div6\"> Main content </div>\r\n    <div class=\"div7\"> Footer </div>\r\n</main>"
         },
         {
             "name": "UnauthorizedComponent",
@@ -900,6 +1242,9 @@
                             "name": "LoginComponent"
                         },
                         {
+                            "name": "SignupComponent"
+                        },
+                        {
                             "name": "SongsComponent"
                         },
                         {
@@ -913,6 +1258,9 @@
                 {
                     "type": "imports",
                     "elements": [
+                        {
+                            "name": "!environment"
+                        },
                         {
                             "name": "AppRoutingModule"
                         }
@@ -969,6 +1317,22 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "addCustomer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/customer.actions.ts",
+                "type": "",
+                "defaultValue": "createAction(\r\n\r\n    '[Customer] Add Customer',\r\n\r\n    (customer: Customer) => ({ customer })\r\n\r\n)"
+            },
+            {
+                "name": "CreateCustomerAction",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/customer/customer.action.ts",
+                "type": "",
+                "defaultValue": "createAction(\r\n    '[Customer] - Create Customer',\r\n    props<Customer>()\r\n)"
+            },
+            {
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -985,6 +1349,30 @@
                 "defaultValue": "{\n  production: false\n}"
             },
             {
+                "name": "GetCustomerAction",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/customer/customer.action.ts",
+                "type": "",
+                "defaultValue": "createAction(\r\n    '[Customer] - Get Customer'\r\n)"
+            },
+            {
+                "name": "initializeState",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/customer/customer.state.ts",
+                "type": "",
+                "defaultValue": "(): CustomerState => {\r\n    return { customer: Array<Customer>()}\r\n}"
+            },
+            {
+                "name": "initialState",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/customer/customer.reducer.ts",
+                "type": "",
+                "defaultValue": "initializeState()"
+            },
+            {
                 "name": "LoggedIn",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1015,6 +1403,14 @@
                 "file": "src/stories/Page.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "reducer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/customer/customer.reducer.ts",
+                "type": "",
+                "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log(\"State is \");\r\n        console.log(customer);\r\n        debugger;\r\n        return { ...state, customer: [...state.customer, customer] }\r\n    })\r\n)"
             },
             {
                 "name": "Template",
@@ -1033,10 +1429,68 @@
                 "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
             }
         ],
-        "functions": [],
+        "functions": [
+            {
+                "name": "CustomerReducer",
+                "file": "src/app/customer/customer.reducer.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "description": "",
+                "args": [
+                    {
+                        "name": "state"
+                    },
+                    {
+                        "name": "action"
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "state",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/customer.actions.ts": [
+                {
+                    "name": "addCustomer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/customer.actions.ts",
+                    "type": "",
+                    "defaultValue": "createAction(\r\n\r\n    '[Customer] Add Customer',\r\n\r\n    (customer: Customer) => ({ customer })\r\n\r\n)"
+                }
+            ],
+            "src/app/customer/customer.action.ts": [
+                {
+                    "name": "CreateCustomerAction",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/customer/customer.action.ts",
+                    "type": "",
+                    "defaultValue": "createAction(\r\n    '[Customer] - Create Customer',\r\n    props<Customer>()\r\n)"
+                },
+                {
+                    "name": "GetCustomerAction",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/customer/customer.action.ts",
+                    "type": "",
+                    "defaultValue": "createAction(\r\n    '[Customer] - Get Customer'\r\n)"
+                }
+            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -1055,6 +1509,34 @@
                     "file": "src/environments/environment.ts",
                     "type": "object",
                     "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "src/app/customer/customer.state.ts": [
+                {
+                    "name": "initializeState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/customer/customer.state.ts",
+                    "type": "",
+                    "defaultValue": "(): CustomerState => {\r\n    return { customer: Array<Customer>()}\r\n}"
+                }
+            ],
+            "src/app/customer/customer.reducer.ts": [
+                {
+                    "name": "initialState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/customer/customer.reducer.ts",
+                    "type": "",
+                    "defaultValue": "initializeState()"
+                },
+                {
+                    "name": "reducer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/customer/customer.reducer.ts",
+                    "type": "",
+                    "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log(\"State is \");\r\n        console.log(customer);\r\n        debugger;\r\n        return { ...state, customer: [...state.customer, customer] }\r\n    })\r\n)"
                 }
             ],
             "src/stories/Header.stories.ts": [
@@ -1110,7 +1592,39 @@
                 }
             ]
         },
-        "groupedFunctions": {},
+        "groupedFunctions": {
+            "src/app/customer/customer.reducer.ts": [
+                {
+                    "name": "CustomerReducer",
+                    "file": "src/app/customer/customer.reducer.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "state"
+                        },
+                        {
+                            "name": "action"
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "state",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "action",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
         "groupedEnumerations": {},
         "groupedTypeAliases": {}
     },
@@ -1148,6 +1662,10 @@
                         "component": "ThemesComponent"
                     },
                     {
+                        "path": "signup",
+                        "component": "SignupComponent"
+                    },
+                    {
                         "path": "login",
                         "component": "LoginComponent"
                     },
@@ -1179,7 +1697,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -1210,12 +1728,126 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/customer.actions.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "addCustomer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.action.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CreateCustomerAction",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.action.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GetCustomerAction",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "Customer",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.reducer.ts",
+                "type": "function",
+                "linksubtype": "function",
+                "name": "CustomerReducer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "initialState",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "reducer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.state.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "CustomerState",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customer/customer.state.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "initializeState",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/details/details.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "DetailsComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/14",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/error.service.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "Post",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/error.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ErrorService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/header/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -1224,7 +1856,16 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/signup/signup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SignupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
