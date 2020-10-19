@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscribable, Subscription } from 'rxjs';
-import { CrudService } from '../crud.service';
+import { CrudService } from '../common.services/crud.service';
 import Customer from '../customer/customer.model';
 import * as CustomerActions from '../customer/customer.action';
 import CustomerState from '../customer/customer.state';
@@ -13,7 +13,7 @@ import CustomerState from '../customer/customer.state';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent {
-  ray: Observable<CustomerState>;
+  ray: any;
   customer: any[];
   user: any;
   isEdit = false;
@@ -46,7 +46,7 @@ export class DetailsComponent {
   }
   getLatestUser() {
     this.myService.getAllUser().subscribe((response) => {
-      // this.ray = response
+      this.ray = response
       console.log(this.ray);
     });
   }

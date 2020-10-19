@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  hide = false;
   constructor(private router: Router){}
   ngOnInit() {
     // localStorage.removeItem("isLoggedIn");
@@ -24,4 +24,14 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.router.navigate(['login']);
     return localStorage.removeItem('isLoggedIn');
-} }
+}
+
+changeOfRoute(checkButton: any) {  
+  // debugger;
+  if(!checkButton.checked){
+    checkButton.checked = true;
+  } else {
+    checkButton.checked = false;
+  }  
+}
+}

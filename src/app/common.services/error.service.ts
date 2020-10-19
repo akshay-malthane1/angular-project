@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 class Post {
   constructor(
@@ -17,6 +16,7 @@ export class ErrorService {
   constructor(private http: HttpClient) { }
 
 
+  // tslint:disable-next-line: typedef
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

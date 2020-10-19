@@ -4,7 +4,7 @@
     "injectables": [
         {
             "name": "AuthService",
-            "id": "injectable-AuthService-76c0602636c43089c78df321e3b26e2d",
+            "id": "injectable-AuthService-a8756df3ec2b0eda496b15a4fb4ad481",
             "file": "src/app/auth.service.ts",
             "properties": [],
             "methods": [
@@ -43,7 +43,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n\n  constructor(private httpClient: HttpClient) { }\n  getLogin(uname, pwd) {\n    const postObject = {\n      username: uname,\n      password: pwd\n    };\n    return this.httpClient.post(\"http://localhost:3000/profile\", postObject);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n\n  constructor(private httpClient: HttpClient) { }\n  getLogin(uname, pwd) {\n    const postObject = {\n      username: uname,\n      password: pwd\n    };\n    return this.httpClient.post('http://localhost:3000/profile', postObject);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -68,7 +68,7 @@
         },
         {
             "name": "CrudService",
-            "id": "injectable-CrudService-52ba98dcf4434c913424b51ef6f9dd50",
+            "id": "injectable-CrudService-4dfb099fdbf8f09b86d30343561fead6",
             "file": "src/app/crud.service.ts",
             "properties": [],
             "methods": [
@@ -81,9 +81,9 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "any",
+                    "returnType": "Observable<Post[]>",
                     "typeParameters": [],
-                    "line": 12,
+                    "line": 20,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -105,7 +105,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 32,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -122,7 +122,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 16
+                    "line": 24
                 },
                 {
                     "name": "updateUser",
@@ -135,7 +135,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 36,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -148,21 +148,32 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private _http: HttpClient) { }\n\n  createUser(user) {\n    return this._http.post(\"http://localhost:3000/posts\", user);\n  };\n\n  getAllUser() {\n    return this._http.get(\"http://localhost:3000/posts\")\n  };\n  \n  deleteUser(user) {\n    return this._http.delete(\"http://localhost:3000/posts/\" + user.id)\n  }\n  updateUser(user) {\n    return this._http.put(\"http://localhost:3000/posts/\" + user.id, user)\n  }\n}",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { catchError, retry } from 'rxjs/operators';\nimport { ErrorService } from './error.service';\n\nclass Post {\n  public username: string;\n  public email: string;\n  public password: string;\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private http: HttpClient, private errorservice: ErrorService\n  ) { }\n\n  createUser(user): Observable<Post[]> {\n    return this.http.post<Post[]>('http://localhost:3000/posts', user);\n  }\n  // tslint:disable-next-line: typedef\n  getAllUser() {\n    return this.http.get('http://localhost:3000/posts')\n      .pipe(\n        retry(1),\n        catchError(this.errorservice.handleError)\n      );\n  }\n  // tslint:disable-next-line: typedef\n  deleteUser(user) {\n    return this.http.delete('http://localhost:3000/posts/' + user.id);\n  }\n  // tslint:disable-next-line: typedef\n  updateUser(user) {\n    return this.http.put('http://localhost:3000/posts/' + user.id, user);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
                 "args": [
                     {
-                        "name": "_http",
+                        "name": "http",
                         "type": "HttpClient"
+                    },
+                    {
+                        "name": "errorservice",
+                        "type": "ErrorService"
                     }
                 ],
-                "line": 8,
+                "line": 15,
                 "jsdoctags": [
                     {
-                        "name": "_http",
+                        "name": "http",
                         "type": "HttpClient",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "errorservice",
+                        "type": "ErrorService",
                         "tagName": {
                             "text": "param"
                         }
@@ -173,7 +184,7 @@
         },
         {
             "name": "ErrorService",
-            "id": "injectable-ErrorService-a6df608bc9916dcdd3dd7128f99b0966",
+            "id": "injectable-ErrorService-29d2bfebf9db67b79086e546cd65cdaf",
             "file": "src/app/error.service.ts",
             "properties": [],
             "methods": [
@@ -201,7 +212,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, throwError } from 'rxjs';\nimport { retry, catchError } from 'rxjs/operators';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n  \n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n  // constructor(private injector: Injector) { }\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   console.log(`Request URL: ${router.url}`);\n\n  //   if (error instanceof HttpErrorResponse) {\n  //     console.error('Backend returned status code:', error.status);\n  //     console.error('Response body:', error.message);\n  //   } else {\n  //     console.error('an error occured:', error.message);\n  //   }\n  //   router.navigate(['songs']);\n  // }\n\n\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   if (Error instanceof HttpErrorResponse) {\n  //     console.log(error.status);\n  //   }\n  //   else {\n  //     console.error(\"an error occurred\");\n  //   }\n  //   router.navigate(['songs']);\n  // }\n}",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, throwError } from 'rxjs';\nimport { retry, catchError } from 'rxjs/operators';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n\n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -259,10 +270,10 @@
         },
         {
             "name": "Customer",
-            "id": "class-Customer-ba046f7c82e5c4c48d33e283eed9d877",
+            "id": "class-Customer-033712deca150c1baaf6cbebab349b48",
             "file": "src/app/customer/customer.model.ts",
             "type": "class",
-            "sourceCode": "export default class Customer{\r\n    firstname: string;\r\n    password: string;\r\n    email: string;\r\n}",
+            "sourceCode": "export default class Customer{\r\n    firstname: string;\r\n    password: string;\r\n    email: string;\r\n}\r\n",
             "properties": [
                 {
                     "name": "email",
@@ -295,10 +306,10 @@
         },
         {
             "name": "CustomerState",
-            "id": "class-CustomerState-2794079483ad118ac7a6390ac3b44bea",
+            "id": "class-CustomerState-de4b0c003b3479464427884697acd8d6",
             "file": "src/app/customer/customer.state.ts",
             "type": "class",
-            "sourceCode": "import Customer from './customer.model';\r\n\r\nexport default class CustomerState {\r\n    customer: Array<Customer>\r\n}\r\n\r\nexport const initializeState = (): CustomerState => {\r\n    return { customer: Array<Customer>()}\r\n}",
+            "sourceCode": "import Customer from './customer.model';\r\n\r\nexport default class CustomerState {\r\n    customer: Array<Customer>;\r\n}\r\n\r\nexport const initializeState = (): CustomerState => {\r\n    return { customer: Array<Customer>()};\r\n};\r\n",
             "properties": [
                 {
                     "name": "customer",
@@ -317,10 +328,55 @@
         },
         {
             "name": "Post",
-            "id": "class-Post-a6df608bc9916dcdd3dd7128f99b0966",
+            "id": "class-Post-4dfb099fdbf8f09b86d30343561fead6",
+            "file": "src/app/crud.service.ts",
+            "type": "class",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { catchError, retry } from 'rxjs/operators';\nimport { ErrorService } from './error.service';\n\nclass Post {\n  public username: string;\n  public email: string;\n  public password: string;\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private http: HttpClient, private errorservice: ErrorService\n  ) { }\n\n  createUser(user): Observable<Post[]> {\n    return this.http.post<Post[]>('http://localhost:3000/posts', user);\n  }\n  // tslint:disable-next-line: typedef\n  getAllUser() {\n    return this.http.get('http://localhost:3000/posts')\n      .pipe(\n        retry(1),\n        catchError(this.errorservice.handleError)\n      );\n  }\n  // tslint:disable-next-line: typedef\n  deleteUser(user) {\n    return this.http.delete('http://localhost:3000/posts/' + user.id);\n  }\n  // tslint:disable-next-line: typedef\n  updateUser(user) {\n    return this.http.put('http://localhost:3000/posts/' + user.id, user);\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "username",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "Post",
+            "id": "class-Post-29d2bfebf9db67b79086e546cd65cdaf-1",
             "file": "src/app/error.service.ts",
             "type": "class",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, throwError } from 'rxjs';\nimport { retry, catchError } from 'rxjs/operators';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n  \n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n  // constructor(private injector: Injector) { }\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   console.log(`Request URL: ${router.url}`);\n\n  //   if (error instanceof HttpErrorResponse) {\n  //     console.error('Backend returned status code:', error.status);\n  //     console.error('Response body:', error.message);\n  //   } else {\n  //     console.error('an error occured:', error.message);\n  //   }\n  //   router.navigate(['songs']);\n  // }\n\n\n  // handleError(error: any) {\n  //   const router = this.injector.get(Router);\n  //   if (Error instanceof HttpErrorResponse) {\n  //     console.log(error.status);\n  //   }\n  //   else {\n  //     console.error(\"an error occurred\");\n  //   }\n  //   router.navigate(['songs']);\n  // }\n}",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, throwError } from 'rxjs';\nimport { retry, catchError } from 'rxjs/operators';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n\n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -400,14 +456,17 @@
             "inputsClass": [],
             "outputsClass": [],
             "hostBindings": [],
-            "hostListeners": []
+            "hostListeners": [],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "Post-1"
         }
     ],
     "directives": [],
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-0d0a9e4c756a56dc53368e1f25d72d8b",
+            "id": "component-AppComponent-b2cc97d60347ca3942284de1c28db476",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -441,7 +500,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent implements OnInit {\n  ngOnInit() {}\n}",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent implements OnInit {\n  ngOnInit() {}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -457,7 +516,7 @@
         },
         {
             "name": "DetailsComponent",
-            "id": "component-DetailsComponent-a6e48e8d44d1a3978f1c20968e871d34",
+            "id": "component-DetailsComponent-4f2beacb7b819e56a559a46da910f7f1",
             "file": "src/app/details/details.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -618,7 +677,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { map } from 'rxjs/operators';\nimport { Component, OnInit } from '@angular/core';\nimport { select, Store } from '@ngrx/store';\nimport { Observable, Subscribable, Subscription } from 'rxjs';\nimport { CrudService } from '../crud.service';\nimport Customer from '../customer/customer.model';\nimport * as CustomerActions from '../customer/customer.action';\nimport CustomerState from '../customer/customer.state';\n\n@Component({\n  selector: 'app-details',\n  templateUrl: './details.component.html',\n  styleUrls: ['./details.component.css']\n})\nexport class DetailsComponent {\n  ray: Observable<CustomerState>;\n  customer: any[];\n  user: any;\n  isEdit = false;\n  CustomerSubscription: Subscription;\n\n  userObj = {\n    firstname: '',\n    email: '',\n    password: '',\n  }\n\n  constructor(private myService: CrudService, private store: Store<{ customers: CustomerState }>) {\n    this.ray = store.pipe(select('customers'));\n  }\n  ngOnInit() {\n    this.getLatestUser()\n    this.CustomerSubscription = this.ray.pipe(map((x: any) => { this.customer = x.customer; console.log(x) })).subscribe();\n  }\n\n  addUser(formObj) {\n    const customer = new Customer();\n    customer.firstname = formObj.firstname;\n    customer.email = formObj.email;\n    customer.password = formObj.password;\n    this.store.dispatch(CustomerActions.CreateCustomerAction(customer));\n    this.myService.createUser(customer).subscribe((response)=> {\n      console.log(\"user added\")\n      this.getLatestUser();\n    })\n  }\n  getLatestUser() {\n    this.myService.getAllUser().subscribe((response) => {\n      // this.ray = response\n      console.log(this.ray)\n    })    \n  }\n  editUser(user) {\n    this.isEdit = true;\n    this.userObj = user;\n  }\n\n  deleteUser(user) {\n    this.myService.deleteUser(user).subscribe(() => {\n      this.getLatestUser();\n    })\n  }\n  updateUser() {\n    this.isEdit = !this.isEdit;\n    this.myService.updateUser(this.userObj).subscribe(() => {\n      this.getLatestUser();\n    })\n  }\n}",
+            "sourceCode": "import { map } from 'rxjs/operators';\nimport { Component, OnInit } from '@angular/core';\nimport { select, Store } from '@ngrx/store';\nimport { Observable, Subscribable, Subscription } from 'rxjs';\nimport { CrudService } from '../crud.service';\nimport Customer from '../customer/customer.model';\nimport * as CustomerActions from '../customer/customer.action';\nimport CustomerState from '../customer/customer.state';\n\n@Component({\n  selector: 'app-details',\n  templateUrl: './details.component.html',\n  styleUrls: ['./details.component.css']\n})\nexport class DetailsComponent {\n  ray: Observable<CustomerState>;\n  customer: any[];\n  user: any;\n  isEdit = false;\n  CustomerSubscription: Subscription;\n\n  userObj = {\n    firstname: '',\n    email: '',\n    password: '',\n  };\n\n  constructor(private myService: CrudService, private store: Store<{ customers: CustomerState }>) {\n    this.ray = store.pipe(select('customers'));\n  }\n  ngOnInit() {\n    this.getLatestUser();\n    this.CustomerSubscription = this.ray.pipe(map((x: any) => { this.customer = x.customer; console.log(x); })).subscribe();\n  }\n\n  addUser(formObj) {\n    const customer = new Customer();\n    customer.firstname = formObj.firstname;\n    customer.email = formObj.email;\n    customer.password = formObj.password;\n    this.store.dispatch(CustomerActions.CreateCustomerAction(customer));\n    this.myService.createUser(customer).subscribe((response) => {\n      console.log('user added');\n      this.getLatestUser();\n    });\n  }\n  getLatestUser() {\n    this.myService.getAllUser().subscribe((response) => {\n      // this.ray = response\n      console.log(this.ray);\n    });\n  }\n  editUser(user) {\n    this.isEdit = true;\n    this.userObj = user;\n  }\n\n  deleteUser(user) {\n    this.myService.deleteUser(user).subscribe(() => {\n      this.getLatestUser();\n    });\n  }\n  updateUser() {\n    this.isEdit = !this.isEdit;\n    this.myService.updateUser(this.userObj).subscribe(() => {\n      this.getLatestUser();\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -724,7 +783,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-a3eb8f1535f58d95cc6858eff0564bdc-1",
+            "id": "component-HeaderComponent-c2155886df7465d03986d7ca1efebf9a-1",
             "file": "src/app/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -774,7 +833,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.css']\n})\nexport class HeaderComponent implements OnInit {\n\n  constructor(private router: Router){}\n  ngOnInit() {\n    // localStorage.removeItem(\"isLoggedIn\");\n  }\n  loggedin() {\n    const loggedIn = localStorage.getItem(\"isLoggedIn\") ? localStorage.getItem(\"isLoggedIn\") : false;\n    // console.log(\"Am I logged in \" + loggedIn);\n    if (loggedIn === \"true\") {\n      return true;\n    }\n    return false;\n  }\n\n  onLogout() {\n    this.router.navigate(['login']);\n    return localStorage.removeItem(\"isLoggedIn\")\n} }\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.css']\n})\nexport class HeaderComponent implements OnInit {\n\n  constructor(private router: Router){}\n  ngOnInit() {\n    // localStorage.removeItem(\"isLoggedIn\");\n  }\n  loggedin() {\n    const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;\n    // console.log(\"Am I logged in \" + loggedIn);\n    if (loggedIn === 'true') {\n      return true;\n    }\n    return false;\n  }\n\n  onLogout() {\n    this.router.navigate(['login']);\n    return localStorage.removeItem('isLoggedIn');\n} }\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -813,7 +872,7 @@
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-6555f5cf98600c7a9603c8d8345cbc68",
+            "id": "component-LoginComponent-de9b669dc3994469fe19c22dcdb90b62",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -896,7 +955,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormGroup, FormControl, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.css']\n})\nexport class LoginComponent implements OnInit {\n  loginForm ;\n\n  constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void {\n    this.loginForm = new FormGroup({\n\n      username: new FormControl('', [ Validators.required]),\n  \n      password: new FormControl(''),\n    });\n\n  }\n  performLogin(userName, password) {\n    this.service.getLogin(userName.value, password.value).subscribe(res => {\n      console.log(res);\n      localStorage.setItem(\"isLoggedIn\", 'true');\n      this.router.navigate(['details']);\n    });\n  }\n  \n  onCreate(){\n    this.router.navigate(['signup']);\n}\n}",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormGroup, FormControl, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.css']\n})\nexport class LoginComponent implements OnInit {\n  loginForm ;\n\n  constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void {\n    this.loginForm = new FormGroup({\n\n      username: new FormControl('', [ Validators.required]),\n\n      password: new FormControl(''),\n    });\n\n  }\n  performLogin(userName, password) {\n    this.service.getLogin(userName.value, password.value).subscribe(res => {\n      console.log(res);\n      localStorage.setItem('isLoggedIn', 'true');\n      this.router.navigate(['details']);\n    });\n  }\n\n  onCreate(){\n    this.router.navigate(['signup']);\n}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1004,8 +1063,52 @@
             "stylesData": ""
         },
         {
+            "name": "SharedComponent",
+            "id": "component-SharedComponent-8813ed6cd68afd0098fec3d0bfc4b5b4",
+            "file": "src/app/shared/shared.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-shared",
+            "styleUrls": [
+                "./shared.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./shared.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n@Component({\n  selector: 'app-shared',\n  templateUrl: './shared.component.html',\n  styleUrls: ['./shared.component.css']\n})\nexport class SharedComponent{\n\n  constructor() { }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".btn {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 150px;\r\n    padding: 15px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n    text-decoration: none;\r\n}\r\n\r\n.btn:hover,\r\n.btn:active,\r\n.btn:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n    color: white;\r\n}",
+                    "styleUrl": "./shared.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "templateData": ""
+        },
+        {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-c4bd33f1dd9c412b7ef30a9a9c43b2e9",
+            "id": "component-SignupComponent-f2761d8c4795246116e95154d9adf073",
             "file": "src/app/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1056,11 +1159,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.css']\n})\nexport class SignupComponent implements OnInit {\n  profile = new FormGroup({\n    username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  })\n  onSubmit(){\n    console.log(this.profile.value)\n  }\n\n  // constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void { }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../auth.service';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.css']\n})\nexport class SignupComponent implements OnInit {\n  profile = new FormGroup({\n    username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  });\n  onSubmit(){\n    console.log(this.profile.value);\n  }\n\n  // constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void { }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".myform {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 400px;\r\n    height: 370px;\r\n    padding: 0 28px 18px 38px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.myform h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n    margin-top: 10px;\r\n}\r\n\r\nlabel {\r\n    margin: 1px 102px 1px 3px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.psd {\r\n    margin: 1px 122px 1px -11px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myform label input {\r\n    position: relative;\r\n    top: 5px;\r\n    left: 34px;\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 197px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n\r\n/* .myform button {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    margin-top: 15px;\r\n    width: 122px;\r\n    padding: 13px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n} */",
+                    "data": ".myform {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 400px;\r\n    height: 370px;\r\n    padding: 0 28px 18px 38px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.myform h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n    margin-top: 10px;\r\n}\r\n\r\nlabel {\r\n    margin: 1px 102px 1px 3px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.psd {\r\n    margin: 1px 122px 1px -11px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myform label input {\r\n    position: relative;\r\n    top: 5px;\r\n    left: 34px;\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 197px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}",
                     "styleUrl": "./signup.component.css"
                 }
             ],
@@ -1072,7 +1175,7 @@
         },
         {
             "name": "SongsComponent",
-            "id": "component-SongsComponent-39881948f13a0ed74aa7b5bceb5919e8",
+            "id": "component-SongsComponent-467e5c2d40144c89ff0481c6572c1d75",
             "file": "src/app/songs/songs.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1106,7 +1209,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n  \n\n@Component({\n  selector: 'app-songs',\n  templateUrl: './songs.component.html',\n  styleUrls: ['./songs.component.css']\n})\nexport class SongsComponent implements OnInit {\n \nconstructor(){}\n\nngOnInit() {}\n}",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-songs',\n  templateUrl: './songs.component.html',\n  styleUrls: ['./songs.component.css']\n})\nexport class SongsComponent implements OnInit {\n\nconstructor(){}\n\nngOnInit() {}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1128,7 +1231,7 @@
         },
         {
             "name": "ThemesComponent",
-            "id": "component-ThemesComponent-6a7f41cf45eafa8affd0ad6a02999a87",
+            "id": "component-ThemesComponent-e520e2522449fd453743caa1c33c0675",
             "file": "src/app/themes/themes.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1153,7 +1256,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-themes',\n  templateUrl: './themes.component.html',\n  styleUrls: ['./themes.component.css']\n})\nexport class ThemesComponent  {\n\n}",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-themes',\n  templateUrl: './themes.component.html',\n  styleUrls: ['./themes.component.css']\n})\nexport class ThemesComponent  {\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1240,6 +1343,9 @@
                         },
                         {
                             "name": "LoginComponent"
+                        },
+                        {
+                            "name": "SharedComponent"
                         },
                         {
                             "name": "SignupComponent"
@@ -1362,7 +1468,7 @@
                 "subtype": "variable",
                 "file": "src/app/customer/customer.state.ts",
                 "type": "",
-                "defaultValue": "(): CustomerState => {\r\n    return { customer: Array<Customer>()}\r\n}"
+                "defaultValue": "(): CustomerState => {\r\n    return { customer: Array<Customer>()};\r\n}"
             },
             {
                 "name": "initialState",
@@ -1410,7 +1516,7 @@
                 "subtype": "variable",
                 "file": "src/app/customer/customer.reducer.ts",
                 "type": "",
-                "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log(\"State is \");\r\n        console.log(customer);\r\n        debugger;\r\n        return { ...state, customer: [...state.customer, customer] }\r\n    })\r\n)"
+                "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log('State is ');\r\n        console.log(customer);\r\n        debugger;\r\n        return { ...state, customer: [...state.customer, customer] };\r\n    })\r\n)"
             },
             {
                 "name": "Template",
@@ -1518,7 +1624,7 @@
                     "subtype": "variable",
                     "file": "src/app/customer/customer.state.ts",
                     "type": "",
-                    "defaultValue": "(): CustomerState => {\r\n    return { customer: Array<Customer>()}\r\n}"
+                    "defaultValue": "(): CustomerState => {\r\n    return { customer: Array<Customer>()};\r\n}"
                 }
             ],
             "src/app/customer/customer.reducer.ts": [
@@ -1536,7 +1642,7 @@
                     "subtype": "variable",
                     "file": "src/app/customer/customer.reducer.ts",
                     "type": "",
-                    "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log(\"State is \");\r\n        console.log(customer);\r\n        debugger;\r\n        return { ...state, customer: [...state.customer, customer] }\r\n    })\r\n)"
+                    "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log('State is ');\r\n        console.log(customer);\r\n        debugger;\r\n        return { ...state, customer: [...state.customer, customer] };\r\n    })\r\n)"
                 }
             ],
             "src/stories/Header.stories.ts": [
@@ -1720,6 +1826,15 @@
             },
             {
                 "filePath": "src/app/crud.service.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "Post",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/crud.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "CrudService",
@@ -1857,6 +1972,15 @@
                 "name": "LoginComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/shared.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SharedComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {

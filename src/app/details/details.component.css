@@ -255,3 +255,65 @@ td .btndelete {
     font-size: 15px;
     transition: 0.25px;
 }
+
+@media screen and (max-width: 450px) {
+    .main {
+        margin-top: 10px;
+        width: 100%;
+    }
+    th {
+        width: 100%;
+        color: #D5DDE5;
+        background: #1b1e24;
+        border-bottom: 2px solid #9ea7af;
+        border-right: 1px solid #343a45;
+        font-size: 15px;
+        font-weight: 100;
+        padding: 10px;
+        vertical-align: middle;
+    }
+    .firstname {
+        position: relative;
+        left: 100px;
+        width: 120px;
+        top: -28px;
+        line-height: 33px;
+        border-radius: 25px;
+        padding: 0 10px;
+        font-size: 14px;
+    }
+    .myemail {
+        position: relative;
+        left: 100px;
+        width: 120px;
+        top: -49px;
+        line-height: 35px;
+        border-radius: 25px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+    .mypassowrd {
+        position: relative;
+        left: 100px;
+        width: 120px;
+        top: -65px;
+        line-height: 35px;
+        border-radius: 25px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+    .password {
+        margin-left: 10px;
+    }
+    button {
+        position: relative;
+        margin: 17px 0px 0px 116px;
+        text-align: center;
+        border-radius: 25px;
+        border: 2px solid #366373;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100px;
+        padding: 10px 13px 9px 15px;
+    }
+}

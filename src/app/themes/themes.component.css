@@ -59,3 +59,9 @@ main {
     grid-column: 1/-1;
     text-align: center;
 }
+
+@media screen and (max-width: 450px) {
+    main {
+        width: 100%;
+    }
+}
