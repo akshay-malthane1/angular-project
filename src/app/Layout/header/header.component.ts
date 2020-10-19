@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DarkService } from 'src/app/common.services/dark.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,19 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   hide = false;
-  constructor(private router: Router){}
-  ngOnInit() {
-    // localStorage.removeItem("isLoggedIn");
+  darkTheme = new FormControl(false);
+  constructor(
+    private darkService: DarkService,
+    private router: Router,
+  ) { }
+  ngOnInit(): void {
+    this.darkTheme.valueChanges.subscribe(value => {
+      if (value) {
+        this.darkService.toggleDark();
+      } else {
+        this.darkService.toggleLight();
+      }
+    });
   }
   loggedin() {
     const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;
@@ -24,14 +36,14 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.router.navigate(['login']);
     return localStorage.removeItem('isLoggedIn');
-}
+  }
 
-changeOfRoute(checkButton: any) {  
-  // debugger;
-  if(!checkButton.checked){
-    checkButton.checked = true;
-  } else {
-    checkButton.checked = false;
-  }  
-}
+  changeOfRoute(checkButton: any) {
+    // debugger;
+    if (!checkButton.checked) {
+      checkButton.checked = true;
+    } else {
+      checkButton.checked = false;
+    }
+  }
 }

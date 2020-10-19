@@ -98,6 +98,11 @@ nav ul li a .btn {
     }
 }
 
+:host {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
 
 /* section {
     background: url() no-repeat;
