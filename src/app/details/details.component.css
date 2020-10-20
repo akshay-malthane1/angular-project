@@ -261,16 +261,8 @@ td .btndelete {
         margin-top: 10px;
         width: 100%;
     }
-    th {
-        width: 100%;
-        color: #D5DDE5;
-        background: #1b1e24;
-        border-bottom: 2px solid #9ea7af;
-        border-right: 1px solid #343a45;
-        font-size: 15px;
-        font-weight: 100;
-        padding: 10px;
-        vertical-align: middle;
+    .details {
+        font-size: 20px;
     }
     .firstname {
         position: relative;
@@ -306,14 +298,21 @@ td .btndelete {
         margin-left: 10px;
     }
     button {
-        position: relative;
         margin: 17px 0px 0px 116px;
-        text-align: center;
-        border-radius: 25px;
-        border: 2px solid #366373;
         cursor: pointer;
         font-size: 14px;
         width: 100px;
         padding: 10px 13px 9px 15px;
+    }
+    th {
+        width: 100%;
+        color: #D5DDE5;
+        background: #1b1e24;
+        border-bottom: 2px solid #9ea7af;
+        border-right: 1px solid #343a45;
+        font-size: 12px;
+        font-weight: 100;
+        padding: 8px;
+        vertical-align: middle;
     }
 }
