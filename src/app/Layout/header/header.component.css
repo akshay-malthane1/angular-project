@@ -109,7 +109,7 @@ input:checked+.slider:before {
     }
     label.logo {
         font-size: 21px;
-        padding-left: 0px;
+        padding-left: 0px 0px;
     }
     nav ul li a {
         font-size: 16px;
