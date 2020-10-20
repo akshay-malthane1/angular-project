@@ -153,6 +153,17 @@ input:checked+.slider:before {
         left: 0;
         z-index: 100;
     }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 22px;
+        left: 4px;
+        bottom: 8px;
+        background-color: white;
+        transition: .4s;
+        -webkit-transition: .4s;
+    }
 }
 
 

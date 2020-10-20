@@ -56,3 +56,42 @@ label {
     transition: 0.5s;
     transition-property: width;
 }
+
+@media (max-width:450px) {
+    .myform {
+        margin-top: 20px;
+        width: 100%;
+    }
+    label {
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .psd {
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .myform label input {
+        font-size: 14px;
+        width: 131px;
+        padding: 13px;
+        transition: 0.5s;
+        transition-property: width;
+    }
+    .btn {
+        outline: 0;
+        background: none;
+        color: #fff;
+        font-size: 13px;
+        text-transform: uppercase;
+        width: 110px;
+        padding: 12px;
+        border: 2.5px solid #128b6d;
+        border-radius: 25px;
+        cursor: pointer;
+        transform: 0.5s;
+        transition-property: transform;
+        text-decoration: none;
+    }
+}

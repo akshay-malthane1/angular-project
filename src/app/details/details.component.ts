@@ -45,9 +45,9 @@ export class DetailsComponent {
     });
   }
   getLatestUser() {
-    this.myService.getAllUser().subscribe((response) => {
-      this.ray = response
-      console.log(this.ray);
+    this.myService.getAllUser().subscribe((response: any[]) => {
+      this.customer = response;
+      console.log(this.customer);
     });
   }
   editUser(user) {

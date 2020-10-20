@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     });
 
   }
-  performLogin(userName, password) {
+  performLogin(userName, password): void {
     this.service.getLogin(userName.value, password.value).subscribe(res => {
       console.log(res);
       localStorage.setItem('isLoggedIn', 'true');
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onCreate(){
+  onCreate(): void{
     this.router.navigate(['signup']);
 }
 }

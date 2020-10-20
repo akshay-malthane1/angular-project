@@ -9,7 +9,7 @@ const reducer = createReducer(
     on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {
         console.log('State is ');
         console.log(customer);
-        debugger;
+       
         return { ...state, customer: [...state.customer, customer] };
     })
 );

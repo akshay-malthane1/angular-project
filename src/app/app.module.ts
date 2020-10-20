@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../app/Layout/login/login.component';
 import { DetailsComponent } from './details/details.component';
-import { SongsComponent } from './songs/songs.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ThemesComponent } from './themes/themes.component';
@@ -26,7 +25,6 @@ import { HeaderComponent } from './Layout/header/header.component';
     AppComponent,
     LoginComponent,
     DetailsComponent,
-    SongsComponent,
     UnauthorizedComponent,
     ThemesComponent,
     HeaderComponent,
