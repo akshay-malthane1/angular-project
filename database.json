@@ -1,24 +1,6 @@
 {
   "posts": [
     {
-      "firstname": "ttttttttt",
-      "email": "wewe",
-      "password": "weewe",
-      "id": 4
-    },
-    {
-      "firstname": "asasas",
-      "email": "asas",
-      "password": "asas",
-      "id": 5
-    },
-    {
-      "firstname": "akshay",
-      "email": "dsnscn",
-      "password": "ad,mfcns",
-      "id": 13
-    },
-    {
       "firstname": "akshay",
       "email": "dsnscn",
       "password": "ad,mfcns",
@@ -31,93 +13,22 @@
       "id": 15
     },
     {
-      "firstname": "jadbnc",
-      "email": "dsnscn",
-      "password": "ad,mfcns",
-      "id": 16
-    },
-    {
-      "firstname": "jsoin",
-      "email": "dsnscn",
-      "password": "ad,mfcns",
-      "id": 17
-    },
-    {
-      "firstname": "roy",
-      "email": "rouzd.m,n",
-      "password": "zdfvzd",
-      "id": 18
-    },
-    {
-      "firstname": "fff",
-      "email": "rouzd.m,n",
-      "password": "zdfvzd",
-      "id": 19
-    },
-    {
-      "firstname": "asdas",
-      "email": "sa",
-      "password": "as",
-      "id": 20
-    },
-    {
-      "firstname": "asdas",
-      "email": "sa",
-      "password": "sa",
-      "id": 21
-    },
-    {
-      "firstname": "asdaq",
-      "email": "sfsd",
-      "password": "sdfs",
-      "id": 22
-    },
-    {
-      "firstname": "akshayu",
-      "email": "asfdajkb",
-      "password": "asjfb",
-      "id": 23
-    },
-    {
-      "firstname": "asda",
-      "email": "sds",
-      "password": "sd",
-      "id": 24
-    },
-    {
-      "firstname": "asxda",
-      "email": "asas",
-      "password": "as",
-      "id": 25
-    },
-    {
-      "username": "ahsdjca",
-      "email": "ssdcvs",
-      "password": "dfv",
-      "id": 40
-    },
-    {
-      "username": "aaaaaaaaaaaaaaaa",
-      "email": "ssdcvs",
-      "password": "dfv",
-      "id": 41
-    },
-    {
-      "username": "asd",
+      "username": "aasda",
       "email": "asdasd",
-      "password": "sdfsd",
-      "id": 42
+      "password": "asdasd",
+      "id": 16,
+      "firstname": "ttttttttttttt"
     },
     {
-      "username": "sdc",
-      "email": "cvsdvc",
-      "password": "qdfvdsf",
-      "id": 43
+      "firstname": "asdasasfas",
+      "email": "qwdqw",
+      "password": "sdcs",
+      "id": 17
     }
   ],
   "comments": [],
   "profile": {
-    "username": "",
-    "password": ""
+    "username": "asda",
+    "password": "df"
   }
 }

@@ -7,6 +7,7 @@ nav {
 label.logo {
     color: deeppink;
     font-size: 35px;
+    font-family: system-ui;
     line-height: 80px;
     padding: 0 0px;
     font-weight: 600;

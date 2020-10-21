@@ -1,19 +1,17 @@
-<div class="container">
-    <div class="myform">
-        <form [formGroup]="profile">
-            <h2> SignUp </h2>
-            <label> Name 
+<div class="myform">
+    <form [formGroup]="profile">
+        <h2> SignUp </h2>
+        <label> Name 
             <input type="text" placeholder="Username" formControlName="username">
         </label>
 
-            <label> Email 
+        <label> Email 
             <input type="email" placeholder="Email" formControlName="email">
         </label>
 
-            <label class="psd"> Password 
+        <label class="psd"> Password 
             <input type="password" placeholder="password" formControlName="password">
         </label>
-        </form>
-        <button class="btn" type="submit" [disabled]="!profile.valid" (click)="onSubmit()"> Signup </button>
-    </div>
+    </form>
+    <button class="btn" type="submit" [disabled]="!profile.valid" (click)="onSubmit()"> Signup </button>
 </div>

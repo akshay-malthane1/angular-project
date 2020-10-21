@@ -315,4 +315,48 @@ td .btndelete {
         padding: 8px;
         vertical-align: middle;
     }
+    td {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+    }
+    tr {
+        width: 100%;
+    }
+    .table-fill {
+        width: 100%;
+    }
+    tbody {
+        width: 100%;
+    }
+    td .btndelete {
+        background-color: rgb(220, 20, 20);
+        display: block;
+        margin: 31px -16px -58px -17px;
+        text-align: center;
+        border-radius: 25px;
+        border: 2px solid #366373;
+        width: 78px;
+        padding: 6px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.25px;
+    }
+    td .btnedit {
+        background-color: rgb(20, 220, 87);
+        display: block;
+        margin: 31px -16px -58px -17px;
+        text-align: center;
+        border-radius: 25px;
+        border: 2px solid #366373;
+        width: 78px;
+        padding: 6px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.25px;
+    }
 }

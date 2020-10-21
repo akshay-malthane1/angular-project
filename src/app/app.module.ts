@@ -16,7 +16,6 @@ import { environment } from '../environments/environment';
 import { state } from '@angular/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomerReducer } from './customer/customer.reducer';
-import { SharedComponent } from './shared/shared.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './Layout/header/header.component';
 
@@ -29,7 +28,6 @@ import { HeaderComponent } from './Layout/header/header.component';
     ThemesComponent,
     HeaderComponent,
     SignupComponent,
-    SharedComponent,
     HomeComponent,
   ],
   imports: [

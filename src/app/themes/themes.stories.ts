@@ -7,4 +7,4 @@ storiesOf('Themes Component', module)
 .add('My Themes', () => ({
     component: ThemesComponent,
        props: {}
-   }))
+   }));

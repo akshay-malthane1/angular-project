@@ -20,7 +20,7 @@ export class CrudService {
   createUser(user): Observable<Post[]> {
     return this.http.post<Post[]>('http://localhost:3000/posts', user);
   }
-  // tslint:disable-next-line: typedef
+
   getAllUser() {
     return this.http.get('http://localhost:3000/posts')
       .pipe(
@@ -28,11 +28,11 @@ export class CrudService {
         catchError(this.errorservice.handleError)
       );
   }
-  // tslint:disable-next-line: typedef
+
   deleteUser(user) {
     return this.http.delete('http://localhost:3000/posts/' + user.id);
   }
-  // tslint:disable-next-line: typedef
+
   updateUser(user) {
     return this.http.put('http://localhost:3000/posts/' + user.id, user);
   }

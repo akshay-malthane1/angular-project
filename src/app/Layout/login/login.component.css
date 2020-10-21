@@ -105,40 +105,42 @@ form button:focus {
 
 @media screen and (max-width: 450px) {
     .form {
-        width: 100%;
+        margin-top: 10%;
+        width: 80%;
         padding: 0px;
     }
-    /* .form input {
+    .form input {
         outline: 0;
         background: none;
         color: #fff;
         font-size: 10px;
         text-transform: uppercase;
         margin-top: 4px;
-        width: 50%px;
+        width: 69%;
         padding: 10px;
         border: 2.5px solid #128b6d;
         border-radius: 20px;
         cursor: pointer;
         transform: 0.5s;
         transition-property: transform;
-    } */
+    }
     .form .options,
     .form .options a {
+        margin-bottom: 10px;
         width: 100%
     }
-    /* form button {
+    form button {
         outline: 0;
         background: none;
         color: #fff;
         font-size: 14px;
         text-transform: uppercase;
-        width: 84px;
+        width: 37%;
         padding: 10px;
         border: 2.5px solid #128b6d;
         border-radius: 25px;
         cursor: pointer;
         transform: 0.5s;
         transition-property: transform;
-    } */
+    }
 }

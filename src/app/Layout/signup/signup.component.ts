@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../common.services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { CrudService } from 'src/app/common.services/crud.service';
 
 @Component({
@@ -19,10 +17,10 @@ export class SignupComponent implements OnInit {
   onSubmit(): void{
     const user = this.profile.getRawValue();
     this.crud.createUser(user).subscribe(res => {
-      alert('your account has been created,please login tyo continue');
-      this.navigateToLogin()
+      alert('your account has been created,please login to continue');
+      this.navigateToLogin();
     }
-      )
+      );
   }
 
   constructor(private crud: CrudService, private router: Router ) { }
