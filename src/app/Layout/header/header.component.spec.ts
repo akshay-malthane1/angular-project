@@ -6,8 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+  let fixture: any;
+  let component: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,6 +25,12 @@ describe('HeaderComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy(); 
   });
-});
+
+  it('should remove from local storage', () => {
+
+    expect(component).toBeTruthy(); 
+  });
+
+})

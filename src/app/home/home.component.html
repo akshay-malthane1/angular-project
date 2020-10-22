@@ -1,11 +1,14 @@
-<main>
-    <div class="card">
-        <img src="assets/guitar3.jpg" alt="Guitar" style="width:100%">
-        <h1>Buy Electric Guitar</h1>
-        <p class="price">$17.99</p>
-        <p><button>Add to Cart</button></p>
-    </div>
 
+<main>
+    <div class="container">
+        <div class="card" *ngFor="let item of dataArray">
+            <img src={{item.src}} alt="Guitar" style="width:100%">
+            <h1>{{item.title}}</h1>
+            <p class="price">{{item.price}}</p>
+            <p><button>Add to Cart</button></p>
+        </div>
+    </div>    
+<!-- 
     <div class="card">
         <img src="assets/guitar2.jpg" alt="Guitar" style="width:100%">
         <h1>Buy at best price</h1>
@@ -35,6 +38,6 @@
         <h1>Buy acoustic Guitar</h1>
         <p class="price">$28.99</p>
         <p><button>Add to Cart</button></p>
-    </div>
+    </div> -->
 
 </main>
