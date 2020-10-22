@@ -45,6 +45,7 @@ main .container {
 @media screen and (max-width: 500px) {
     main .container{
         grid-template-columns: repeat(2, 50%);
+        grid-gap: 4px;
         width: 100%;
         height: auto;
     }

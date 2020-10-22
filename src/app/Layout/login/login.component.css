@@ -106,19 +106,23 @@ form button:focus {
 @media screen and (max-width: 450px) {
     .form {
         margin-top: 10%;
-        width: 80%;
+        top: 50%;
+        left: 50%;
+      
+        height: auto;
         padding: 0px;
     }
     .form input {
         outline: 0;
         background: none;
+        display: block;
         color: #fff;
-        font-size: 10px;
+        font-size: 13px;
         text-transform: uppercase;
-        margin-top: 4px;
-        width: 69%;
+        margin: 3px 0px 37px 69px;
+        width: 53%;
         padding: 10px;
-        border: 2.5px solid #128b6d;
+        border: 2.5px solid #2543d8;
         border-radius: 20px;
         cursor: pointer;
         transform: 0.5s;
@@ -130,17 +134,20 @@ form button:focus {
         width: 100%
     }
     form button {
-        outline: 0;
-        background: none;
-        color: #fff;
-        font-size: 14px;
-        text-transform: uppercase;
-        width: 37%;
-        padding: 10px;
-        border: 2.5px solid #128b6d;
-        border-radius: 25px;
-        cursor: pointer;
-        transform: 0.5s;
-        transition-property: transform;
+    outline: 0;
+    display: block;
+    background: none;
+    color: #fff;
+    margin-left: 98px;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 33%;
+    padding: 10px;
+    border: 2.5px solid #128b6d;
+    margin-bottom: 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    transform: 0.5s;
+    transition-property: transform;
     }
 }

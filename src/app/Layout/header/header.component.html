@@ -1,9 +1,10 @@
 <nav>
-    <label class="switch"><input type="checkbox" id="darkTheme" [formControl]="darkTheme"><span class="slider round"></span></label>
+    <label class="switch"><input type="checkbox" id="darkTheme" [formControl]="darkTheme"><span
+            class="slider round"></span></label>
     <input type="checkbox" id="check" #checkButton>
     <label for="check" class="checkbtn">
-      <i class="fas fa-bars"></i>
-  </label>
+        <i class="fas fa-bars"></i>
+    </label>
     <label class="logo">Music-X</label>
     <ul>
         <li> <a class="btn" [routerLink]="['/home']"> Home</a></li>
@@ -11,8 +12,6 @@
         <li> <a [hidden]="!loggedin()" class="btn" (click)="onLogout()"> Logout </a></li>
         <li> <a class="btn" [routerLink]="['/themes']"> Themes </a></li>
         <li> <a class="btn" [routerLink]="['/details']"> details </a></li>
-
-
     </ul>
 </nav>
 

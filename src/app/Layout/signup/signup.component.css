@@ -25,14 +25,15 @@
 }
 
 label {
-    margin: 1px 102px 1px 3px;
+    margin: 1px 0px -5px -58px;
+    display: inline-block;
     color: white;
     font-size: 18px;
     font-weight: 700;
 }
 
 .psd {
-    margin: 1px 122px 1px -11px;
+    margin: 1px 0px 1px -89px;
     color: white;
     font-size: 18px;
     font-weight: 700;
@@ -41,29 +42,47 @@ label {
 .myform label input {
     position: relative;
     top: 5px;
-    left: 34px;
+    display: inline-block;
+    left: 25px;
     outline: 0;
     background: none;
     font-size: 15px;
     color: #fff;
     text-align: center;
-    width: 197px;
-    margin-bottom: 30px;
-    padding: 15px;
+    width: 210px;
+    margin: -6px 1px 35px 0px;
+    padding: 13px;
     box-sizing: border-box;
     border: 2.5px solid #2543d8;
     border-radius: 25px;
     transition: 0.5s;
     transition-property: width;
 }
+.mybtn {
+    outline: 0;
+    background: none;
+    color: #fff;
+    margin-left: 42px;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 141px;
+    padding: 13px;
+    border: 2.5px solid #128b6d;
+    border-radius: 25px;
+    cursor: pointer;
+    transform: 0.5s;
+    transition-property: transform;
+    text-decoration: none;
+}
 
 @media (max-width:450px) {
     .myform {
         margin-top: 20px;
-        width: 100%;
+        width: 90%;
         padding: 0px;
     }
     label {
+        display: flow-root;
         color: white;
         font-size: 18px;
         font-weight: 700;
@@ -80,7 +99,7 @@ label {
         transition: 0.5s;
         transition-property: width;
     }
-    .btn {
+    .mybtn {
         outline: 0;
         background: none;
         color: #fff;
