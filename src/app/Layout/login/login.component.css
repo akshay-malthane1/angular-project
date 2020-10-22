@@ -1,13 +1,11 @@
-/* .container {
+.container {
     margin: 0;
     padding: 0;
     height: 87vh;
     /* clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%); */
-
-
-/* background: linear-gradient(45deg, darkblue, transparent);
+ background: linear-gradient(45deg, darkblue, transparent);
     background-size: cover;
-} */
+}
 
 .form {
     background: #000;

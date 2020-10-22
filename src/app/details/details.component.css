@@ -259,7 +259,7 @@ td .btndelete {
 @media screen and (max-width: 450px) {
     .main {
         margin-top: 10px;
-        width: 100%;
+        width: 90%;
     }
     .details {
         font-size: 20px;

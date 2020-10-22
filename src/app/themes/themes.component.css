@@ -1,8 +1,10 @@
-body {
+
+.container {
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg, currentColor, TRANSPARENT);
-    box-sizing: border-box;
+    height: 87vh;
+    background: linear-gradient(45deg, rgb(4 19 52), transparent);
+    background-size: cover;
 }
 
 h1 {
