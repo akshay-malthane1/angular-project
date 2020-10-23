@@ -38,8 +38,8 @@ main .container {
     border: 1px solid gray;
     display: grid;
     color: white;
-    grid-template-columns: repeat(6, 195px);
-    grid-gap: 8px;
+    grid-template-columns: repeat(6, 196px);
+    grid-gap: 7px;
 }
 
 @media screen and (max-width: 500px) {

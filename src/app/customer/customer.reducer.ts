@@ -9,11 +9,10 @@ const reducer = createReducer(
     on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {
         console.log('State is ');
         console.log(customer);
-       
         return { ...state, customer: [...state.customer, customer] };
     })
 );
 
-export function CustomerReducer(state: CustomerState | undefined, action: Action) {
+export function CustomerReducer(state: CustomerState | undefined, action: Action): any {
     return reducer(state, action);
 }

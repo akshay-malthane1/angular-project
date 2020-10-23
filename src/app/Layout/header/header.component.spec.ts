@@ -25,12 +25,11 @@ describe('HeaderComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy(); 
+    expect(component).toBeTruthy();
   });
 
   it('should remove from local storage', () => {
-
-    expect(component).toBeTruthy(); 
+    expect(component).toBeTruthy();
   });
 
-})
+});

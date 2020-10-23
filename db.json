@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "firstname": "akshay",
+      "email": "askha",
+      "password": "sdscfas",
+      "id": 2
+    },
+    {
+      "firstname": "ttttt",
+      "email": "askha",
+      "password": "sdscfas",
+      "id": 3
+    },
+    {
+      "firstname": "tttttrrrrrrrrrrrrrrrr",
+      "email": "askha",
+      "password": "sdscfas",
+      "id": 4
+    },
+    {
+      "firstname": "iiiii",
+      "email": "hfdvd",
+      "password": "sdscfas",
+      "id": 5
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

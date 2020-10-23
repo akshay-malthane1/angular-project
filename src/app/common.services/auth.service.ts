@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
-  getLogin(uname, pwd) {
+  getLogin(uname, pwd): any {
     const postObject = {
       username: uname,
       password: pwd

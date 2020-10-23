@@ -43,8 +43,7 @@ describe('LoginComponent', () => {
 });
   it('should validate the form', () => {
     component.loginForm.controls.username.setValue('akshay');
-    component.loginForm.controls.password.setValue('password')
+    component.loginForm.controls.password.setValue('password');
     expect(component.loginForm.valid).toBeTruthy();
   });
-  
 });

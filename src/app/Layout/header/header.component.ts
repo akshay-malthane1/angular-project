@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  loggedin() {
+  loggedin(): any {
     const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;
     // console.log("Am I logged in " + loggedIn);
     if (loggedIn === 'true') {
@@ -33,12 +33,12 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-  onLogout() {
+  onLogout(): any {
     this.router.navigate(['login']);
     return localStorage.removeItem('isLoggedIn');
   }
 
-  changeOfRoute(checkButton: any) {
+  changeOfRoute(checkButton: any): any{
     // debugger;
     if (!checkButton.checked) {
       checkButton.checked = true;

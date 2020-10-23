@@ -3,6 +3,7 @@ import { ErrorService } from './error.service';
 
 describe('ErrorService', () => {
   let service: ErrorService;
+  // tslint:disable-next-line: prefer-const
   let mockHttpClient;
 
   beforeEach(() => {

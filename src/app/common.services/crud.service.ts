@@ -21,7 +21,7 @@ export class CrudService {
     return this.http.post<Post[]>('http://localhost:3000/posts', user);
   }
 
-  getAllUser() {
+  getAllUser(): any {
     return this.http.get('http://localhost:3000/posts')
       .pipe(
         retry(1),
@@ -29,11 +29,11 @@ export class CrudService {
       );
   }
 
-  deleteUser(user) {
+  deleteUser(user): any {
     return this.http.delete('http://localhost:3000/posts/' + user.id);
   }
 
-  updateUser(user) {
+  updateUser(user): any {
     return this.http.put('http://localhost:3000/posts/' + user.id, user);
   }
 }

@@ -305,7 +305,6 @@ td .btndelete {
         padding: 10px 13px 9px 15px;
     }
     th {
-        width: 100%;
         color: #D5DDE5;
         background: #1b1e24;
         border-bottom: 2px solid #9ea7af;
@@ -324,7 +323,7 @@ td .btndelete {
         width: 100%;
     }
     .table-fill {
-        width: 100%;
+        width: 90%;
     }
     tbody {
         width: 100%;

@@ -15,13 +15,13 @@ export const lightTheme = {
   providedIn: 'root'
 })
 export class DarkService {
-  toggleDark() {
+  toggleDark(): any {
     this.setTheme(darkTheme);
      }
-    toggleLight() {
+    toggleLight(): any {
     this.setTheme(lightTheme);
      }
-    private setTheme(theme: {}) {
+    private setTheme(theme: {}): any {
     Object.keys(theme).forEach(k =>
     document.documentElement.style.setProperty(`--${k}`, theme[k])
      );

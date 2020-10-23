@@ -1,3 +1,11 @@
+.container {
+    margin: 0;
+    padding: 0;
+    height: 87vh;
+    /* clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%); */
+    background: linear-gradient(45deg, black, transparent);
+    background-size: cover;
+}
 .myform {
     background: #000;
     z-index: 1;
@@ -58,6 +66,13 @@ label {
     transition: 0.5s;
     transition-property: width;
 }
+    .myform label input:hover{
+        width: 250px;
+    }
+    .myform label input:focus{
+        width: 300px;
+    }
+
 .mybtn {
     outline: 0;
     background: none;

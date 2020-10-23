@@ -7,7 +7,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 })
 export class AuthguardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot) {
+              state: RouterStateSnapshot): any {
       return true;
     //   const isLoggedIn = localStorage.getItem('isLoggedIn');
     //   if (isLoggedIn) {
