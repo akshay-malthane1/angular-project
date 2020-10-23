@@ -8,14 +8,14 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 export class AuthguardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): any {
+      // return true;
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn) {
       return true;
-    //   const isLoggedIn = localStorage.getItem('isLoggedIn');
-    //   if (isLoggedIn) {
-    //   return true;
-    // } else {
-    //   this.router.navigate(['unauthorized']);
-    //   return false;
-    // }
+    } else {
+      this.router.navigate(['unauthorized']);
+      return false;
+    }
   }
   constructor(private router: Router) { }
 }

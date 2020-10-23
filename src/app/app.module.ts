@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CustomerReducer } from './customer/customer.reducer';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './Layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HeaderComponent } from './Layout/header/header.component';
     HeaderComponent,
     SignupComponent,
     HomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

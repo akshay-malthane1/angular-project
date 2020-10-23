@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, },
   { path: 'details', component: DetailsComponent, canActivate: [AuthguardService] },
   { path: 'themes', component: ThemesComponent, },

@@ -13,7 +13,7 @@
       "id": 3
     },
     {
-      "firstname": "tttttrrrrrrrrrrrrrrrr",
+      "firstname": "tttttr",
       "email": "askha",
       "password": "sdscfas",
       "id": 4
@@ -27,6 +27,7 @@
   ],
   "comments": [],
   "profile": {
-    "name": "typicode"
+    "username": "akshay",
+    "password": "malyhane"
   }
 }
