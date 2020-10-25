@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscribable, Subscription } from 'rxjs';
-import { CrudService } from '../common.services/crud.service';
+import { CrudService } from '../common/crud.service';
 import Customer from '../customer/customer.model';
 import * as CustomerActions from '../customer/customer.action';
 import CustomerState from '../customer/customer.state';

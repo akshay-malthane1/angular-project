@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CrudService } from 'src/app/common.services/crud.service';
+import { CrudService } from 'src/app/common/crud.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,18 +14,17 @@ export class SignupComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
   });
-  onSubmit(): void{
+  onSubmit(): void {
     const user = this.profile.getRawValue();
     this.crud.createUser(user).subscribe(res => {
       alert('your account has been created,please login to continue');
       this.navigateToLogin();
     }
-      );
+    );
   }
-
-  constructor(private crud: CrudService, private router: Router ) { }
-navigateToLogin(): void{
-  this.router.navigate(['login']);
-}
+  constructor(private crud: CrudService, private router: Router) { }
+  navigateToLogin(): void {
+    this.router.navigate(['login']);
+  }
   ngOnInit(): void { }
 }

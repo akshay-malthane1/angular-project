@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DarkService } from 'src/app/common.services/dark.service';
+import { DarkService } from 'src/app/common/dark.service';
+import { DataService } from 'src/app/common/data.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,7 @@ export class HeaderComponent implements OnInit {
   hide = false;
   darkTheme = new FormControl(false);
   constructor(
-    private darkService: DarkService,
-    private router: Router,
+    private darkService: DarkService, private router: Router, private dataService: DataService
   ) { }
   ngOnInit(): void {
     this.darkTheme.valueChanges.subscribe(value => {
@@ -22,6 +22,9 @@ export class HeaderComponent implements OnInit {
       } else {
         this.darkService.toggleLight();
       }
+
+      this.dataService.observable.subscribe(res => console.log('response is ' + res));
+
     });
   }
   loggedin(): any {
@@ -38,12 +41,14 @@ export class HeaderComponent implements OnInit {
     return localStorage.removeItem('isLoggedIn');
   }
 
-  changeOfRoute(checkButton: any): any{
+  changeOfRoute(res): any {
+    console.log('Response is ' + res);
     // debugger;
-    if (!checkButton.checked) {
-      checkButton.checked = true;
-    } else {
-      checkButton.checked = false;
-    }
+    // if (!checkButton.checked) {
+    //   checkButton.checked = true;
+    // } else {
+    //   checkButton.checked = false;
+    // }
   }
+
 }

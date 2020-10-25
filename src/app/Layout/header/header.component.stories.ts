@@ -2,7 +2,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { HttpClientModule} from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { HeaderComponent } from './header.component';
-import { DarkService } from 'src/app/common.services/dark.service';
+import { DarkService } from 'src/app/common/dark.service';
 
 
 storiesOf('Header Component', module)
@@ -16,5 +16,5 @@ storiesOf('Header Component', module)
 .add('MY', () => ({
  component: HeaderComponent,
     props: {}
-}))
+}));
 

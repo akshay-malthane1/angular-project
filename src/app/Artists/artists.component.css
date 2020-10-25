@@ -1,0 +1,55 @@
+/* 
+.container {
+    margin: 0;
+    padding: 0;
+    height: 87vh;
+    background: linear-gradient(45deg, rgb(4 19 52), transparent);
+    background-size: cover;
+} */
+
+main {
+    background-color: black;
+    display: block;
+    width: 80%;
+    margin: 8px auto;
+    border: none;
+    color: white;
+   
+}
+.artist-card{
+    display: grid;
+    height: 10rem;
+    width: 10rem;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    transition: all 1s;
+    -webkit-box-shadow: 0 0 10px #fff;
+    box-shadow: 0 0 10px #fff;
+    grid-template-columns: repeat(2, 196px);
+    grid-gap: 7px;
+}
+
+.artist-card:hover{
+    /* transform: scale(1.1); */    
+    opacity: 1;
+}
+.title{
+    color: gold;
+    padding: 2%;
+}
+p.info {
+   padding: 5%;
+}
+@media screen and (max-width: 450px) {
+    main {
+        width: 100%;
+        margin: 8px auto;
+        border: 1px solid gray;
+        display: grid;
+        grid-template-rows: 80px 100px 200px 80px;
+        grid-template-columns: repeat(3, 1fr) 200px;
+        grid-gap: 2px;
+    }
+}

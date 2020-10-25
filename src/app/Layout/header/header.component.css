@@ -180,9 +180,3 @@ input:checked+.slider:before {
     -webkit-transition: .4s;
     }
 }
-
-/* section {
-    background: url() no-repeat;
-    background-size: cover;
-    height: calc(100vh - 80vh);
-} */

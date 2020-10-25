@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from './common/data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'myapp';
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+  constructor(private dataService: DataService) {
+  }
+  changeOfRoute(): void{
+    this.dataService.emitNewValue('next value');
+  }
+
 }

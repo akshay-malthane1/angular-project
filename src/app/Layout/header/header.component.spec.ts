@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DarkService } from 'src/app/common.services/dark.service';
+import { DarkService } from 'src/app/common/dark.service';
 import { HeaderComponent } from './header.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';

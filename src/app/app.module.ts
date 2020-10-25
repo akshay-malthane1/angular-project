@@ -8,7 +8,6 @@ import { LoginComponent } from '../app/Layout/login/login.component';
 import { DetailsComponent } from './details/details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
-import { ThemesComponent } from './themes/themes.component';
 import { SignupComponent } from '../app/Layout/signup/signup.component';
 import { reduceState, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -19,6 +18,10 @@ import { CustomerReducer } from './customer/customer.reducer';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './Layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { DataService } from './common/data.service';
+import { ArtistsComponent } from './Artists/artists.component';
+import { CommonModule } from '@angular/common';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     LoginComponent,
     DetailsComponent,
     UnauthorizedComponent,
-    ThemesComponent,
+    ArtistsComponent,
     HeaderComponent,
     SignupComponent,
     HomeComponent,
@@ -34,15 +37,17 @@ import { FooterComponent } from './layout/footer/footer.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CoreModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ customers: CustomerReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
