@@ -9,22 +9,52 @@ import { CrudService } from 'src/app/common/crud.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  profile = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  });
-  onSubmit(): void {
-    const user = this.profile.getRawValue();
-    this.crud.createUser(user).subscribe(res => {
+  // profile = new FormGroup({
+  //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  //   email: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  //   password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  // });
+
+  Title1 = 'SIGNUP';
+  InputFields = [{
+    inputName: 'Username',
+    inputType: 'text',
+    inputPlaceholder: 'username'
+  },
+  {
+    inputName: 'Password',
+    inputType: 'password',
+    inputPlaceholder: 'password'
+  },
+  {
+    inputName: 'Email',
+    inputType: 'email',
+    inputPlaceholder: 'email'
+  }
+  ];
+  SubmitButton = 'Signup';
+
+
+  // onSubmit(): void {
+  //   const user = this.profile.getRawValue();
+  //   this.crud.createUser(user).subscribe(res => {
+  //     alert('your account has been created,please login to continue');
+  //     this.navigateToLogin();
+  //   }
+  //   );
+  // }
+  constructor(private crud: CrudService, private router: Router) {
+  }
+  navigateToLogin(): void {
+    this.router.navigate(['login']);
+  }
+  ngOnInit(): void { }
+
+  sendLogin(userCreds): void {
+    this.crud.createUser(userCreds).subscribe(res => {
       alert('your account has been created,please login to continue');
       this.navigateToLogin();
     }
     );
   }
-  constructor(private crud: CrudService, private router: Router) { }
-  navigateToLogin(): void {
-    this.router.navigate(['login']);
-  }
-  ngOnInit(): void { }
 }

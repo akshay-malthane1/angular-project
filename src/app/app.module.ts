@@ -22,6 +22,7 @@ import { DataService } from './common/data.service';
 import { ArtistsComponent } from './Artists/artists.component';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from './core/core.module';
+import { LogformComponent } from './common/logform/logform.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CoreModule } from './core/core.module';
     SignupComponent,
     HomeComponent,
     FooterComponent,
+    LogformComponent,
   ],
   imports: [
     BrowserModule,

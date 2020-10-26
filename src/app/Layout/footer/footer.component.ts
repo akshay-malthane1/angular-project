@@ -6,11 +6,11 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
+  // title1 = "Hey bumrah";
   constructor() { }
 
   ngOnInit(): void {
-  
+
   }
 
 }

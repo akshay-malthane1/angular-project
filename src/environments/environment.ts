@@ -3,6 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+   endpoint : {
+    POSTS : 'http://localhost:3000/posts'
+  },
   production: false
 };
 

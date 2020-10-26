@@ -13,6 +13,7 @@ describe('LoginComponent', () => {
   let AuthServiceMock: Partial<AuthService>;
 
 
+
   beforeEach(async () => {
       TestBed.configureTestingModule({
         declarations: [ LoginComponent ],
@@ -53,11 +54,11 @@ describe('LoginComponent', () => {
     component.loginForm.controls.password.setValue('password');
     expect(component.loginForm.valid).toBeTruthy();
   });
-  // it('should assert "getLogin" has been called', () => {
-  //   spyOn(AuthService, 'getLogin');
-  //   expect(AuthService.getLogin).toHaveBeenCalled();
-  // });
 
+  it('should assert "getLogin" has been called', () => {
+    spyOn(AuthServiceMock, 'getLogin').and.returnValue;
+    expect(AuthServiceMock.getLogin).toHaveBeenCalled();
+  });
 
   // it('should login user if form is validate and should navigate user to details', () => {
   //   component.loginForm.setValue({username: 'akshay', password: 'malthane'});

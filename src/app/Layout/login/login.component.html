@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="form">
         <form class="login-form" action="" method="post" [formGroup]="loginForm">
             <h2> Login </h2>
@@ -11,9 +11,12 @@
 
             <input id="password" type="password" value="" placeholder="Password" formControlName="password" #password
                 required>
-
+ 
             <button type="submit" name="button" (click)="performLogin(username, password)"> Login </button>
             <p class="options"> Not Registered? <a (click)="onCreate()"> Create an Account</a></p>
         </form>
     </div>
-</div>
+</div> -->
+<app-logform [Title2]="Title1" [inputFields]="InputFields" [submitButton]="SubmitButton" (getData)="sendLogin($event)">
+    <p class="options"> Not Registered? <a (click)="onCreate()" style="cursor: pointer; color: white;"> Create an Account</a></p>
+</app-logform>

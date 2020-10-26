@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 <div class="myform">
     <form [formGroup]="profile">
         <h2> SignUp </h2>
@@ -16,4 +16,7 @@
     </form>
     <button class="mybtn" type="submit" [disabled]="!profile.valid" (click)="onSubmit()"> Signup </button>
 </div>
-</div>
+</div> -->
+
+<app-logform [Title2]="Title1" [inputFields]="InputFields" [submitButton]="SubmitButton" (getData)="sendLogin($event)">
+</app-logform>

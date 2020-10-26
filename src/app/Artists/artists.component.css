@@ -10,46 +10,87 @@
 main {
     background-color: black;
     display: block;
-    width: 80%;
+    width: 70%;
     margin: 8px auto;
     border: none;
     color: white;
-   
 }
-.artist-card{
-    display: grid;
-    height: 10rem;
-    width: 10rem;
+
+.container {
+    display: inline-grid;
+    grid-template-columns: repeat(2, 48%);
+    grid-template-rows: repeat(2, 48%);
+    grid-gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.artist-card {
+    width: 100%;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.8;
     transition: all 1s;
-    -webkit-box-shadow: 0 0 10px #fff;
     box-shadow: 0 0 10px #fff;
-    grid-template-columns: repeat(2, 196px);
-    grid-gap: 7px;
 }
 
-.artist-card:hover{
-    /* transform: scale(1.1); */    
+img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.artist-card:hover {
+    /* transform: scale(1.1); */
     opacity: 1;
 }
-.title{
+
+.title {
     color: gold;
     padding: 2%;
+    font-family: -webkit-body;
+    font-size: 25px;
 }
-p.info {
+
+
+/* p.info {
    padding: 5%;
-}
+} */
+
 @media screen and (max-width: 450px) {
     main {
         width: 100%;
-        margin: 8px auto;
+        margin: 0px;
         border: 1px solid gray;
-        display: grid;
-        grid-template-rows: 80px 100px 200px 80px;
-        grid-template-columns: repeat(3, 1fr) 200px;
-        grid-gap: 2px;
+    }
+    .container {
+        display: inline-grid;
+        grid-template-columns: repeat(2, 44%);
+        grid-template-rows: repeat(2, 44%);
+        width: 100%;
+        grid-gap: 7px;
+        justify-content: center;
+    }
+    .title {
+        color: gold;
+        padding: 2%;
+        font-family: -webkit-body;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 911px) and (min-width: 450px) {
+    main {
+        width: 100%;
+        margin: 0px;
+        border: 1px solid gray;
+    }
+    .container {
+        display: inline-grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(2, 50%);
+        width: 100%;
+        grid-gap: 7px;
+        justify-content: center;
     }
 }

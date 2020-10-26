@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="form">
+        <form method="post" [formGroup]="baseForm">
+            <h2> {{Title2}}</h2>
+            <div *ngFor="let inputField of inputFields">
+                <label> {{inputField.inputName}}
+                    <input formControlName={{inputField.inputName}} type={{inputField.inputType}} placeholder="{{inputField.inputPlaceholder}}">
+                </label>
+            </div>
+        </form>
+        <button type="submit" (click)="submitForm()">{{submitButton}}</button>
+        <ng-content></ng-content>
+    </div>
+</div>

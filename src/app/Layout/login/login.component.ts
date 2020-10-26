@@ -9,25 +9,49 @@ import { AuthService } from 'src/app/common/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm ;
+  loginForm: any;
+
+  Title1 = 'LOGIN';
+  InputFields = [{
+    inputName: 'Username',
+    inputType: 'text',
+    inputPlaceholder: 'username'
+  },
+  {
+    inputName: 'Password',
+    inputType: 'password',
+    inputPlaceholder: 'password'
+  }
+  ];
+  SubmitButton = 'Login';
+
   constructor(public service: AuthService, public router: Router) { }
+
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [ Validators.required]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl(''),
     });
 
   }
-  performLogin(userName, password): void {
-    this.service.getLogin(userName.value, password.value).subscribe(res => {
+  // performLogin(userName, password): void {
+  //   this.service.getLogin(userName.value, password.value).subscribe(res => {
+  //     console.log(res);
+  //     localStorage.setItem('isLoggedIn', 'true');
+  //     this.router.navigate(['details']);
+  //   });
+  // }
+
+  onCreate(): void {
+    this.router.navigate(['signup']);
+  }
+
+  sendLogin(userCreds): void {
+    this.service.getLogin(userCreds.Username, userCreds.Password).subscribe(res => {
       console.log(res);
       localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['details']);
     });
   }
-
-  onCreate(): void{
-    this.router.navigate(['signup']);
-}
 }

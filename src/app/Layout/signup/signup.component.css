@@ -1,4 +1,4 @@
-.container {
+/* .container {
     background: url('../../../assets/music4.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -73,7 +73,8 @@ label {
         width: 300px;
     } */
 
-.mybtn {
+
+/* .mybtn {
     outline: 0;
     background: none;
     color: #fff;
@@ -129,4 +130,4 @@ label {
         transition-property: transform;
         text-decoration: none;
     }
-}
+} */

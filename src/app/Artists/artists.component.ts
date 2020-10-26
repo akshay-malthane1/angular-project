@@ -9,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class ArtistsComponent  {
 
    artist = [
-    {src: 'assets/music3.jpg', },
-    {src: 'assets/music.jpg', },
-    {src: 'assets/music4.jpg', }
+    {src: 'assets/artist1.jpg', },
+    {src: 'assets/artist2.jpg', },
+    {src: 'assets/artist3.jpg', },
+    {src: 'assets/artist6.jpg', },
 
   ];
 }

@@ -32,6 +32,7 @@ body {
 
 form {
     padding: 10px;
+    margin: 10px auto;
 }
 
 .name {
@@ -226,7 +227,8 @@ td.text-right {
     text-align: right;
 }
 
-td .btnedit {
+
+/* td .btnedit {
     background-color: rgb(20, 220, 87);
     display: block;
     margin: 31px -16px -58px -17px;
@@ -239,9 +241,18 @@ td .btnedit {
     cursor: pointer;
     font-size: 15px;
     transition: 0.25px;
+} */
+
+.editz {
+    color: green;
 }
 
-td .btndelete {
+.delt {
+    color: red;
+}
+
+
+/* td .btndelete {
     background-color: rgb(220, 20, 20);
     display: block;
     margin: 31px -16px -58px -17px;
@@ -254,9 +265,9 @@ td .btndelete {
     cursor: pointer;
     font-size: 15px;
     transition: 0.25px;
-}
+} */
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
     .main {
         margin-top: 10px;
         width: 90%;
@@ -267,7 +278,7 @@ td .btndelete {
     .firstname {
         position: relative;
         left: 100px;
-        width: 120px;
+        width: 133px;
         top: -28px;
         line-height: 33px;
         border-radius: 25px;
@@ -277,7 +288,7 @@ td .btndelete {
     .myemail {
         position: relative;
         left: 100px;
-        width: 120px;
+        width: 133px;
         top: -49px;
         line-height: 35px;
         border-radius: 25px;
@@ -287,7 +298,7 @@ td .btndelete {
     .mypassowrd {
         position: relative;
         left: 100px;
-        width: 120px;
+        width: 133px;
         top: -65px;
         line-height: 35px;
         border-radius: 25px;
@@ -317,7 +328,7 @@ td .btndelete {
     td {
         padding: 0px;
         margin: 0px;
-        width: 100%;
+        text-align: center;
     }
     tr {
         width: 100%;
@@ -329,33 +340,11 @@ td .btndelete {
         width: 100%;
     }
     td .btndelete {
-        background-color: rgb(220, 20, 20);
-        display: block;
-        margin: 31px -16px -58px -17px;
-        text-align: center;
-        border-radius: 25px;
-        border: 2px solid #366373;
-        width: 78px;
+        width: 73px;
         padding: 6px;
-        outline: none;
-        color: white;
-        cursor: pointer;
-        font-size: 15px;
-        transition: 0.25px;
     }
     td .btnedit {
-        background-color: rgb(20, 220, 87);
-        display: block;
-        margin: 31px -16px -58px -17px;
-        text-align: center;
-        border-radius: 25px;
-        border: 2px solid #366373;
-        width: 78px;
+        width: 73px;
         padding: 6px;
-        outline: none;
-        color: white;
-        cursor: pointer;
-        font-size: 15px;
-        transition: 0.25px;
     }
 }
