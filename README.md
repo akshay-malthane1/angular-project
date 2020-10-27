@@ -1,6 +1,7 @@
-# Myapp
+# Music App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
+dependencies version 10 above
 
 ## Development server
 
@@ -16,12 +17,19 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test` to execute the unit tests via [jest].
 
-## Running end-to-end tests
+## Important command to run
+jest- npm test
+storybook- npm run storybook
+json server- npx json-server --watch db.json
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## About app
+this is Music app where user can checkout the multiplle artists and will able to listen their song in next update.
+for now only Authenticated user can perform crud operation.
+user will have to login in order to perform crud operation.
+user can register for free.
+it content Dark mode as well.
+user state has been managed in state management.
+Reusability of component and data sharing between multiple component.
+written a storybook for shareable component.
