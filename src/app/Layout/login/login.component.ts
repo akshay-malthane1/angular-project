@@ -35,13 +35,6 @@ export class LoginComponent implements OnInit {
     });
 
   }
-  // performLogin(userName, password): void {
-  //   this.service.getLogin(userName.value, password.value).subscribe(res => {
-  //     console.log(res);
-  //     localStorage.setItem('isLoggedIn', 'true');
-  //     this.router.navigate(['details']);
-  //   });
-  // }
 
   onCreate(): void {
     this.router.navigate(['signup']);
@@ -49,7 +42,6 @@ export class LoginComponent implements OnInit {
 
   sendLogin(userCreds): void {
     this.service.getLogin(userCreds.Username, userCreds.Password).subscribe(res => {
-      console.log(res);
       localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['details']);
     });

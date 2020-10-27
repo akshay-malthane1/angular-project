@@ -1,57 +1,27 @@
 {
   "posts": [
     {
-      "firstname": "tttttr",
-      "email": "askha",
-      "password": "sdscfas",
+      "firstname": "akshay",
+      "email": "malthane",
+      "password": "asas",
+      "id": 3
+    },
+    {
+      "firstname": "roy",
+      "email": "malthane",
+      "password": "asas",
       "id": 4
     },
     {
-      "firstname": "kkkk",
-      "email": "uuu",
-      "password": "dssdd",
-      "id": 7
-    },
-    {
-      "firstname": "askda",
-      "email": "asdakj",
-      "password": "asdffas",
-      "id": 8
-    },
-    {
-      "Username": "Akshay",
-      "Password": "Malthane",
-      "Email": "vivekajbe@gmail.com",
-      "id": 9
-    },
-    {
-      "Username": "dhanashree",
-      "Password": "sdfjk",
-      "Email": "sdfsd",
-      "id": 11
-    },
-    {
-      "Username": "asdjkh",
-      "Password": "asdabksj",
-      "Email": "sdfsd",
-      "id": 14
-    },
-    {
-      "firstname": "tttttr",
-      "email": "akshay.malthane07@gmail.com",
-      "password": "",
-      "id": 15
-    },
-    {
-      "firstname": "lllll",
-      "email": "asdas",
-      "password": "sdfsdf",
-      "id": 16
+      "firstname": "hey",
+      "email": "malthane",
+      "password": "asas",
+      "id": 5
     }
   ],
   "comments": [],
   "profile": {
-    "username": "",
-    "password": ""
+    "username": "asa",
+    "password": "asa"
   }
 }

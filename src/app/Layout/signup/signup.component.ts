@@ -9,11 +9,6 @@ import { CrudService } from 'src/app/common/crud.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  // profile = new FormGroup({
-  //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  //   email: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  //   password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  // });
 
   Title1 = 'SIGNUP';
   InputFields = [{
@@ -34,15 +29,6 @@ export class SignupComponent implements OnInit {
   ];
   SubmitButton = 'Signup';
 
-
-  // onSubmit(): void {
-  //   const user = this.profile.getRawValue();
-  //   this.crud.createUser(user).subscribe(res => {
-  //     alert('your account has been created,please login to continue');
-  //     this.navigateToLogin();
-  //   }
-  //   );
-  // }
   constructor(private crud: CrudService, private router: Router) {
   }
   navigateToLogin(): void {

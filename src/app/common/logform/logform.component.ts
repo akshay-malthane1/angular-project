@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -19,7 +19,7 @@ export class LogformComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     const tempObject = {};
     this.inputFields.forEach(item => {
-      tempObject[item.inputName] = new FormControl('', [Validators.required]);
+      tempObject[item.inputName] = new FormControl('', [Validators.required, Validators.minLength(3)]);
     });
     this.baseForm = new FormGroup(tempObject);
     // console.log(this.baseForm);

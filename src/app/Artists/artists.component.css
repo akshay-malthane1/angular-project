@@ -1,12 +1,3 @@
-/* 
-.container {
-    margin: 0;
-    padding: 0;
-    height: 87vh;
-    background: linear-gradient(45deg, rgb(4 19 52), transparent);
-    background-size: cover;
-} */
-
 main {
     background-color: black;
     display: block;
@@ -41,7 +32,6 @@ img {
 }
 
 .artist-card:hover {
-    /* transform: scale(1.1); */
     opacity: 1;
 }
 
@@ -51,11 +41,6 @@ img {
     font-family: -webkit-body;
     font-size: 25px;
 }
-
-
-/* p.info {
-   padding: 5%;
-} */
 
 @media screen and (max-width: 450px) {
     main {

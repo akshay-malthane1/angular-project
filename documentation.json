@@ -4,8 +4,8 @@
     "injectables": [
         {
             "name": "AuthService",
-            "id": "injectable-AuthService-a8756df3ec2b0eda496b15a4fb4ad481",
-            "file": "src/app/common.services/auth.service.ts",
+            "id": "injectable-AuthService-2135d9eb93720045eabefd42876380c0",
+            "file": "src/app/common/auth.service.ts",
             "properties": [],
             "methods": [
                 {
@@ -43,7 +43,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n\n  constructor(private httpClient: HttpClient) { }\n  getLogin(uname, pwd) {\n    const postObject = {\n      username: uname,\n      password: pwd\n    };\n    return this.httpClient.post('http://localhost:3000/profile', postObject);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n\n  constructor(private httpClient: HttpClient) { }\n  getLogin(uname, pwd ): any {\n    const postObject = {\n      username: uname,\n      password: pwd\n    };\n    return this.httpClient.post('http://localhost:3000/profile', postObject);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -68,8 +68,8 @@
         },
         {
             "name": "CrudService",
-            "id": "injectable-CrudService-4dfb099fdbf8f09b86d30343561fead6",
-            "file": "src/app/common.services/crud.service.ts",
+            "id": "injectable-CrudService-2ec1b29888227061c8e4cf1f6fc92338",
+            "file": "src/app/common/crud.service.ts",
             "properties": [],
             "methods": [
                 {
@@ -83,7 +83,7 @@
                     "optional": false,
                     "returnType": "Observable<Post[]>",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 21,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -105,7 +105,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 33,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -122,7 +122,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 24
+                    "line": 25
                 },
                 {
                     "name": "updateUser",
@@ -135,7 +135,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 37,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -148,7 +148,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { catchError, retry } from 'rxjs/operators';\nimport { ErrorService } from './error.service';\n\nclass Post {\n  public username: string;\n  public email: string;\n  public password: string;\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private http: HttpClient, private errorservice: ErrorService\n  ) { }\n\n  createUser(user): Observable<Post[]> {\n    return this.http.post<Post[]>('http://localhost:3000/posts', user);\n  }\n  // tslint:disable-next-line: typedef\n  getAllUser() {\n    return this.http.get('http://localhost:3000/posts')\n      .pipe(\n        retry(1),\n        catchError(this.errorservice.handleError)\n      );\n  }\n  // tslint:disable-next-line: typedef\n  deleteUser(user) {\n    return this.http.delete('http://localhost:3000/posts/' + user.id);\n  }\n  // tslint:disable-next-line: typedef\n  updateUser(user) {\n    return this.http.put('http://localhost:3000/posts/' + user.id, user);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { catchError, retry } from 'rxjs/operators';\nimport { ErrorService } from './error.service';\nimport { environment } from 'src/environments/environment';\n\nclass Post {\n  public username: string;\n  public email: string;\n  public password: string;\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private http: HttpClient, private errorservice: ErrorService\n  ) { }\n\n  createUser(user): Observable<Post[]> {\n    return this.http.post<Post[]>(environment.endpoint.POSTS, user);\n  }\n\n  getAllUser(): any {\n    return this.http.get(environment.endpoint.POSTS)\n      .pipe(\n        retry(1),\n        catchError(this.errorservice.handleError)\n      );\n  }\n\n  deleteUser(user): any {\n    return this.http.delete(environment.endpoint.POSTS + user.id);\n  }\n\n  updateUser(user): any {\n    return this.http.put(environment.endpoint.POSTS + user.id, user);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -162,7 +162,7 @@
                         "type": "ErrorService"
                     }
                 ],
-                "line": 15,
+                "line": 16,
                 "jsdoctags": [
                     {
                         "name": "http",
@@ -184,8 +184,8 @@
         },
         {
             "name": "DarkService",
-            "id": "injectable-DarkService-c52ff156e22d7a12e37e9639cd8c81a8",
-            "file": "src/app/common.services/dark.service.ts",
+            "id": "injectable-DarkService-4d7f0daf03874eeefb80345f4cc328f9",
+            "file": "src/app/common/dark.service.ts",
             "properties": [],
             "methods": [
                 {
@@ -197,7 +197,7 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 24,
                     "modifierKind": [
@@ -217,7 +217,7 @@
                     "name": "toggleDark",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 18
                 },
@@ -225,13 +225,13 @@
                     "name": "toggleLight",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 21
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\n\nexport const darkTheme = {\n  'primary-color': '#455363',\n  'background-color': '#1f2935',\n  'text-color': '#fff'\n  };\nexport const lightTheme = {\n     'primary-color': '#fff',\n'background-color': '#fff',\n'text-color': '#2d2d2d'\n};\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class DarkService {\n  toggleDark() {\n    this.setTheme(darkTheme);\n     }\n    toggleLight() {\n    this.setTheme(lightTheme);\n     }\n    private setTheme(theme: {}) {\n    Object.keys(theme).forEach(k =>\n    document.documentElement.style.setProperty(`--${k}`, theme[k])\n     );\n     }\n  constructor() { }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\n\nexport const darkTheme = {\n  'primary-color': '#455363',\n  'background-color': '#1f2935',\n  'text-color': '#fff'\n  };\nexport const lightTheme = {\n     'primary-color': '#fff',\n'background-color': '#fff',\n'text-color': '#2d2d2d'\n};\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class DarkService {\n  toggleDark(): any {\n    this.setTheme(darkTheme);\n     }\n    toggleLight(): any {\n    this.setTheme(lightTheme);\n     }\n    private setTheme(theme: {}): any {\n    Object.keys(theme).forEach(k =>\n    document.documentElement.style.setProperty(`--${k}`, theme[k])\n     );\n     }\n  constructor() { }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -241,9 +241,68 @@
             "type": "injectable"
         },
         {
+            "name": "DataService",
+            "id": "injectable-DataService-f9b540a73aaf5b64f50c35f48fff086f",
+            "file": "src/app/common/data.service.ts",
+            "properties": [
+                {
+                    "name": "behaviourSubject",
+                    "defaultValue": "new BehaviorSubject<string>('initial')",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "observable",
+                    "defaultValue": "this.behaviourSubject.asObservable()",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "methods": [
+                {
+                    "name": "emitNewValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable, OnInit } from '@angular/core';\nimport { constructor } from 'events';\nimport { BehaviorSubject } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class DataService {\n  private behaviourSubject = new BehaviorSubject<string>('initial');\n  observable = this.behaviourSubject.asObservable();\n\n  emitNewValue(value): void {\n    this.behaviourSubject.next(value);\n  }\n  constructor() {\n    // this.behaviourSubject.subscribe(res => console.log(\"Response is \" + res));\n  }\n}\n\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 14
+            },
+            "type": "injectable"
+        },
+        {
             "name": "ErrorService",
-            "id": "injectable-ErrorService-d5fdfeac8fde013a369dbad677f57ffe",
-            "file": "src/app/common.services/error.service.ts",
+            "id": "injectable-ErrorService-abd5e7cbba545ddbde01eab919b64961",
+            "file": "src/app/common/error.service.ts",
             "properties": [],
             "methods": [
                 {
@@ -257,7 +316,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 19,
                     "jsdoctags": [
                         {
                             "name": "error",
@@ -270,7 +329,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { throwError } from 'rxjs';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n\n  // tslint:disable-next-line: typedef\n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { throwError } from 'rxjs';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n\n  handleError(error): any {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -316,6 +375,29 @@
                     "args": [],
                     "optional": false,
                     "returnType": "Promise<unknown>",
+                    "typeParameters": [],
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "AuthServiceMock",
+            "id": "class-AuthServiceMock-f3c4183912e1f4acc7f0d26aee1459e4",
+            "file": "src/tests/mockup/services/auth-service.mock.ts",
+            "type": "class",
+            "sourceCode": "import { Observable, of } from 'rxjs';\r\n\r\nexport class AuthServiceMock {\r\n    getLogin(): Observable<null> {\r\n        return of (null);\r\n\r\n    }\r\n}\r\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<null>",
                     "typeParameters": [],
                     "line": 4
                 }
@@ -386,23 +468,13 @@
         },
         {
             "name": "Post",
-            "id": "class-Post-4dfb099fdbf8f09b86d30343561fead6",
-            "file": "src/app/common.services/crud.service.ts",
+            "id": "class-Post-2ec1b29888227061c8e4cf1f6fc92338",
+            "file": "src/app/common/crud.service.ts",
             "type": "class",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { catchError, retry } from 'rxjs/operators';\nimport { ErrorService } from './error.service';\n\nclass Post {\n  public username: string;\n  public email: string;\n  public password: string;\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private http: HttpClient, private errorservice: ErrorService\n  ) { }\n\n  createUser(user): Observable<Post[]> {\n    return this.http.post<Post[]>('http://localhost:3000/posts', user);\n  }\n  // tslint:disable-next-line: typedef\n  getAllUser() {\n    return this.http.get('http://localhost:3000/posts')\n      .pipe(\n        retry(1),\n        catchError(this.errorservice.handleError)\n      );\n  }\n  // tslint:disable-next-line: typedef\n  deleteUser(user) {\n    return this.http.delete('http://localhost:3000/posts/' + user.id);\n  }\n  // tslint:disable-next-line: typedef\n  updateUser(user) {\n    return this.http.put('http://localhost:3000/posts/' + user.id, user);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { catchError, retry } from 'rxjs/operators';\nimport { ErrorService } from './error.service';\nimport { environment } from 'src/environments/environment';\n\nclass Post {\n  public username: string;\n  public email: string;\n  public password: string;\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class CrudService {\n\n  constructor(private http: HttpClient, private errorservice: ErrorService\n  ) { }\n\n  createUser(user): Observable<Post[]> {\n    return this.http.post<Post[]>(environment.endpoint.POSTS, user);\n  }\n\n  getAllUser(): any {\n    return this.http.get(environment.endpoint.POSTS)\n      .pipe(\n        retry(1),\n        catchError(this.errorservice.handleError)\n      );\n  }\n\n  deleteUser(user): any {\n    return this.http.delete(environment.endpoint.POSTS + user.id);\n  }\n\n  updateUser(user): any {\n    return this.http.put(environment.endpoint.POSTS + user.id, user);\n  }\n}\n",
             "properties": [
                 {
                     "name": "email",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 9,
-                    "modifierKind": [
-                        114
-                    ]
-                },
-                {
-                    "name": "password",
                     "type": "string",
                     "optional": false,
                     "description": "",
@@ -412,11 +484,21 @@
                     ]
                 },
                 {
+                    "name": "password",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
                     "name": "username",
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 8,
+                    "line": 9,
                     "modifierKind": [
                         114
                     ]
@@ -431,10 +513,10 @@
         },
         {
             "name": "Post",
-            "id": "class-Post-d5fdfeac8fde013a369dbad677f57ffe-1",
-            "file": "src/app/common.services/error.service.ts",
+            "id": "class-Post-abd5e7cbba545ddbde01eab919b64961-1",
+            "file": "src/app/common/error.service.ts",
             "type": "class",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { throwError } from 'rxjs';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n\n  // tslint:disable-next-line: typedef\n  handleError(error) {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { throwError } from 'rxjs';\n\nclass Post {\n  constructor(\n    public id: string,\n    public title: string,\n    public body: string\n  ) { }\n}\n@Injectable({\n  providedIn: 'root'\n})\nexport class ErrorService {\n  constructor(private http: HttpClient) { }\n\n\n  handleError(error): any {\n    let errorMessage = '';\n    if (error.error instanceof ErrorEvent) {\n      // client-side error\n      errorMessage = `Error: ${error.error.message}`;\n    } else {\n      // server-side error\n      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n    }\n    console.log(errorMessage);\n    return throwError(errorMessage);\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -524,7 +606,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-9135ee90bd8697e450e971dc31a6d3a4",
+            "id": "component-AppComponent-d4780b3f659816bf9be200a2c7430323",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -549,17 +631,25 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 10
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "changeOfRoute",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 10
+                    "line": 11
                 }
             ],
             "hostBindings": [],
@@ -567,7 +657,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent implements OnInit {\n  title = 'myapp';\n  ngOnInit() {}\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { DataService } from './common/data.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent implements OnInit {\n  title = 'myapp';\n  ngOnInit(): void { }\n  constructor(private dataService: DataService) {\n  }\n  changeOfRoute(): void{\n    this.dataService.emitNewValue('next value');\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -576,14 +666,81 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "dataService",
+                        "type": "DataService"
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "dataService",
+                        "type": "DataService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<app-header> </app-header>"
+            "templateData": "<app-header> </app-header>\r\n<router-outlet (activate)=\"changeOfRoute()\"> </router-outlet>\r\n<!-- <app-footer> </app-footer> -->"
+        },
+        {
+            "name": "ArtistsComponent",
+            "id": "component-ArtistsComponent-53ccc7c2b60168db93b1f5253c4659d9",
+            "file": "src/app/Artists/artists.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-artists",
+            "styleUrls": [
+                "./artists.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./artists.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "artist",
+                    "defaultValue": "[\n    {src: 'assets/artist1.jpg', },\n    {src: 'assets/artist2.jpg', },\n    {src: 'assets/artist3.jpg', },\n    {src: 'assets/artist6.jpg', },\n\n  ]",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-artists',\n  templateUrl: './artists.component.html',\n  styleUrls: ['./artists.component.css']\n})\nexport class ArtistsComponent  {\n\n   artist = [\n    {src: 'assets/artist1.jpg', },\n    {src: 'assets/artist2.jpg', },\n    {src: 'assets/artist3.jpg', },\n    {src: 'assets/artist6.jpg', },\n\n  ];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "/* \r\n.container {\r\n    margin: 0;\r\n    padding: 0;\r\n    height: 87vh;\r\n    background: linear-gradient(45deg, rgb(4 19 52), transparent);\r\n    background-size: cover;\r\n} */\r\n\r\nmain {\r\n    background-color: black;\r\n    display: block;\r\n    width: 70%;\r\n    margin: 8px auto;\r\n    border: none;\r\n    color: white;\r\n}\r\n\r\n.container {\r\n    display: inline-grid;\r\n    grid-template-columns: repeat(2, 48%);\r\n    grid-template-rows: repeat(2, 48%);\r\n    grid-gap: 20px;\r\n    width: 100%;\r\n    justify-content: center;\r\n}\r\n\r\n.artist-card {\r\n    width: 100%;\r\n    background-position: center center;\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    opacity: 0.8;\r\n    transition: all 1s;\r\n    box-shadow: 0 0 10px #fff;\r\n}\r\n\r\nimg {\r\n    height: 300px;\r\n    object-fit: cover;\r\n}\r\n\r\n.artist-card:hover {\r\n    /* transform: scale(1.1); */\r\n    opacity: 1;\r\n}\r\n\r\n.title {\r\n    color: gold;\r\n    padding: 2%;\r\n    font-family: -webkit-body;\r\n    font-size: 25px;\r\n}\r\n\r\n\r\n/* p.info {\r\n   padding: 5%;\r\n} */\r\n\r\n@media screen and (max-width: 450px) {\r\n    main {\r\n        width: 100%;\r\n        margin: 0px;\r\n        border: 1px solid gray;\r\n    }\r\n    .container {\r\n        display: inline-grid;\r\n        grid-template-columns: repeat(2, 44%);\r\n        grid-template-rows: repeat(2, 44%);\r\n        width: 100%;\r\n        grid-gap: 7px;\r\n        justify-content: center;\r\n    }\r\n    .title {\r\n        color: gold;\r\n        padding: 2%;\r\n        font-family: -webkit-body;\r\n        font-size: 20px;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 911px) and (min-width: 450px) {\r\n    main {\r\n        width: 100%;\r\n        margin: 0px;\r\n        border: 1px solid gray;\r\n    }\r\n    .container {\r\n        display: inline-grid;\r\n        grid-template-columns: repeat(2, 50%);\r\n        grid-template-rows: repeat(2, 50%);\r\n        width: 100%;\r\n        grid-gap: 7px;\r\n        justify-content: center;\r\n    }\r\n}",
+                    "styleUrl": "./artists.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<main>\r\n    <div class=\"title\"> OUR ARTISTS </div>\r\n    <!-- <div>\r\n        <p class=\"info\"> Here we have the list of Artists </p>\r\n    </div> -->\r\n\r\n    <div class=\"container\">\r\n        <div class=\"artist-card\" *ngFor=\"let item of artist\">\r\n            <!-- <div class=\"artist-card\" [ngStyle]=\"{'background-image': 'url('+ art.src +')'}\"> -->\r\n            <!-- </div> -->\r\n            <img src={{item.src}} alt=\"Guitar\" style=\"width:100%\">\r\n        </div>\r\n    </div>\r\n</main>"
         },
         {
             "name": "DetailsComponent",
-            "id": "component-DetailsComponent-1bb819e2e8eb398736a7a6380cd52ee0",
+            "id": "component-DetailsComponent-dd8b6d89df7ea5a17d9feac48ea092be",
             "file": "src/app/details/details.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -657,7 +814,7 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 36,
                     "jsdoctags": [
@@ -679,7 +836,7 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 58,
                     "jsdoctags": [
@@ -701,7 +858,7 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 53,
                     "jsdoctags": [
@@ -718,7 +875,7 @@
                     "name": "getLatestUser",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 47
                 },
@@ -734,7 +891,7 @@
                     "name": "updateUser",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
                     "line": 63
                 }
@@ -744,11 +901,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { map } from 'rxjs/operators';\nimport { Component, OnInit } from '@angular/core';\nimport { select, Store } from '@ngrx/store';\nimport { Observable, Subscribable, Subscription } from 'rxjs';\nimport { CrudService } from '../common.services/crud.service';\nimport Customer from '../customer/customer.model';\nimport * as CustomerActions from '../customer/customer.action';\nimport CustomerState from '../customer/customer.state';\n\n@Component({\n  selector: 'app-details',\n  templateUrl: './details.component.html',\n  styleUrls: ['./details.component.css']\n})\nexport class DetailsComponent {\n  ray: any;\n  customer: any[];\n  user: any;\n  isEdit = false;\n  CustomerSubscription: Subscription;\n\n  userObj = {\n    firstname: '',\n    email: '',\n    password: '',\n  };\n\n  constructor(private myService: CrudService, private store: Store<{ customers: CustomerState }>) {\n    this.ray = store.pipe(select('customers'));\n  }\n  ngOnInit() {\n    this.getLatestUser();\n    this.CustomerSubscription = this.ray.pipe(map((x: any) => { this.customer = x.customer; console.log(x); })).subscribe();\n  }\n\n  addUser(formObj) {\n    const customer = new Customer();\n    customer.firstname = formObj.firstname;\n    customer.email = formObj.email;\n    customer.password = formObj.password;\n    this.store.dispatch(CustomerActions.CreateCustomerAction(customer));\n    this.myService.createUser(customer).subscribe((response) => {\n      console.log('user added');\n      this.getLatestUser();\n    });\n  }\n  getLatestUser() {\n    this.myService.getAllUser().subscribe((response: any[]) => {\n      this.customer = response;\n      console.log(this.customer);\n    });\n  }\n  editUser(user) {\n    this.isEdit = true;\n    this.userObj = user;\n  }\n\n  deleteUser(user) {\n    this.myService.deleteUser(user).subscribe(() => {\n      this.getLatestUser();\n    });\n  }\n  updateUser() {\n    this.isEdit = !this.isEdit;\n    this.myService.updateUser(this.userObj).subscribe(() => {\n      this.getLatestUser();\n    });\n  }\n}\n",
+            "sourceCode": "import { map } from 'rxjs/operators';\nimport { Component, OnInit } from '@angular/core';\nimport { select, Store } from '@ngrx/store';\nimport { Observable, Subscribable, Subscription } from 'rxjs';\nimport { CrudService } from '../common/crud.service';\nimport Customer from '../customer/customer.model';\nimport * as CustomerActions from '../customer/customer.action';\nimport CustomerState from '../customer/customer.state';\n\n@Component({\n  selector: 'app-details',\n  templateUrl: './details.component.html',\n  styleUrls: ['./details.component.css']\n})\nexport class DetailsComponent implements OnInit {\n  ray: any;\n  customer: any[];\n  user: any;\n  isEdit = false;\n  CustomerSubscription: Subscription;\n\n  userObj = {\n    firstname: '',\n    email: '',\n    password: '',\n  };\n\n  constructor(private myService: CrudService, private store: Store<{ customers: CustomerState }>) {\n    this.ray = store.pipe(select('customers'));\n  }\n  ngOnInit(): void {\n    this.getLatestUser();\n    this.CustomerSubscription = this.ray.pipe(map((x: any) => { this.customer = x.customer; console.log(x); })).subscribe();\n  }\n\n  addUser(formObj): any {\n    const customer = new Customer();\n    customer.firstname = formObj.firstname;\n    customer.email = formObj.email;\n    customer.password = formObj.password;\n    this.store.dispatch(CustomerActions.CreateCustomerAction(customer));\n    this.myService.createUser(customer).subscribe((response) => {\n      console.log('user added');\n      this.getLatestUser();\n    });\n  }\n  getLatestUser(): any {\n    this.myService.getAllUser().subscribe((response: any[]) => {\n      this.customer = response;\n      console.log(this.customer);\n    });\n  }\n  editUser(user): any {\n    this.isEdit = true;\n    this.userObj = user;\n  }\n\n  deleteUser(user): any {\n    this.myService.deleteUser(user).subscribe(() => {\n      this.getLatestUser();\n    });\n  }\n  updateUser(): any {\n    this.isEdit = !this.isEdit;\n    this.myService.updateUser(this.userObj).subscribe(() => {\n      this.getLatestUser();\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "body {\r\n    background-image: url();\r\n    background-position: center;\r\n    background-size: cover;\r\n    font-family: sans-serif;\r\n    margin-top: 10px;\r\n}\r\n\r\n.details {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.regform h2 {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n}\r\n\r\n.main {\r\n    background-color: rgba(6, 1, 27, 0.932);\r\n    width: 600px;\r\n    height: 350px;\r\n    margin: auto;\r\n    border-radius: 20px 20px 20px 20px;\r\n}\r\n\r\nform {\r\n    padding: 10px;\r\n}\r\n\r\n.name {\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.firstname {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -37px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.email {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -20px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myemail {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -55px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.password {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -35px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.mypassowrd {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -70px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\nbutton {\r\n    position: relative;\r\n    top: -50px;\r\n    margin: 17px 0px 0px 207px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 14px 53px;\r\n    outline: none;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #84e984;\r\n}\r\n\r\n.table-fill {\r\n    background: white;\r\n    border-radius: 3px;\r\n    border-collapse: collapse;\r\n    height: 320px;\r\n    margin: auto;\r\n    max-width: 600px;\r\n    padding: 5px;\r\n    width: 100%;\r\n    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);\r\n    animation: float 5s infinite;\r\n}\r\n\r\nth {\r\n    color: #D5DDE5;\r\n    background: #1b1e24;\r\n    border-bottom: 4px solid #9ea7af;\r\n    border-right: 1px solid #343a45;\r\n    font-size: 23px;\r\n    font-weight: 100;\r\n    padding: 15px;\r\n    text-align: center;\r\n    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);\r\n    vertical-align: middle;\r\n}\r\n\r\nth:first-child {\r\n    border-top-left-radius: 3px;\r\n}\r\n\r\nth:last-child {\r\n    border-top-right-radius: 3px;\r\n    border-right: none;\r\n}\r\n\r\ntr {\r\n    border-top: 1px solid #C1C3D1;\r\n    border-bottom: 1px solid #C1C3D1;\r\n    color: #666B85;\r\n    font-size: 16px;\r\n    font-weight: normal;\r\n    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);\r\n}\r\n\r\ntr:hover td {\r\n    background: #4E5066;\r\n    color: #FFFFFF;\r\n    border-top: 1px solid #22262e;\r\n}\r\n\r\ntr:first-child {\r\n    border-top: none;\r\n}\r\n\r\ntr:last-child {\r\n    border-bottom: none;\r\n}\r\n\r\ntr:nth-child(odd) td {\r\n    background: #EBEBEB;\r\n}\r\n\r\ntr:nth-child(odd):hover td {\r\n    background: #4E5066;\r\n}\r\n\r\ntr:last-child td:first-child {\r\n    border-bottom-left-radius: 3px;\r\n}\r\n\r\ntr:last-child td:last-child {\r\n    border-bottom-right-radius: 3px;\r\n}\r\n\r\ntd {\r\n    background: #FFFFFF;\r\n    padding: 20px;\r\n    text-align: left;\r\n    vertical-align: middle;\r\n    font-weight: 300;\r\n    font-size: 18px;\r\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);\r\n    border-right: 1px solid #C1C3D1;\r\n}\r\n\r\ntd:last-child {\r\n    border-right: 0px;\r\n}\r\n\r\nth.text-left {\r\n    text-align: left;\r\n}\r\n\r\nth.text-center {\r\n    text-align: center;\r\n}\r\n\r\nth.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd.text-left {\r\n    text-align: left;\r\n}\r\n\r\ntd.text-center {\r\n    text-align: center;\r\n}\r\n\r\ntd.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd .btnedit {\r\n    background-color: rgb(20, 220, 87);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\ntd .btndelete {\r\n    background-color: rgb(220, 20, 20);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\n@media screen and (max-width: 450px) {\r\n    .main {\r\n        margin-top: 10px;\r\n        width: 100%;\r\n    }\r\n    .details {\r\n        font-size: 20px;\r\n    }\r\n    .firstname {\r\n        position: relative;\r\n        left: 100px;\r\n        width: 120px;\r\n        top: -28px;\r\n        line-height: 33px;\r\n        border-radius: 25px;\r\n        padding: 0 10px;\r\n        font-size: 14px;\r\n    }\r\n    .myemail {\r\n        position: relative;\r\n        left: 100px;\r\n        width: 120px;\r\n        top: -49px;\r\n        line-height: 35px;\r\n        border-radius: 25px;\r\n        padding: 0 10px;\r\n        font-size: 13px;\r\n    }\r\n    .mypassowrd {\r\n        position: relative;\r\n        left: 100px;\r\n        width: 120px;\r\n        top: -65px;\r\n        line-height: 35px;\r\n        border-radius: 25px;\r\n        padding: 0 10px;\r\n        font-size: 13px;\r\n    }\r\n    .password {\r\n        margin-left: 10px;\r\n    }\r\n    button {\r\n        margin: 17px 0px 0px 116px;\r\n        cursor: pointer;\r\n        font-size: 14px;\r\n        width: 100px;\r\n        padding: 10px 13px 9px 15px;\r\n    }\r\n    th {\r\n        width: 100%;\r\n        color: #D5DDE5;\r\n        background: #1b1e24;\r\n        border-bottom: 2px solid #9ea7af;\r\n        border-right: 1px solid #343a45;\r\n        font-size: 12px;\r\n        font-weight: 100;\r\n        padding: 8px;\r\n        vertical-align: middle;\r\n    }\r\n    td {\r\n        padding: 0px;\r\n        margin: 0px;\r\n        width: 100%;\r\n    }\r\n    tr {\r\n        width: 100%;\r\n    }\r\n    .table-fill {\r\n        width: 100%;\r\n    }\r\n    tbody {\r\n        width: 100%;\r\n    }\r\n    td .btndelete {\r\n        background-color: rgb(220, 20, 20);\r\n        display: block;\r\n        margin: 31px -16px -58px -17px;\r\n        text-align: center;\r\n        border-radius: 25px;\r\n        border: 2px solid #366373;\r\n        width: 78px;\r\n        padding: 6px;\r\n        outline: none;\r\n        color: white;\r\n        cursor: pointer;\r\n        font-size: 15px;\r\n        transition: 0.25px;\r\n    }\r\n    td .btnedit {\r\n        background-color: rgb(20, 220, 87);\r\n        display: block;\r\n        margin: 31px -16px -58px -17px;\r\n        text-align: center;\r\n        border-radius: 25px;\r\n        border: 2px solid #366373;\r\n        width: 78px;\r\n        padding: 6px;\r\n        outline: none;\r\n        color: white;\r\n        cursor: pointer;\r\n        font-size: 15px;\r\n        transition: 0.25px;\r\n    }\r\n}",
+                    "data": "body {\r\n    background-image: url();\r\n    background-position: center;\r\n    background-size: cover;\r\n    font-family: sans-serif;\r\n    margin-top: 10px;\r\n}\r\n\r\n.details {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.regform h2 {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n}\r\n\r\n.main {\r\n    background-color: rgba(6, 1, 27, 0.932);\r\n    width: 600px;\r\n    height: 350px;\r\n    margin: auto;\r\n    border-radius: 20px 20px 20px 20px;\r\n}\r\n\r\nform {\r\n    padding: 10px;\r\n    margin: 10px auto;\r\n}\r\n\r\n.name {\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.firstname {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -37px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.email {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -20px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myemail {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -55px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\n.password {\r\n    position: relative;\r\n    margin-left: 25px;\r\n    margin-top: 30px;\r\n    top: -35px;\r\n    width: 125px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.mypassowrd {\r\n    position: relative;\r\n    left: 200px;\r\n    top: -70px;\r\n    line-height: 35px;\r\n    border-radius: 25px;\r\n    padding: 0 10px;\r\n    font-size: 13px;\r\n}\r\n\r\nbutton {\r\n    position: relative;\r\n    top: -50px;\r\n    margin: 17px 0px 0px 207px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 14px 53px;\r\n    outline: none;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #84e984;\r\n}\r\n\r\n.table-fill {\r\n    background: white;\r\n    border-radius: 3px;\r\n    border-collapse: collapse;\r\n    height: 320px;\r\n    margin: auto;\r\n    max-width: 600px;\r\n    padding: 5px;\r\n    width: 100%;\r\n    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);\r\n    animation: float 5s infinite;\r\n}\r\n\r\nth {\r\n    color: #D5DDE5;\r\n    background: #1b1e24;\r\n    border-bottom: 4px solid #9ea7af;\r\n    border-right: 1px solid #343a45;\r\n    font-size: 23px;\r\n    font-weight: 100;\r\n    padding: 15px;\r\n    text-align: center;\r\n    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);\r\n    vertical-align: middle;\r\n}\r\n\r\nth:first-child {\r\n    border-top-left-radius: 3px;\r\n}\r\n\r\nth:last-child {\r\n    border-top-right-radius: 3px;\r\n    border-right: none;\r\n}\r\n\r\ntr {\r\n    border-top: 1px solid #C1C3D1;\r\n    border-bottom: 1px solid #C1C3D1;\r\n    color: #666B85;\r\n    font-size: 16px;\r\n    font-weight: normal;\r\n    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);\r\n}\r\n\r\n\r\n/* tr:hover td {\r\n    background: #4E5066;\r\n    color: #FFFFFF;\r\n    border-top: 1px solid #22262e;\r\n}\r\n\r\ntr:first-child {\r\n    border-top: none;\r\n}\r\n\r\ntr:last-child {\r\n    border-bottom: none;\r\n}\r\n\r\ntr:nth-child(odd) td {\r\n    background: #EBEBEB;\r\n}\r\n\r\ntr:nth-child(odd):hover td {\r\n    background: #4E5066;\r\n}\r\n\r\ntr:last-child td:first-child {\r\n    border-bottom-left-radius: 3px;\r\n}\r\n\r\ntr:last-child td:last-child {\r\n    border-bottom-right-radius: 3px;\r\n} */\r\n\r\ntd {\r\n    background: #FFFFFF;\r\n    padding: 20px;\r\n    text-align: left;\r\n    vertical-align: middle;\r\n    font-weight: 300;\r\n    font-size: 18px;\r\n    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);\r\n    border-right: 1px solid #C1C3D1;\r\n}\r\n\r\n\r\n/* td:last-child {\r\n    border-right: 0px;\r\n}\r\n\r\nth.text-left {\r\n    text-align: left;\r\n}\r\n\r\nth.text-center {\r\n    text-align: center;\r\n}\r\n\r\nth.text-right {\r\n    text-align: right;\r\n}\r\n\r\ntd.text-left {\r\n    text-align: left;\r\n}\r\n\r\ntd.text-center {\r\n    text-align: center;\r\n}\r\n\r\ntd.text-right {\r\n    text-align: right;\r\n} */\r\n\r\n\r\n/* td .btnedit {\r\n    background-color: rgb(20, 220, 87);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n} */\r\n\r\n.editz {\r\n    color: green;\r\n    padding: 10px;\r\n    text-align: center;\r\n}\r\n\r\n.delt {\r\n    color: red;\r\n    padding: 10px;\r\n    text-align: center;\r\n}\r\n\r\n\r\n/* td .btndelete {\r\n    background-color: rgb(220, 20, 20);\r\n    display: block;\r\n    margin: 31px -16px -58px -17px;\r\n    text-align: center;\r\n    border-radius: 25px;\r\n    border: 2px solid #366373;\r\n    padding: 11px 28px;\r\n    outline: none;\r\n    color: white;\r\n    cursor: pointer;\r\n    font-size: 15px;\r\n    transition: 0.25px;\r\n} */\r\n\r\n@media screen and (max-width: 500px) {\r\n    .main {\r\n        margin-top: 10px;\r\n        width: 90%;\r\n    }\r\n    .details {\r\n        font-size: 20px;\r\n    }\r\n    .firstname {\r\n        position: relative;\r\n        left: 100px;\r\n        width: 133px;\r\n        top: -28px;\r\n        line-height: 33px;\r\n        border-radius: 25px;\r\n        padding: 0 10px;\r\n        font-size: 14px;\r\n    }\r\n    .myemail {\r\n        position: relative;\r\n        left: 100px;\r\n        width: 133px;\r\n        top: -49px;\r\n        line-height: 35px;\r\n        border-radius: 25px;\r\n        padding: 0 10px;\r\n        font-size: 13px;\r\n    }\r\n    .mypassowrd {\r\n        position: relative;\r\n        left: 100px;\r\n        width: 133px;\r\n        top: -65px;\r\n        line-height: 35px;\r\n        border-radius: 25px;\r\n        padding: 0 10px;\r\n        font-size: 13px;\r\n    }\r\n    .password {\r\n        margin-left: 10px;\r\n    }\r\n    button {\r\n        margin: 17px 0px 0px 116px;\r\n        cursor: pointer;\r\n        font-size: 14px;\r\n        width: 100px;\r\n        padding: 10px 13px 9px 15px;\r\n    }\r\n    th {\r\n        color: #D5DDE5;\r\n        background: #1b1e24;\r\n        border-bottom: 2px solid #9ea7af;\r\n        border-right: 1px solid #343a45;\r\n        font-size: 12px;\r\n        font-weight: 100;\r\n        padding: 8px;\r\n        vertical-align: middle;\r\n    }\r\n    td {\r\n        padding: 0px;\r\n        margin: 0px;\r\n        text-align: center;\r\n    }\r\n    tr {\r\n        width: 100%;\r\n    }\r\n    .table-fill {\r\n        width: 90%;\r\n    }\r\n    tbody {\r\n        width: 100%;\r\n    }\r\n}",
                     "styleUrl": "./details.component.css"
                 }
             ],
@@ -784,7 +941,66 @@
                     }
                 ]
             },
-            "templateData": "<div class=\"regform\">\n</div>\n<div class=\"main\">\n    <form #myForm=\"ngForm\">\n        <h1 class=\"details\"> Details Form </h1>\n        <h2 class=\"name\"> Name </h2>\n        <input class=\"firstname\" placeholder=\"name\" type=\"text\" name=\"firstname\" [(ngModel)]=\"userObj.firstname\"><br>\n        <h2 class=\"email\"> Email </h2>\n        <input class=\"myemail\" placeholder=\"email\" type=\"email\" name=\"email\" [(ngModel)]=\"userObj.email\"><br>\n        <h2 class=\"password\"> Password </h2>\n        <input class=\"mypassowrd\" placeholder=\"password\" type=\"password\" name=\"password\" [(ngModel)]=\"userObj.password\"><br>\n        <button class=\"btn\" type=\"submit\" (click)=\"addUser(myForm.value)\" *ngIf=\"!isEdit\"> Submit</button>\n        <button type=\"submit\" *ngIf=\"isEdit\" (click)=\"updateUser()\">Update</button>\n    </form>\n</div>\n<br>\n\n<table class=\"table-fill\">\n    <thead>\n        <tr>\n            <th class=\"text-left\">Name</th>\n            <th class=\"text-left\">Email</th>\n            <th class=\"text-left\">Password</th>\n            <th class=\"text-left\">Edit</th>\n            <th class=\"text-left\">Delete</th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let user of customer\">\n            <td> {{user.firstname}}</td>\n            <td> {{user.email}}</td>\n            <td> {{user.password}}</td>\n            <td> <button class=\"btnedit\" type=\"submit\" (click)=\"editUser(user)\"> Edit </button></td>\n            <td> <button class=\"btndelete\" type=\"submit\" (click)=\"deleteUser(user)\"> Delete </button></td>\n        </tr>\n    </tbody>\n</table>"
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"regform\">\n</div>\n<div class=\"main\">\n    <form #myForm=\"ngForm\">\n        <h1 class=\"details\"> Details Form </h1>\n        <h2 class=\"name\"> Name </h2>\n        <input class=\"firstname\" placeholder=\"name\" type=\"text\" name=\"firstname\" [(ngModel)]=\"userObj.firstname\"><br>\n        <h2 class=\"email\"> Email </h2>\n        <input class=\"myemail\" placeholder=\"email\" type=\"email\" name=\"email\" [(ngModel)]=\"userObj.email\"><br>\n        <h2 class=\"password\"> Password </h2>\n        <input class=\"mypassowrd\" placeholder=\"password\" type=\"password\" name=\"password\" [(ngModel)]=\"userObj.password\"><br>\n        <button class=\"btn\" type=\"submit\" (click)=\"addUser(myForm.value)\" *ngIf=\"!isEdit\"> Submit</button>\n        <button type=\"submit\" *ngIf=\"isEdit\" (click)=\"updateUser()\">Update</button>\n    </form>\n</div>\n<br>\n\n<table class=\"table-fill\">\n    <thead>\n        <tr>\n            <th class=\"text-left\">Name</th>\n            <th class=\"text-left\">Email</th>\n            <th class=\"text-left\">Password</th>\n            <th class=\"text-left\">Edit</th>\n            <th class=\"text-left\">Delete</th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let user of customer\">\n            <td> {{user.firstname}}</td>\n            <td> {{user.email}}</td>\n            <td> {{user.password}}</td>\n            <!-- <td> <button class=\"btnedit\" type=\"submit\" (click)=\"editUser(user)\"> Edit </button></td> -->\n            <td class=\"editz\">\n                <i class='fas fa-edit' type=\"submit\" (click)=\"editUser(user)\"></i>\n            </td>\n\n            <!-- <td> <button class=\"btndelete\" type=\"submit\" (click)=\"deleteUser(user)\"> Delete </button></td> -->\n            <td class=\"delt\">\n                <i class='fas fa-eraser' type=\"submit\" (click)=\"deleteUser(user)\"></i>\n            </td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "name": "FooterComponent",
+            "id": "component-FooterComponent-495a80e393fc55b4c0c9841b19e086bb",
+            "file": "src/app/Layout/footer/footer.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-footer",
+            "styleUrls": [
+                "./footer.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./footer.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-footer',\n  templateUrl: './footer.component.html',\n  styleUrls: ['./footer.component.css']\n})\nexport class FooterComponent implements OnInit {\n  // title1 = \"Hey bumrah\";\n  constructor() { }\n\n  ngOnInit(): void {\n\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "h3{\r\n    text-align: center;\r\n    font-weight: 100;\r\n    vertical-align: sub;\r\n    color: white;\r\n    background-color:rgba(6, 1, 27, 0.932);\r\n    font-size: 1rem;\r\n}",
+                    "styleUrl": "./footer.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<h3> © 2020 by NYZ Productions </h3>\n\n\n<!-- <app-logform [Title1]=\"title1\"></app-logform> -->"
         },
         {
             "name": "HeaderComponent",
@@ -850,7 +1066,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-1f24be837dbd39a508b616096233fab7-1",
+            "id": "component-HeaderComponent-508ddb6a9b5cd920ff4f0530045b189c-1",
             "file": "src/app/Layout/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -875,7 +1091,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 14
                 },
                 {
                     "name": "hide",
@@ -883,7 +1099,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 12
+                    "line": 13
                 }
             ],
             "methodsClass": [
@@ -891,18 +1107,18 @@
                     "name": "changeOfRoute",
                     "args": [
                         {
-                            "name": "checkButton",
-                            "type": "any"
+                            "name": "res",
+                            "type": ""
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 44,
                     "jsdoctags": [
                         {
-                            "name": "checkButton",
-                            "type": "any",
+                            "name": "res",
+                            "type": "",
                             "tagName": {
                                 "text": "param"
                             }
@@ -913,9 +1129,9 @@
                     "name": "loggedin",
                     "args": [],
                     "optional": false,
-                    "returnType": "boolean",
+                    "returnType": "any",
                     "typeParameters": [],
-                    "line": 27
+                    "line": 30
                 },
                 {
                     "name": "ngOnInit",
@@ -931,7 +1147,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 36
+                    "line": 39
                 }
             ],
             "hostBindings": [],
@@ -939,11 +1155,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { DarkService } from 'src/app/common.services/dark.service';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.css']\n})\nexport class HeaderComponent implements OnInit {\n  hide = false;\n  darkTheme = new FormControl(false);\n  constructor(\n    private darkService: DarkService,\n    private router: Router,\n  ) { }\n  ngOnInit(): void {\n    this.darkTheme.valueChanges.subscribe(value => {\n      if (value) {\n        this.darkService.toggleDark();\n      } else {\n        this.darkService.toggleLight();\n      }\n    });\n  }\n  loggedin() {\n    const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;\n    // console.log(\"Am I logged in \" + loggedIn);\n    if (loggedIn === 'true') {\n      return true;\n    }\n    return false;\n  }\n\n  onLogout() {\n    this.router.navigate(['login']);\n    return localStorage.removeItem('isLoggedIn');\n  }\n\n  changeOfRoute(checkButton: any) {\n    // debugger;\n    if (!checkButton.checked) {\n      checkButton.checked = true;\n    } else {\n      checkButton.checked = false;\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { DarkService } from 'src/app/common/dark.service';\nimport { DataService } from 'src/app/common/data.service';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.css']\n})\nexport class HeaderComponent implements OnInit {\n  hide = false;\n  darkTheme = new FormControl(false);\n  constructor(\n    private darkService: DarkService, private router: Router, private dataService: DataService\n  ) { }\n  ngOnInit(): void {\n    this.darkTheme.valueChanges.subscribe(value => {\n      if (value) {\n        this.darkService.toggleDark();\n      } else {\n        this.darkService.toggleLight();\n      }\n\n      this.dataService.observable.subscribe(res => console.log('response is ' + res));\n\n    });\n  }\n  loggedin(): any {\n    const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;\n    // console.log(\"Am I logged in \" + loggedIn);\n    if (loggedIn === 'true') {\n      return true;\n    }\n    return false;\n  }\n\n  onLogout(): any {\n    this.router.navigate(['login']);\n    return localStorage.removeItem('isLoggedIn');\n  }\n\n  changeOfRoute(res): any {\n    console.log('Response is ' + res);\n    // debugger;\n    // if (!checkButton.checked) {\n    //   checkButton.checked = true;\n    // } else {\n    //   checkButton.checked = false;\n    // }\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "nav {\r\n    background: rgba(6, 1, 27, 0.932);\r\n    height: 80px;\r\n    width: 100%;\r\n}\r\n\r\nlabel.logo {\r\n    color: deeppink;\r\n    font-size: 35px;\r\n    line-height: 80px;\r\n    padding: 0 0px;\r\n    font-weight: 600;\r\n    text-transform: uppercase;\r\n}\r\n\r\nnav ul {\r\n    float: right;\r\n    margin-right: 20px;\r\n}\r\n\r\nnav ul li {\r\n    display: inline-block;\r\n    line-height: 70px;\r\n    margin: 0 5px;\r\n}\r\n\r\nnav ul li a .btn {\r\n    color: white;\r\n    font-size: 17px;\r\n    padding: 7px 13px;\r\n    border-radius: 3px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.checkbtn {\r\n    font-size: 30px;\r\n    color: white;\r\n    float: right;\r\n    line-height: 80px;\r\n    margin-right: 40px;\r\n    cursor: pointer;\r\n    display: none;\r\n}\r\n\r\n#check {\r\n    display: none;\r\n}\r\n\r\n:host {\r\n    background-color: var(--primary-color);\r\n    color: var(--text-color);\r\n}\r\n\r\n.switch {\r\n    position: relative;\r\n    display: inline-block;\r\n    width: 60px;\r\n    height: 34px;\r\n    margin: 8px;\r\n}\r\n\r\n.switch input {\r\n    opacity: 0;\r\n    width: 0;\r\n    height: 0;\r\n}\r\n\r\n.slider {\r\n    position: absolute;\r\n    cursor: pointer;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    background-color: #ccc;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n}\r\n\r\n.slider:before {\r\n    position: absolute;\r\n    content: \"\";\r\n    height: 26px;\r\n    width: 26px;\r\n    left: 4px;\r\n    bottom: 4px;\r\n    background-color: white;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n}\r\n\r\ninput:checked+.slider {\r\n    background-color: #2196F3;\r\n}\r\n\r\ninput:focus+.slider {\r\n    box-shadow: 0 0 1px #2196F3;\r\n}\r\n\r\ninput:checked+.slider:before {\r\n    -webkit-transform: translateX(26px);\r\n    -ms-transform: translateX(26px);\r\n    transform: translateX(26px);\r\n}\r\n\r\n@media (max-width:952px) {\r\n    nav {\r\n        width: 100%;\r\n    }\r\n    label.logo {\r\n        font-size: 21px;\r\n        padding-left: 0px 0px;\r\n    }\r\n    nav ul li a {\r\n        font-size: 16px;\r\n    }\r\n    nav ul li a .btn {\r\n        color: white;\r\n        font-size: 10px;\r\n        padding: 7px 13px;\r\n        border-radius: 3px;\r\n        text-transform: uppercase;\r\n    }\r\n}\r\n\r\n@media (max-width:858px) {\r\n    .checkbtn {\r\n        display: block;\r\n    }\r\n    ul {\r\n        position: absolute;\r\n        width: 100%;\r\n        height: 100vh;\r\n        background: #2c3e50;\r\n        top: 80px;\r\n        left: -100%;\r\n        text-align: center;\r\n        transition: all .5s;\r\n    }\r\n    nav ul li {\r\n        display: block;\r\n        margin: 50px, 0;\r\n    }\r\n    nav ul li a {\r\n        font-size: 14px;\r\n    }\r\n    a:hover,\r\n    a.active {\r\n        background: none;\r\n        color: black;\r\n    }\r\n    #check:checked~ul {\r\n        left: 0;\r\n        z-index: 100;\r\n    }\r\n    .slider:before {\r\n        position: absolute;\r\n        content: \"\";\r\n        height: 18px;\r\n        width: 22px;\r\n        left: 4px;\r\n        bottom: 8px;\r\n        background-color: white;\r\n        transition: .4s;\r\n        -webkit-transition: .4s;\r\n    }\r\n}\r\n\r\n\r\n/* section {\r\n    background: url() no-repeat;\r\n    background-size: cover;\r\n    height: calc(100vh - 80vh);\r\n} */",
+                    "data": "nav {\r\n    background: rgba(6, 1, 27, 0.932);\r\n    height: 80px;\r\n    width: 100%;\r\n}\r\n\r\nlabel.logo {\r\n    color: deeppink;\r\n    font-size: 35px;\r\n    font-family: system-ui;\r\n    line-height: 80px;\r\n    padding: 0 0px;\r\n    font-weight: 600;\r\n    text-transform: uppercase;\r\n}\r\n\r\nnav ul {\r\n    float: right;\r\n    margin-right: 20px;\r\n}\r\n\r\nnav ul li {\r\n    display: inline-block;\r\n    line-height: 70px;\r\n    margin: 0 5px;\r\n}\r\n\r\nnav ul li a .btn {\r\n    color: white;\r\n    font-size: 17px;\r\n    padding: 7px 13px;\r\n    border-radius: 3px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.checkbtn {\r\n    font-size: 30px;\r\n    color: white;\r\n    float: right;\r\n    line-height: 80px;\r\n    margin-right: 40px;\r\n    cursor: pointer;\r\n    display: none;\r\n}\r\n\r\n#check {\r\n    display: none;\r\n}\r\n\r\n:host {\r\n    background-color: var(--primary-color);\r\n    color: var(--text-color);\r\n}\r\n\r\n.switch {\r\n    position: relative;\r\n    display: inline-block;\r\n    width: 60px;\r\n    height: 34px;\r\n    margin: 8px;\r\n}\r\n\r\n.switch input {\r\n    opacity: 0;\r\n    width: 0;\r\n    height: 0;\r\n}\r\n\r\n.slider {\r\n    position: absolute;\r\n    cursor: pointer;\r\n    border-radius: 15px;\r\n    width: 50px;\r\n    top: -6px;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 15px;\r\n    background-color: #ccc;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n}\r\n\r\n.slider:before {\r\n    position: absolute;\r\n    content: \"\";\r\n    border-radius: 5px;\r\n    height: 12px;\r\n    width: 17px;\r\n    left: 4px;\r\n    bottom: 7px;\r\n    background-color: white;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n}\r\n\r\ninput:checked+.slider {\r\n    background-color: #2196F3;\r\n}\r\n\r\ninput:focus+.slider {\r\n    box-shadow: 0 0 1px #2196F3;\r\n}\r\n\r\ninput:checked+.slider:before {\r\n    -webkit-transform: translateX(26px);\r\n    -ms-transform: translateX(26px);\r\n    transform: translateX(26px);\r\n}\r\n\r\n@media (max-width:952px) {\r\n   \r\n    label.logo {\r\n        font-size: 31px;\r\n    }\r\n    nav ul li a {\r\n        font-size: 16px;\r\n    }\r\n    nav ul li a .btn {\r\n        color: white;\r\n        font-size: 10px;\r\n        padding: 7px 13px;\r\n        border-radius: 3px;\r\n        text-transform: uppercase;\r\n    }\r\n}\r\n\r\n@media (max-width:858px) {\r\n    .checkbtn {\r\n        display: block;\r\n    }\r\n    ul {\r\n        position: absolute;\r\n        width: 100%;\r\n        height: 100vh;\r\n        background: #2c3e50;\r\n        top: 80px;\r\n        left: -100%;\r\n        text-align: center;\r\n        transition: all .5s;\r\n    }\r\n    nav ul li {\r\n        display: block;\r\n        margin: 50px, 0;\r\n    }\r\n    nav ul li a {\r\n        font-size: 14px;\r\n    }\r\n    a:hover,\r\n    a.active {\r\n        background: none;\r\n        color: black;\r\n    }\r\n    #check:checked~ul {\r\n        left: 0;\r\n        z-index: 100;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 450px) {\r\n    label.logo {\r\n        font-size: 25px;\r\n    }\r\n    span.slider.round {\r\n        width: 35px;\r\n        height: 20px;\r\n        border-radius: 10px;\r\n    }\r\n    input:checked+.slider:before {\r\n        -webkit-transform: translateX(10px);\r\n        -ms-transform: translateX(10px);\r\n        transform: translateX(16px);\r\n        border-radius: 5px;\r\n    }\r\n    .slider:before{\r\n        border-radius: 5px;\r\n        height: 9px;\r\n    width: 9px;\r\n    bottom: 5px;\r\n    transition: .4s;\r\n    -webkit-transition: .4s;\r\n    }\r\n}",
                     "styleUrl": "./header.component.css"
                 }
             ],
@@ -959,9 +1175,13 @@
                     {
                         "name": "router",
                         "type": "Router"
+                    },
+                    {
+                        "name": "dataService",
+                        "type": "DataService"
                     }
                 ],
-                "line": 13,
+                "line": 14,
                 "jsdoctags": [
                     {
                         "name": "darkService",
@@ -976,6 +1196,13 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "dataService",
+                        "type": "DataService",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
@@ -985,11 +1212,11 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "HeaderComponent-1",
-            "templateData": "<nav>\n    <label class=\"switch\"><input type=\"checkbox\" id=\"darkTheme\" [formControl]=\"darkTheme\"><span class=\"slider round\"></span></label>\n    <input type=\"checkbox\" id=\"check\" #checkButton>\n    <label for=\"check\" class=\"checkbtn\">\n      <i class=\"fas fa-bars\"></i>\n  </label>\n    <label class=\"logo\">Music-X</label>\n    <ul>\n        <li> <a class=\"btn\" [routerLink]=\"['/home']\"> Home</a></li>\n        <li> <a [hidden]=\"loggedin()\" class=\"btn\" [routerLink]=\"['/login']\"> Login </a></li>\n        <li> <a [hidden]=\"!loggedin()\" class=\"btn\" (click)=\"onLogout()\"> Logout </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/themes']\"> Themes </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/details']\"> details </a></li>\n\n\n    </ul>\n</nav>\n\n<section></section>\n\n<router-outlet (activate)=\"changeOfRoute(checkButton)\"></router-outlet>"
+            "templateData": "<nav>\n    <label class=\"switch\"><input type=\"checkbox\" id=\"darkTheme\" [formControl]=\"darkTheme\"><span\n            class=\"slider round\"></span></label>\n    <input type=\"checkbox\" id=\"check\" #checkButton>\n    <label for=\"check\" class=\"checkbtn\">\n        <i class=\"fas fa-bars\"></i>\n    </label>\n    <label class=\"logo\">Music-X</label>\n    <ul>\n        <li> <a [hidden]=\"loggedin()\" class=\"btn\" [routerLink]=\"['/login']\"> Login </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/home']\"> Home</a></li>\n        <li> <a [hidden]=\"!loggedin()\" class=\"btn\" (click)=\"onLogout()\"> Logout </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/artists']\"> Artists </a></li>\n        <li> <a class=\"btn\" [routerLink]=\"['/details']\"> details </a></li>\n    </ul>\n</nav>"
         },
         {
             "name": "HomeComponent",
-            "id": "component-HomeComponent-f9ba9c5c10910fcc6dbb874816c99278",
+            "id": "component-HomeComponent-6015310b47aad98f4dda2dda22c50481",
             "file": "src/app/home/home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1015,7 +1242,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 10
                 }
             ],
             "hostBindings": [],
@@ -1023,11 +1250,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.css']\n})\nexport class HomeComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.css']\n})\nexport class HomeComponent implements OnInit {\n  constructor() { }\n  ngOnInit(): void {\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".card {\r\n    /* Add shadows to create the \"card\" effect */\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    transition: 0.3s;\r\n}\r\n\r\n\r\n/* On mouse-over, add a deeper shadow */\r\n\r\n.card:hover {\r\n    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n\r\n/* Add some padding inside the card container */\r\n\r\n.container {\r\n    padding: 2px 16px;\r\n}",
+                    "data": "/* .card {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    max-width: 300px;\r\n    margin: auto;\r\n    text-align: center;\r\n    font-family: arial;\r\n}\r\n\r\nh1 {\r\n    font-size: 20px;\r\n    color: black;\r\n}\r\n\r\n.price {\r\n    color: grey;\r\n    font-size: 22px;\r\n}\r\n\r\n.card button {\r\n    border: none;\r\n    outline: 0;\r\n    padding: 8px;\r\n    color: white;\r\n    background-color: #000;\r\n    text-align: center;\r\n    cursor: pointer;\r\n    width: 100%;\r\n    font-size: 18px;\r\n}\r\n\r\n.card button:hover {\r\n    opacity: 0.7;\r\n}\r\n\r\nmain .container {\r\n    width: 100%;\r\n    margin: 8px auto;\r\n    border: 1px solid gray;\r\n    display: grid;\r\n    color: white;\r\n    grid-template-columns: repeat(6, 196px);\r\n    grid-gap: 7px;\r\n}\r\n\r\n@media screen and (max-width: 500px) {\r\n    main .container{\r\n        grid-template-columns: repeat(2, 50%);\r\n        grid-gap: 4px;\r\n        width: 100%;\r\n        height: auto;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 700px) and (min-width: 500px) {\r\n    main .container{\r\n        grid-template-columns: repeat(3, 33%);\r\n        width: 100%;\r\n        height: auto;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 900px) and (min-width: 700px) {\r\n    main .container{\r\n        grid-template-columns: repeat(4, 25%);\r\n        width: 100%;\r\n        height: auto;\r\n    }\r\n} */\r\n\r\n.container {\r\n    background: url('../../assets/music.jpg');\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    background-position: center center;\r\n    width: 100%;\r\n    height: 90vh;\r\n}\r\n.font3{\r\nfont: normal normal normal 90px/1.1em 'Open Sans',sans-serif;\r\ncolor: #07FFEE;\r\n}\r\nh3 {\r\n    padding-top: 1rem;\r\n    display: block;\r\n    font-size: 1.17em;\r\n    margin-inline-start: 0px;\r\n    margin-inline-end: 0px;\r\n    font-weight: bold;\r\n    font-size: 5.6rem;\r\n    color: lightblue;\r\n    width: 40%;\r\n}\r\n\r\n@media (max-width:600px){\r\n    h3{\r\n        \r\n        font-size: 50px;\r\n    }\r\n}",
                     "styleUrl": "./home.component.css"
                 }
             ],
@@ -1041,11 +1268,114 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"card\">\n    <img src=\"img_avatar.png\" alt=\"Avatar\" style=\"width:100%\">\n    <div class=\"container\">\n        <h4><b>John Doe</b></h4>\n        <p>Architect & Engineer</p>\n    </div>\n</div>"
+            "templateData": "<!-- <main>\n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let item of dataArray\">\n            <img src={{item.src}} alt=\"Guitar\" style=\"width:100%\">\n            <h1>{{item.title}}</h1>\n            <p class=\"price\">{{item.price}}</p>\n            <p><button>Add to Cart</button></p>\n        </div>\n    </div> \n</main> -->\n\n<div class=\"container\">\n    <h3 class=\"font_3\" style=\"line-height:1em;\">\n        <span style=\"line-height:1em;\">\n            <strong>CREATING AND PRODUCING MUSIC</strong></span>\n    </h3>\n</div>"
+        },
+        {
+            "name": "LogformComponent",
+            "id": "component-LogformComponent-9e25237917f504776e6f59ba97318176",
+            "file": "src/app/common/logform/logform.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-logform",
+            "styleUrls": [
+                "./logform.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./logform.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "inputFields",
+                    "defaultValue": "[]",
+                    "line": 11,
+                    "type": "any"
+                },
+                {
+                    "name": "submitButton",
+                    "line": 12
+                },
+                {
+                    "name": "Title2",
+                    "line": 10
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "getData",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "line": 13,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "baseForm",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28
+                },
+                {
+                    "name": "submitForm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-logform',\n  templateUrl: './logform.component.html',\n  styleUrls: ['./logform.component.css']\n})\nexport class LogformComponent implements OnInit, OnChanges {\n  @Input() Title2;\n  @Input() inputFields: any = [];\n  @Input() submitButton;\n  @Output() getData = new EventEmitter<any>();\n  baseForm: any;\n\n  constructor() {\n  }\n\n  ngOnChanges(): void {\n    const tempObject = {};\n    this.inputFields.forEach(item => {\n      tempObject[item.inputName] = new FormControl('', [Validators.required, Validators.minLength(3)]);\n    });\n    this.baseForm = new FormGroup(tempObject);\n    // console.log(this.baseForm);\n  }\n\n  ngOnInit(): void {\n    // console.log(this.baseForm);\n  }\n  submitForm(): void {\n    // console.log(this.baseForm.getRawValue());\n    this.getData.emit(this.baseForm.getRawValue());\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".container {\r\n    background: url('../../../assets/music4.jpg');\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    background-position: center center;\r\n    width: 100%;\r\n    height: 88vh;\r\n}\r\n\r\n.form {\r\n    background: #000;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 350px;\r\n    padding: 0 45px 30px 45px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.8;\r\n}\r\n\r\n.form h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.form .icons i {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    margin: 0 20px 20px 20px;\r\n    transition: 0.8s;\r\n    transition-property: color, transform;\r\n}\r\n\r\n.form .icons i:hover {\r\n    color: #5369CC;\r\n    transform: scale(1.3);\r\n}\r\n\r\n.form input {\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 230px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n.form input:hover {\r\n    width: 250px;\r\n}\r\n\r\n.form input:focus {\r\n    width: 250px;\r\n}\r\n\r\nbutton {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 142px;\r\n    padding: 13px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n}\r\n\r\nbutton:hover,\r\nbutton:active,\r\nbutton:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.form .options {\r\n    color: #bbb;\r\n    font-size: 14px;\r\n    margin: 20px 0 0;\r\n}\r\n\r\n.form .options a {\r\n    text-decoration: none;\r\n    color: #06C5CF;\r\n    cursor: pointer;\r\n}\r\n\r\n@media screen and (max-width: 450px) {\r\n    .form {\r\n        margin-top: 10%;\r\n        top: 50%;\r\n        left: 50%;\r\n        height: auto;\r\n        padding: 0px;\r\n        width: 90%;\r\n    }\r\n    .form input {\r\n        outline: 0;\r\n        background: none;\r\n        display: block;\r\n        color: #fff;\r\n        font-size: 13px;\r\n        text-transform: uppercase;\r\n        margin: 3px 0px 37px 69px;\r\n        width: 53%;\r\n        padding: 10px;\r\n        border: 2.5px solid #2543d8;\r\n        border-radius: 20px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n    }\r\n    .form .options,\r\n    .form .options a {\r\n        margin-bottom: 10px;\r\n        width: 100%\r\n    }\r\n    button {\r\n        outline: 0;\r\n        display: block;\r\n        background: none;\r\n        color: #fff;\r\n        margin-left: 98px;\r\n        font-size: 14px;\r\n        text-transform: uppercase;\r\n        width: 33%;\r\n        padding: 10px;\r\n        border: 2.5px solid #128b6d;\r\n        margin-bottom: 25px;\r\n        border-radius: 25px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n    }\r\n    .form input:hover {\r\n        width: 200px;\r\n    }\r\n    .form input:focus {\r\n        width: 200px;\r\n    }\r\n}",
+                    "styleUrl": "./logform.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 14
+            },
+            "implements": [
+                "OnInit",
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"container\">\n    <div class=\"form\">\n        <form method=\"post\" [formGroup]=\"baseForm\">\n            <h2> {{Title2}}</h2>\n            <div *ngFor=\"let inputField of inputFields\">\n                <label> {{inputField.inputName}}\n                    <input formControlName={{inputField.inputName}} type={{inputField.inputType}} placeholder=\"{{inputField.inputPlaceholder}}\">\n                </label>\n            </div>\n        </form>\n        <button type=\"submit\" (click)=\"submitForm()\">{{submitButton}}</button>\n        <ng-content></ng-content>\n    </div>\n</div>"
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-321e96bdc6852111ae577b6a3014b32e",
+            "id": "component-LoginComponent-6b401113ac59abf80fc9536d3ad9c186",
             "file": "src/app/Layout/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1065,11 +1395,55 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "loginForm",
-                    "type": "",
+                    "name": "InputFields",
+                    "defaultValue": "[{\n    inputName: 'Username',\n    inputType: 'text',\n    inputPlaceholder: 'username'\n  },\n  {\n    inputName: 'Password',\n    inputType: 'password',\n    inputPlaceholder: 'password'\n  }\n  ]",
+                    "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 15
+                },
+                {
+                    "name": "loginForm",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "router",
+                    "type": "Router",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "service",
+                    "type": "AuthService",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "SubmitButton",
+                    "defaultValue": "'Login'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "Title1",
+                    "defaultValue": "'LOGIN'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
                 }
             ],
             "methodsClass": [
@@ -1079,7 +1453,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 17
+                    "line": 31
                 },
                 {
                     "name": "onCreate",
@@ -1087,34 +1461,23 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34
+                    "line": 46
                 },
                 {
-                    "name": "performLogin",
+                    "name": "sendLogin",
                     "args": [
                         {
-                            "name": "userName",
-                            "type": ""
-                        },
-                        {
-                            "name": "password",
+                            "name": "userCreds",
                             "type": ""
                         }
                     ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 50,
                     "jsdoctags": [
                         {
-                            "name": "userName",
-                            "type": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        },
-                        {
-                            "name": "password",
+                            "name": "userCreds",
                             "type": "",
                             "tagName": {
                                 "text": "param"
@@ -1128,11 +1491,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\n\nimport { FormGroup, FormControl, Validators } from '@angular/forms';\nimport { AuthService } from 'src/app/common.services/auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.css']\n})\nexport class LoginComponent implements OnInit {\n  loginForm ;\n\n  constructor(private service: AuthService, private router: Router) { }\n\n  ngOnInit(): void {\n    this.loginForm = new FormGroup({\n\n      username: new FormControl('', [ Validators.required]),\n\n      password: new FormControl(''),\n    });\n\n  }\n  performLogin(userName, password): void {\n    this.service.getLogin(userName.value, password.value).subscribe(res => {\n      console.log(res);\n      localStorage.setItem('isLoggedIn', 'true');\n      this.router.navigate(['details']);\n    });\n  }\n\n  onCreate(): void{\n    this.router.navigate(['signup']);\n}\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { FormGroup, FormControl, Validators } from '@angular/forms';\nimport { AuthService } from 'src/app/common/auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.css']\n})\nexport class LoginComponent implements OnInit {\n  loginForm: any;\n\n  Title1 = 'LOGIN';\n  InputFields = [{\n    inputName: 'Username',\n    inputType: 'text',\n    inputPlaceholder: 'username'\n  },\n  {\n    inputName: 'Password',\n    inputType: 'password',\n    inputPlaceholder: 'password'\n  }\n  ];\n  SubmitButton = 'Login';\n\n  constructor(public service: AuthService, public router: Router) { }\n\n\n  ngOnInit(): void {\n    this.loginForm = new FormGroup({\n      username: new FormControl('', [Validators.required]),\n      password: new FormControl(''),\n    });\n\n  }\n  // performLogin(userName, password): void {\n  //   this.service.getLogin(userName.value, password.value).subscribe(res => {\n  //     console.log(res);\n  //     localStorage.setItem('isLoggedIn', 'true');\n  //     this.router.navigate(['details']);\n  //   });\n  // }\n\n  onCreate(): void {\n    this.router.navigate(['signup']);\n  }\n\n  sendLogin(userCreds): void {\n    this.service.getLogin(userCreds.Username, userCreds.Password).subscribe(res => {\n      // console.log(res);\n      localStorage.setItem('isLoggedIn', 'true');\n      this.router.navigate(['details']);\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "/* .container {\r\n    margin: 0;\r\n    padding: 0;\r\n    height: 87vh;\r\n    /* clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%); */\r\n\r\n\r\n/* background: linear-gradient(45deg, darkblue, transparent);\r\n    background-size: cover;\r\n} */\r\n\r\n.form {\r\n    background: #000;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 350px;\r\n    padding: 0 45px 30px 45px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.form h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.form .icons i {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    margin: 0 20px 20px 20px;\r\n    transition: 0.8s;\r\n    transition-property: color, transform;\r\n}\r\n\r\n.form .icons i:hover {\r\n    color: #5369CC;\r\n    transform: scale(1.3);\r\n}\r\n\r\n.form input {\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 265px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n.form input:hover {\r\n    width: 300px;\r\n}\r\n\r\n.form input:focus {\r\n    width: 300px;\r\n}\r\n\r\nform button {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 150px;\r\n    padding: 15px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n}\r\n\r\n.form button:hover,\r\nform button:active,\r\nform button:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.form .options {\r\n    color: #bbb;\r\n    font-size: 14px;\r\n    margin: 20px 0 0;\r\n}\r\n\r\n.form .options a {\r\n    text-decoration: none;\r\n    color: #06C5CF;\r\n    cursor: pointer;\r\n}\r\n\r\n@media screen and (max-width: 450px) {\r\n    .form {\r\n        width: 100%;\r\n        padding: 0px;\r\n    }\r\n    /* .form input {\r\n        outline: 0;\r\n        background: none;\r\n        color: #fff;\r\n        font-size: 10px;\r\n        text-transform: uppercase;\r\n        margin-top: 4px;\r\n        width: 50%px;\r\n        padding: 10px;\r\n        border: 2.5px solid #128b6d;\r\n        border-radius: 20px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n    } */\r\n    .form .options,\r\n    .form .options a {\r\n        width: 100%\r\n    }\r\n    /* form button {\r\n        outline: 0;\r\n        background: none;\r\n        color: #fff;\r\n        font-size: 14px;\r\n        text-transform: uppercase;\r\n        width: 84px;\r\n        padding: 10px;\r\n        border: 2.5px solid #128b6d;\r\n        border-radius: 25px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n    } */\r\n}",
+                    "data": "/* .container {\r\n    background: url('../../../assets/music3.jpg');\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    background-position: center center;\r\n    width: 100%;\r\n    height: 88vh;\r\n}\r\n\r\n.form {\r\n    background: #000;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 350px;\r\n    padding: 0 45px 30px 45px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.7;\r\n}\r\n\r\n.form h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.form .icons i {\r\n    color: #fff;\r\n    font-size: 25px;\r\n    margin: 0 20px 20px 20px;\r\n    transition: 0.8s;\r\n    transition-property: color, transform;\r\n}\r\n\r\n.form .icons i:hover {\r\n    color: #5369CC;\r\n    transform: scale(1.3);\r\n}\r\n\r\n.form input {\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 265px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n} */\r\n\r\n\r\n/* .form input:hover {\r\n    width: 300px;\r\n}\r\n\r\n.form input:focus {\r\n    width: 300px;\r\n} */\r\n\r\n\r\n/* form button {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 150px;\r\n    padding: 15px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n}\r\n\r\n.form button:hover,\r\nform button:active,\r\nform button:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.form .options {\r\n    color: #bbb;\r\n    font-size: 14px;\r\n    margin: 20px 0 0;\r\n}\r\n\r\n.form .options a {\r\n    text-decoration: none;\r\n    color: #06C5CF;\r\n    cursor: pointer;\r\n}\r\n\r\n@media screen and (max-width: 450px) {\r\n    .form {\r\n        margin-top: 10%;\r\n        top: 50%;\r\n        left: 50%;\r\n      \r\n        height: auto;\r\n        padding: 0px;\r\n    }\r\n    .form input {\r\n        outline: 0;\r\n        background: none;\r\n        display: block;\r\n        color: #fff;\r\n        font-size: 13px;\r\n        text-transform: uppercase;\r\n        margin: 3px 0px 37px 69px;\r\n        width: 53%;\r\n        padding: 10px;\r\n        border: 2.5px solid #2543d8;\r\n        border-radius: 20px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n    }\r\n    .form .options,\r\n    .form .options a {\r\n        margin-bottom: 10px;\r\n        width: 100%\r\n    }\r\n    form button {\r\n    outline: 0;\r\n    display: block;\r\n    background: none;\r\n    color: #fff;\r\n    margin-left: 98px;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 33%;\r\n    padding: 10px;\r\n    border: 2.5px solid #128b6d;\r\n    margin-bottom: 25px;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n    }\r\n    \r\n} */",
                     "styleUrl": "./login.component.css"
                 }
             ],
@@ -1150,7 +1513,7 @@
                         "type": "Router"
                     }
                 ],
-                "line": 13,
+                "line": 26,
                 "jsdoctags": [
                     {
                         "name": "service",
@@ -1171,7 +1534,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"form\">\n    <form class=\"login-form\" action=\"\" method=\"post\" [formGroup]=\"loginForm\">\n        <h2> Login </h2>\n        <div class=\"icons\">\n            <a href=\"#\"><i class=\"fab fa-facebook\" ></i></a>\n            <a href=\"#\"><i class=\"fab fa-google\" ></i></a>\n            <a href=\"#\"><i class=\"fab fa-twitter\" ></i></a>\n        </div>\n        <input id=\"username\" type=\"text\" placeholder=\"Username\" formControlName=\"username\" #username required>\n\n        <input id=\"password\" type=\"password\" value=\"\" placeholder=\"Password\" formControlName=\"password\" #password required>\n\n        <button type=\"submit\" name=\"button\" (click)=\"performLogin(username, password)\"> Login </button>\n        <p class=\"options\"> Not Registered? <a (click)=\"onCreate()\"> Create an Account</a></p>\n    </form>\n</div>"
+            "templateData": "<!-- <div class=\"container\">\n    <div class=\"form\">\n        <form class=\"login-form\" action=\"\" method=\"post\" [formGroup]=\"loginForm\">\n            <h2> Login </h2>\n            <div class=\"icons\">\n                <a href=\"#\"><i class=\"fab fa-facebook\"></i></a>\n                <a href=\"#\"><i class=\"fab fa-google\"></i></a>\n                <a href=\"#\"><i class=\"fab fa-twitter\"></i></a>\n            </div>\n            <input id=\"username\" type=\"text\" placeholder=\"Username\" formControlName=\"username\" #username required>\n\n            <input id=\"password\" type=\"password\" value=\"\" placeholder=\"Password\" formControlName=\"password\" #password\n                required>\n \n            <button type=\"submit\" name=\"button\" (click)=\"performLogin(username, password)\"> Login </button>\n            <p class=\"options\"> Not Registered? <a (click)=\"onCreate()\"> Create an Account</a></p>\n        </form>\n    </div>\n</div> -->\n<app-logform [Title2]=\"Title1\" [inputFields]=\"InputFields\" [submitButton]=\"SubmitButton\" (getData)=\"sendLogin($event)\">\n    <p class=\"options\"> Not Registered? <a (click)=\"onCreate()\" style=\"cursor: pointer; color: white;\"> Create an Account</a></p>\n</app-logform>"
         },
         {
             "name": "PageComponent",
@@ -1236,52 +1599,8 @@
             "stylesData": ""
         },
         {
-            "name": "SharedComponent",
-            "id": "component-SharedComponent-8813ed6cd68afd0098fec3d0bfc4b5b4",
-            "file": "src/app/shared/shared.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-shared",
-            "styleUrls": [
-                "./shared.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./shared.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n@Component({\n  selector: 'app-shared',\n  templateUrl: './shared.component.html',\n  styleUrls: ['./shared.component.css']\n})\nexport class SharedComponent{\n\n  constructor() { }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".btn {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 150px;\r\n    padding: 15px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n    text-decoration: none;\r\n}\r\n\r\n.btn:hover,\r\n.btn:active,\r\n.btn:focus {\r\n    background: #15daa8;\r\n    transform: scale(1.1);\r\n    color: white;\r\n}",
-                    "styleUrl": "./shared.component.css"
-                }
-            ],
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "templateData": ""
-        },
-        {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-9bd592c65038e55bdd107c764d21114a",
+            "id": "component-SignupComponent-9a1bc52f08bd3c9eef80321597ff49c7",
             "file": "src/app/Layout/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1301,12 +1620,28 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "profile",
-                    "defaultValue": "new FormGroup({\n    username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  })",
-                    "type": "",
+                    "name": "InputFields",
+                    "defaultValue": "[{\n    inputName: 'Username',\n    inputType: 'text',\n    inputPlaceholder: 'username'\n  },\n  {\n    inputName: 'Password',\n    inputType: 'password',\n    inputPlaceholder: 'password'\n  },\n  {\n    inputName: 'Email',\n    inputType: 'email',\n    inputPlaceholder: 'email'\n  }\n  ]",
+                    "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 19
+                },
+                {
+                    "name": "SubmitButton",
+                    "defaultValue": "'Signup'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "Title1",
+                    "defaultValue": "'SIGNUP'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -1316,7 +1651,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29
+                    "line": 48
                 },
                 {
                     "name": "ngOnInit",
@@ -1324,15 +1659,29 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32
+                    "line": 51
                 },
                 {
-                    "name": "onSubmit",
-                    "args": [],
+                    "name": "sendLogin",
+                    "args": [
+                        {
+                            "name": "userCreds",
+                            "type": ""
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19
+                    "line": 53,
+                    "jsdoctags": [
+                        {
+                            "name": "userCreds",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "hostBindings": [],
@@ -1340,11 +1689,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../../common.services/auth.service';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { HttpClient } from '@angular/common/http';\nimport { CrudService } from 'src/app/common.services/crud.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.css']\n})\nexport class SignupComponent implements OnInit {\n  profile = new FormGroup({\n    username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n    password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  });\n  onSubmit(): void{\n    const user = this.profile.getRawValue();\n    this.crud.createUser(user).subscribe(res => {\n      alert('your account has been created,please login to continue');\n      this.navigateToLogin();\n    }\n      );\n  }\n\n  constructor(private crud: CrudService, private router: Router ) { }\nnavigateToLogin(): void{\n  this.router.navigate(['login']);\n}\n  ngOnInit(): void { }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { CrudService } from 'src/app/common/crud.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.css']\n})\nexport class SignupComponent implements OnInit {\n  // profile = new FormGroup({\n  //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  //   email: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  //   password: new FormControl('', [Validators.required, Validators.minLength(3)]),\n  // });\n\n  Title1 = 'SIGNUP';\n  InputFields = [{\n    inputName: 'Username',\n    inputType: 'text',\n    inputPlaceholder: 'username'\n  },\n  {\n    inputName: 'Password',\n    inputType: 'password',\n    inputPlaceholder: 'password'\n  },\n  {\n    inputName: 'Email',\n    inputType: 'email',\n    inputPlaceholder: 'email'\n  }\n  ];\n  SubmitButton = 'Signup';\n\n\n  // onSubmit(): void {\n  //   const user = this.profile.getRawValue();\n  //   this.crud.createUser(user).subscribe(res => {\n  //     alert('your account has been created,please login to continue');\n  //     this.navigateToLogin();\n  //   }\n  //   );\n  // }\n  constructor(private crud: CrudService, private router: Router) {\n  }\n  navigateToLogin(): void {\n    this.router.navigate(['login']);\n  }\n  ngOnInit(): void { }\n\n  sendLogin(userCreds): void {\n    this.crud.createUser(userCreds).subscribe(res => {\n      alert('your account has been created,please login to continue');\n      this.navigateToLogin();\n    }\n    );\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".myform {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 400px;\r\n    height: 370px;\r\n    padding: 0 28px 18px 38px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.myform h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n    margin-top: 10px;\r\n}\r\n\r\nlabel {\r\n    margin: 1px 102px 1px 3px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.psd {\r\n    margin: 1px 122px 1px -11px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myform label input {\r\n    position: relative;\r\n    top: 5px;\r\n    left: 34px;\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 197px;\r\n    margin-bottom: 30px;\r\n    padding: 15px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n\r\n@media (max-width:450px) {\r\n    .myform {\r\n        margin-top: 20px;\r\n        width: 100%;\r\n        padding: 0px;\r\n    }\r\n    label {\r\n        color: white;\r\n        font-size: 18px;\r\n        font-weight: 700;\r\n    }\r\n    .psd {\r\n        color: white;\r\n        font-size: 18px;\r\n        font-weight: 700;\r\n    }\r\n    .myform label input {\r\n        font-size: 14px;\r\n        width: 131px;\r\n        padding: 13px;\r\n        transition: 0.5s;\r\n        transition-property: width;\r\n    }\r\n    .btn {\r\n        outline: 0;\r\n        background: none;\r\n        color: #fff;\r\n        font-size: 13px;\r\n        text-transform: uppercase;\r\n        width: 110px;\r\n        padding: 12px;\r\n        border: 2.5px solid #128b6d;\r\n        border-radius: 25px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n        text-decoration: none;\r\n    }\r\n}",
+                    "data": "/* .container {\r\n    background: url('../../../assets/music4.jpg');\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    background-position: center center;\r\n    width: 100%;\r\n    height: 88vh;\r\n}\r\n.myform {\r\n    background: #000;\r\n    z-index: 1;\r\n    font-family: \"Candara\", sans-serif;\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: 400px;\r\n    height: 370px;\r\n    padding: 0 28px 18px 38px;\r\n    text-align: center;\r\n    border-radius: 10px;\r\n    opacity: 0.7;\r\n}\r\n\r\n.myform h2 {\r\n    color: #fff;\r\n    font-size: 28px;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    text-transform: uppercase;\r\n    margin-bottom: 15px;\r\n    margin-top: 10px;\r\n}\r\n\r\nlabel {\r\n    margin: 1px 0px -5px -58px;\r\n    display: inline-block;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.psd {\r\n    margin: 1px 0px 1px -89px;\r\n    color: white;\r\n    font-size: 18px;\r\n    font-weight: 700;\r\n}\r\n\r\n.myform label input {\r\n    position: relative;\r\n    top: 5px;\r\n    display: inline-block;\r\n    left: 25px;\r\n    outline: 0;\r\n    background: none;\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-align: center;\r\n    width: 210px;\r\n    margin: -6px 1px 35px 0px;\r\n    padding: 13px;\r\n    box-sizing: border-box;\r\n    border: 2.5px solid #2543d8;\r\n    border-radius: 25px;\r\n    transition: 0.5s;\r\n    transition-property: width;\r\n}\r\n    /* .myform label input:hover{\r\n        width: 250px;\r\n    }\r\n    .myform label input:focus{\r\n        width: 300px;\r\n    } */\r\n\r\n\r\n/* .mybtn {\r\n    outline: 0;\r\n    background: none;\r\n    color: #fff;\r\n    margin-left: 42px;\r\n    font-size: 14px;\r\n    text-transform: uppercase;\r\n    width: 141px;\r\n    padding: 13px;\r\n    border: 2.5px solid #128b6d;\r\n    border-radius: 25px;\r\n    cursor: pointer;\r\n    transform: 0.5s;\r\n    transition-property: transform;\r\n    text-decoration: none;\r\n}\r\n\r\n@media (max-width:450px) {\r\n    .myform {\r\n        margin-top: 20px;\r\n        width: 90%;\r\n        padding: 0px;\r\n    }\r\n    label {\r\n        display: flow-root;\r\n        color: white;\r\n        font-size: 18px;\r\n        font-weight: 700;\r\n    }\r\n    .psd {\r\n        color: white;\r\n        font-size: 18px;\r\n        font-weight: 700;\r\n    }\r\n    .myform label input {\r\n        font-size: 14px;\r\n        width: 131px;\r\n        padding: 13px;\r\n        transition: 0.5s;\r\n        transition-property: width;\r\n    }\r\n    .mybtn {\r\n        outline: 0;\r\n        background: none;\r\n        color: #fff;\r\n        font-size: 13px;\r\n        text-transform: uppercase;\r\n        width: 110px;\r\n        padding: 12px;\r\n        border: 2.5px solid #128b6d;\r\n        border-radius: 25px;\r\n        cursor: pointer;\r\n        transform: 0.5s;\r\n        transition-property: transform;\r\n        text-decoration: none;\r\n    }\r\n} */",
                     "styleUrl": "./signup.component.css"
                 }
             ],
@@ -1362,7 +1711,7 @@
                         "type": "Router"
                     }
                 ],
-                "line": 26,
+                "line": 35,
                 "jsdoctags": [
                     {
                         "name": "crud",
@@ -1383,45 +1732,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"myform\">\n    <form [formGroup]=\"profile\">\n        <h2> SignUp </h2>\n        <label> Name \n            <input type=\"text\" placeholder=\"Username\" formControlName=\"username\">\n        </label>\n\n        <label> Email \n            <input type=\"email\" placeholder=\"Email\" formControlName=\"email\">\n        </label>\n\n        <label class=\"psd\"> Password \n            <input type=\"password\" placeholder=\"password\" formControlName=\"password\">\n        </label>\n    </form>\n    <button class=\"btn\" type=\"submit\" [disabled]=\"!profile.valid\" (click)=\"onSubmit()\"> Signup </button>\n</div>"
-        },
-        {
-            "name": "ThemesComponent",
-            "id": "component-ThemesComponent-e520e2522449fd453743caa1c33c0675",
-            "file": "src/app/themes/themes.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-themes",
-            "styleUrls": [
-                "./themes.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./themes.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-themes',\n  templateUrl: './themes.component.html',\n  styleUrls: ['./themes.component.css']\n})\nexport class ThemesComponent  {\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "body {\r\n    margin: 0;\r\n    padding: 0;\r\n    background: linear-gradient(45deg, currentColor, TRANSPARENT);\r\n    box-sizing: border-box;\r\n}\r\n\r\nh1 {\r\n    text-align: center;\r\n}\r\n\r\nmain {\r\n    width: 75%;\r\n    margin: 8px auto;\r\n    border: 1px solid gray;\r\n    display: grid;\r\n    color: white;\r\n    grid-template-rows: 80px 100px 200px 80px;\r\n    grid-template-columns: repeat(3, 1fr) 200px;\r\n    grid-gap: 10px;\r\n}\r\n\r\n.div1 {\r\n    background-color: #ff4757;\r\n    grid-column: 1/ -1;\r\n    text-align: center;\r\n}\r\n\r\n.div2 {\r\n    background-color: #2ed573;\r\n    text-align: center;\r\n}\r\n\r\n.div3 {\r\n    background-color: #1e90ff;\r\n    text-align: center;\r\n}\r\n\r\n.div4 {\r\n    background-color: #5352ed;\r\n    text-align: center;\r\n}\r\n\r\n.div5 {\r\n    background-color: #2f3542;\r\n    grid-row: 2/4;\r\n    grid-column: 4/5;\r\n    text-align: center;\r\n}\r\n\r\n.div6 {\r\n    background-color: #ffa502;\r\n    grid-column: 1/4;\r\n    text-align: center;\r\n}\r\n\r\n.div7 {\r\n    background-color: #00d2d3;\r\n    grid-column: 1/-1;\r\n    text-align: center;\r\n}\r\n\r\n@media screen and (max-width: 450px) {\r\n    main {\r\n        width: 100%;\r\n        margin: 8px auto;\r\n        border: 1px solid gray;\r\n        display: grid;\r\n        color: white;\r\n        grid-template-rows: 80px 100px 200px 80px;\r\n        grid-template-columns: repeat(3, 1fr) 200px;\r\n        grid-gap: 2px;\r\n    }\r\n}",
-                    "styleUrl": "./themes.component.css"
-                }
-            ],
-            "stylesData": "",
-            "templateData": "<main>\r\n    <div class=\"div1\"> Header </div>\r\n    <div class=\"div2\"> Box1 </div>\r\n    <div class=\"div3\"> Box2 </div>\r\n    <div class=\"div4\"> Box3 </div>\r\n    <div class=\"div5\"> Sidebar </div>\r\n    <div class=\"div6\"> Main content </div>\r\n    <div class=\"div7\"> Footer </div>\r\n</main>"
+            "templateData": "<!-- <div class=\"container\">\n<div class=\"myform\">\n    <form [formGroup]=\"profile\">\n        <h2> SignUp </h2>\n        <label> Name \n            <input type=\"text\" placeholder=\"Username\" formControlName=\"username\">\n        </label>\n\n        <label> Email \n            <input type=\"email\" placeholder=\"Email\" formControlName=\"email\">\n        </label>\n\n        <label class=\"psd\"> Password \n            <input type=\"password\" placeholder=\"password\" formControlName=\"password\">\n        </label>\n    </form>\n    <button class=\"mybtn\" type=\"submit\" [disabled]=\"!profile.valid\" (click)=\"onSubmit()\"> Signup </button>\n</div>\n</div> -->\n\n<app-logform [Title2]=\"Title1\" [inputFields]=\"InputFields\" [submitButton]=\"SubmitButton\" (getData)=\"sendLogin($event)\">\n</app-logform>"
         },
         {
             "name": "UnauthorizedComponent",
@@ -1486,7 +1797,11 @@
             "children": [
                 {
                     "type": "providers",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "DataService"
+                        }
+                    ]
                 },
                 {
                     "type": "declarations",
@@ -1495,22 +1810,25 @@
                             "name": "AppComponent"
                         },
                         {
+                            "name": "ArtistsComponent"
+                        },
+                        {
                             "name": "DetailsComponent"
+                        },
+                        {
+                            "name": "FooterComponent"
                         },
                         {
                             "name": "HomeComponent"
                         },
                         {
+                            "name": "LogformComponent"
+                        },
+                        {
                             "name": "LoginComponent"
                         },
                         {
-                            "name": "SharedComponent"
-                        },
-                        {
                             "name": "SignupComponent"
-                        },
-                        {
-                            "name": "ThemesComponent"
                         },
                         {
                             "name": "UnauthorizedComponent"
@@ -1525,6 +1843,9 @@
                         },
                         {
                             "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "CoreModule"
                         }
                     ]
                 },
@@ -1574,6 +1895,35 @@
                     "elements": []
                 }
             ]
+        },
+        {
+            "name": "CoreModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
         }
     ],
     "miscellaneous": {
@@ -1587,6 +1937,14 @@
                 "defaultValue": "createAction(\r\n\r\n    '[Customer] Add Customer',\r\n\r\n    (customer: Customer) => ({ customer })\r\n\r\n)"
             },
             {
+                "name": "Base",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/logform/logform.component.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "CreateCustomerAction",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1598,7 +1956,7 @@
                 "name": "darkTheme",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/common.services/dark.service.ts",
+                "file": "src/app/common/dark.service.ts",
                 "type": "object",
                 "defaultValue": "{\n  'primary-color': '#455363',\n  'background-color': '#1f2935',\n  'text-color': '#fff'\n  }"
             },
@@ -1616,7 +1974,7 @@
                 "subtype": "variable",
                 "file": "src/environments/environment.ts",
                 "type": "object",
-                "defaultValue": "{\n  production: false\n}"
+                "defaultValue": "{\n   endpoint : {\n    POSTS : 'http://localhost:3000/posts/'\n  },\n  production: false\n}"
             },
             {
                 "name": "GetCustomerAction",
@@ -1646,7 +2004,7 @@
                 "name": "lightTheme",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/common.services/dark.service.ts",
+                "file": "src/app/common/dark.service.ts",
                 "type": "object",
                 "defaultValue": "{\n     'primary-color': '#fff',\n'background-color': '#fff',\n'text-color': '#2d2d2d'\n}"
             },
@@ -1688,7 +2046,7 @@
                 "subtype": "variable",
                 "file": "src/app/customer/customer.reducer.ts",
                 "type": "",
-                "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log('State is ');\r\n        console.log(customer);\r\n       \r\n        return { ...state, customer: [...state.customer, customer] };\r\n    })\r\n)"
+                "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n\r\n        console.log('State is ');\r\n        console.log(customer);\r\n        return { ...state, customer: [...state.customer, customer] };\r\n    })\r\n)"
             },
             {
                 "name": "Template",
@@ -1705,6 +2063,14 @@
                 "file": "src/stories/Page.stories.ts",
                 "type": "Story<Page>",
                 "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/logform/logform.component.stories.ts",
+                "type": "Story<LogformComponent>",
+                "defaultValue": "() => ({\r\n    component: LogformComponent,\r\n    props: {\r\n        Title2: 'LOGIN',\r\n        inputFields: [{\r\n            inputName: 'Username',\r\n            inputType: 'text',\r\n            inputPlaceholder: 'username'\r\n        },\r\n        {\r\n            inputName: 'Password',\r\n            inputType: 'password',\r\n            inputPlaceholder: 'password'\r\n        }\r\n        ],\r\n        submitButton: 'Login',\r\n    },\r\n\r\n    template: `<app-logform\r\n        [Title2]=\"Title2\"\r\n        [inputFields]=\"inputFields\"\r\n        [submitButton]=\"submitButton\"\r\n\r\n        >\r\n        </app-logform>`,\r\n})"
             }
         ],
         "functions": [
@@ -1722,6 +2088,7 @@
                         "name": "action"
                     }
                 ],
+                "returnType": "any",
                 "jsdoctags": [
                     {
                         "name": "state",
@@ -1751,6 +2118,24 @@
                     "defaultValue": "createAction(\r\n\r\n    '[Customer] Add Customer',\r\n\r\n    (customer: Customer) => ({ customer })\r\n\r\n)"
                 }
             ],
+            "src/app/common/logform/logform.component.stories.ts": [
+                {
+                    "name": "Base",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/logform/logform.component.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/logform/logform.component.stories.ts",
+                    "type": "Story<LogformComponent>",
+                    "defaultValue": "() => ({\r\n    component: LogformComponent,\r\n    props: {\r\n        Title2: 'LOGIN',\r\n        inputFields: [{\r\n            inputName: 'Username',\r\n            inputType: 'text',\r\n            inputPlaceholder: 'username'\r\n        },\r\n        {\r\n            inputName: 'Password',\r\n            inputType: 'password',\r\n            inputPlaceholder: 'password'\r\n        }\r\n        ],\r\n        submitButton: 'Login',\r\n    },\r\n\r\n    template: `<app-logform\r\n        [Title2]=\"Title2\"\r\n        [inputFields]=\"inputFields\"\r\n        [submitButton]=\"submitButton\"\r\n\r\n        >\r\n        </app-logform>`,\r\n})"
+                }
+            ],
             "src/app/customer/customer.action.ts": [
                 {
                     "name": "CreateCustomerAction",
@@ -1769,12 +2154,12 @@
                     "defaultValue": "createAction(\r\n    '[Customer] - Get Customer'\r\n)"
                 }
             ],
-            "src/app/common.services/dark.service.ts": [
+            "src/app/common/dark.service.ts": [
                 {
                     "name": "darkTheme",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/common.services/dark.service.ts",
+                    "file": "src/app/common/dark.service.ts",
                     "type": "object",
                     "defaultValue": "{\n  'primary-color': '#455363',\n  'background-color': '#1f2935',\n  'text-color': '#fff'\n  }"
                 },
@@ -1782,7 +2167,7 @@
                     "name": "lightTheme",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/common.services/dark.service.ts",
+                    "file": "src/app/common/dark.service.ts",
                     "type": "object",
                     "defaultValue": "{\n     'primary-color': '#fff',\n'background-color': '#fff',\n'text-color': '#2d2d2d'\n}"
                 }
@@ -1804,7 +2189,7 @@
                     "subtype": "variable",
                     "file": "src/environments/environment.ts",
                     "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
+                    "defaultValue": "{\n   endpoint : {\n    POSTS : 'http://localhost:3000/posts/'\n  },\n  production: false\n}"
                 }
             ],
             "src/app/customer/customer.state.ts": [
@@ -1832,7 +2217,7 @@
                     "subtype": "variable",
                     "file": "src/app/customer/customer.reducer.ts",
                     "type": "",
-                    "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n        console.log('State is ');\r\n        console.log(customer);\r\n       \r\n        return { ...state, customer: [...state.customer, customer] };\r\n    })\r\n)"
+                    "defaultValue": "createReducer(\r\n    initialState,\r\n    on(CustomerActions.GetCustomerAction, state => state),\r\n    on(CustomerActions.CreateCustomerAction, (state: CustomerState, customer: Customer) => {\r\n\r\n        console.log('State is ');\r\n        console.log(customer);\r\n        return { ...state, customer: [...state.customer, customer] };\r\n    })\r\n)"
                 }
             ],
             "src/stories/Header.stories.ts": [
@@ -1904,6 +2289,7 @@
                             "name": "action"
                         }
                     ],
+                    "returnType": "any",
                     "jsdoctags": [
                         {
                             "name": "state",
@@ -1936,7 +2322,7 @@
                 "children": [
                     {
                         "path": "",
-                        "redirectTo": "/home",
+                        "redirectTo": "/login",
                         "pathMatch": "full"
                     },
                     {
@@ -1951,8 +2337,8 @@
                         ]
                     },
                     {
-                        "path": "themes",
-                        "component": "ThemesComponent"
+                        "path": "artists",
+                        "component": "ArtistsComponent"
                     },
                     {
                         "path": "signup",
@@ -1985,6 +2371,24 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/Artists/artists.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ArtistsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/Layout/footer/footer.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FooterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/Layout/header/header.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -1999,7 +2403,7 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/11",
                 "status": "low"
             },
             {
@@ -2008,7 +2412,7 @@
                 "linktype": "component",
                 "name": "SignupComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -2017,11 +2421,11 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/auth.service.ts",
+                "filePath": "src/app/common/auth.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "AuthService",
@@ -2030,7 +2434,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/authguard.service.ts",
+                "filePath": "src/app/common/authguard.service.ts",
                 "type": "guard",
                 "linktype": "guard",
                 "name": "AuthguardService",
@@ -2039,7 +2443,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/crud.service.ts",
+                "filePath": "src/app/common/crud.service.ts",
                 "type": "class",
                 "linktype": "classe",
                 "name": "Post",
@@ -2048,7 +2452,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/crud.service.ts",
+                "filePath": "src/app/common/crud.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "CrudService",
@@ -2057,7 +2461,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/dark.service.ts",
+                "filePath": "src/app/common/dark.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "DarkService",
@@ -2066,7 +2470,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/dark.service.ts",
+                "filePath": "src/app/common/dark.service.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -2076,7 +2480,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/dark.service.ts",
+                "filePath": "src/app/common/dark.service.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -2086,7 +2490,16 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/error.service.ts",
+                "filePath": "src/app/common/data.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "DataService",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/error.service.ts",
                 "type": "class",
                 "linktype": "classe",
                 "name": "Post",
@@ -2095,12 +2508,41 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/common.services/error.service.ts",
+                "filePath": "src/app/common/error.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "ErrorService",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/logform/logform.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Base",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/logform/logform.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/logform/logform.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LogformComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -2209,24 +2651,6 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/shared.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "SharedComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/themes/themes.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ThemesComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
                 "filePath": "src/app/unauthorized/unauthorized.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -2331,6 +2755,15 @@
                 "name": "PageComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/tests/mockup/services/auth-service.mock.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AuthServiceMock",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             }
         ]

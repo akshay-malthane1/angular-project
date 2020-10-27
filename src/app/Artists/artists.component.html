@@ -1,13 +1,7 @@
 <main>
     <div class="title"> OUR ARTISTS </div>
-    <!-- <div>
-        <p class="info"> Here we have the list of Artists </p>
-    </div> -->
-
     <div class="container">
         <div class="artist-card" *ngFor="let item of artist">
-            <!-- <div class="artist-card" [ngStyle]="{'background-image': 'url('+ art.src +')'}"> -->
-            <!-- </div> -->
             <img src={{item.src}} alt="Guitar" style="width:100%">
         </div>
     </div>

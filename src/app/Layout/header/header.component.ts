@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
   }
   loggedin(): any {
     const loggedIn = localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false;
-    // console.log("Am I logged in " + loggedIn);
     if (loggedIn === 'true') {
       return true;
     }

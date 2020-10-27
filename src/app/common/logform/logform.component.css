@@ -108,7 +108,7 @@ button:focus {
         left: 50%;
         height: auto;
         padding: 0px;
-        width: 100%;
+        width: 90%;
     }
     .form input {
         outline: 0;
@@ -147,5 +147,11 @@ button:focus {
         cursor: pointer;
         transform: 0.5s;
         transition-property: transform;
+    }
+    .form input:hover {
+        width: 200px;
+    }
+    .form input:focus {
+        width: 200px;
     }
 }
